@@ -14,7 +14,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.supplier.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.supplier.create');
     }
 
     /**
@@ -57,12 +57,12 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.supplier.edit');
     }
 
     /**
      * Update the specified resource in storage.
-     *
+     
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Supplier  $supplier
      * @return \Illuminate\Http\Response
