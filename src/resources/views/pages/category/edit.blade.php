@@ -24,12 +24,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <form action="" method="post">
+        <form action="{{ route('category.update', $category->id)}}" method="post">
             {{ csrf_field() }}
             {{ method_field('put') }}
             <div class="form-group">
               <label for="namaKelompok">Category</label>
-              <input type="text" class="form-control" name="name" value="" placeholder="Nama Category" autofocus>
+            <input type="text" class="form-control" name="name" value="{{$category->name}}" placeholder="Nama Category" autofocus>
             </div>
             <button type="submit" class="btn btn-info">submit</button>
           </form>
