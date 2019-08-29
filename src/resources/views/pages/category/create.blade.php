@@ -24,19 +24,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <form action="" method="post">
+        <form action="{{route ('category.store')}}" method="post">
             {{ csrf_field() }}
             <div class="form-group">
-              <label for="namaSuppliers">Nama</label>
-              <input type="text" class="form-control" name="name" placeholder="nama suppliers">
-            </div>
-            <div class="form-group">
-              <label for="noTelephone">No. Telephone</label>
-              <input type="text" class="form-control" name="suppliers" placeholder="nomor telephone">
-            </div>
-            <div class="form-group">
-              <label for="alamat">Alamat</label>
-              <input type="text" class="form-control" name="address" placeholder="nomor telephone">
+              <label for="namaKelompok">Category</label>
+              <input type="text" class="form-control" name="name" value="" placeholder="Nama Category" autofocus>
+              {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <button type="submit" class="btn btn-info">submit</button>
           </form>
