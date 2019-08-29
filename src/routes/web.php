@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Auth::routes();
@@ -23,7 +23,7 @@ Route::get('/hello', 'HomeController@index')->name('hello');
 Route::group([
   'as' => 'admin',
   'prefix' => 'admin',
-], function() {
+], function () {
   Route::get('/', 'AdminController@index');
   Route::post('/', 'AdminController@store')->name('.store');
   Route::get('/create', 'AdminController@create')->name('.create');
@@ -35,7 +35,7 @@ Route::group([
 Route::group([
   'as' => 'item',
   'prefix' => 'item',
-], function() {
+], function () {
   Route::get('/', 'ItemController@index');
   Route::post('/', 'ItemController@store')->name('.store');
   Route::get('/create', 'ItemController@create')->name('.create');
@@ -47,7 +47,7 @@ Route::group([
 Route::group([
   'as' => 'customer',
   'prefix' => 'customer',
-], function() {
+], function () {
   Route::get('/', 'CustomerController@index');
   Route::post('/', 'CustomerController@store')->name('.store');
   Route::get('/create', 'CustomerController@create')->name('.create');
@@ -59,7 +59,7 @@ Route::group([
 Route::group([
   'as' => 'purchase',
   'prefix' => 'purchase',
-], function() {
+], function () {
   Route::get('/', 'PurchaseController@index');
   Route::post('/', 'PurchaseController@store')->name('.store');
   Route::get('/create', 'PurchaseController@create')->name('.create');
@@ -71,8 +71,9 @@ Route::group([
 Route::group([
   'as' => 'category',
   'prefix' => 'category',
-], function() {
+], function () {
   Route::get('/', 'CategoryController@index');
+  Route::get('/create', 'CategoryController@create')->name('.create');
   Route::post('/', 'CategoryController@store')->name('.store');
   Route::get('/create', 'CategoryController@create')->name('.create');
   Route::get('/{id}', 'CategoryController@edit')->name('.edit');
@@ -83,8 +84,9 @@ Route::group([
 Route::group([
   'as' => 'supplier',
   'prefix' => 'supplier',
-], function() {
+], function () {
   Route::get('/', 'SupplierController@index');
+  Route::get('/create', 'SupplierController@create')->name('.create');
   Route::post('/', 'SupplierController@store')->name('.store');
   Route::get('/create', 'SupplierController@create')->name('.create');
   Route::get('/{id}', 'SupplierController@edit')->name('.edit');
