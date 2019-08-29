@@ -80,6 +80,7 @@ Route::group([
   'prefix' => 'supplier',
 ], function() {
   Route::get('/', 'SupplierController@index');
+  Route::get('/create', 'SupplierController@create')->name('.create');
   Route::post('/', 'SupplierController@store')->name('.store');
   Route::get('/{id}', 'SupplierController@edit')->name('.edit');
   Route::put('/{id}', 'SupplierController@update')->name('.update');
