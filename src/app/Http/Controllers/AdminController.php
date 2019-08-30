@@ -36,13 +36,19 @@ class AdminController extends Controller
     public function store(Request $request)
     {
       try {
-        User::create([
-          'name' => $request->name,
-          'email' => $request->email,
-          'password' => Hash::make($request->password),
+        $verifiedData = $request->validate([
+          'name' => 'required',
+          'email' => 'required|email',
+          'password' => 'required',
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
+      } finally {
+        User::create([
+          'name' => $verifiedData['name'],
+          'email' => $verifiedData['email'],
+          'password' => Hash::make($verifiedData['password']),
+        ]);
       }
 
       return redirect()->route('admin');
