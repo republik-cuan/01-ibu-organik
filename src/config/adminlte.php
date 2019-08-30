@@ -119,7 +119,7 @@ return [
         ],
         [
           'text'    => 'Admin',
-          'url'     => 'admin/pages',
+          'url'     => 'admin',
           'icon'    => 'fas fa-user-secret',
         ],
         [

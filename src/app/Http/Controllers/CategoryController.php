@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('pages.category.index',[
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.category.create');
     }
 
     /**
@@ -35,7 +38,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'unique:categories|required'
+        ]);
+        Category::create($validatedData);
+        return redirect('/category')->with('message', 'Tambah category berhasil');
     }
 
     /**
@@ -57,7 +64,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('pages.category.edit',[
+            'category' => $category
+        ]);
     }
 
     /**
@@ -69,7 +79,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=> 'required'
+        ]);
+        $category= Category::find($id);
+        $category->update($validatedData);
+        return redirect('/category')->with('message', 'Edit category berhasil'); 
     }
 
     /**
@@ -80,6 +95,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect('/category');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -21,6 +22,11 @@ class AdminController extends Controller
       ]);
     }
 
+    public function create()
+    {
+      return view('pages.admin.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -30,15 +36,13 @@ class AdminController extends Controller
     public function store(Request $request)
     {
       try {
-        $verifiedData = $request->validate([
-          'name' => 'required',
-          'email' => 'required|email',
-          'password' => 'required',
+        User::create([
+          'name' => $request->name,
+          'email' => $request->email,
+          'password' => Hash::make($request->password),
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
-      } finally {
-        User::create($verifiedData);
       }
 
       return redirect()->route('admin');
