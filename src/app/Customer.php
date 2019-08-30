@@ -11,6 +11,7 @@ class Customer extends Model
     'phone',
     'email',
     'gender',
+    'adress',
   ];
 
   public function purchases() {
