@@ -18,7 +18,7 @@
   </div>
   <div class="col-md-6 text-right">
     <h3>
-      <a class="btn btn-info" href="{{route('category.create')}}">
+      <a class="btn btn-info" href="{{route('item.create')}}">
         Tambah Item
       </a>
     </h3>
@@ -27,6 +27,7 @@
 @stop
 
 @section('content')
+{{ $items }}
 <div class="box box-danger">
   <div class="box-body">
     <div class="row">
@@ -36,7 +37,12 @@
             <tr>
               <th class="text-center">No</th>
               <th class="text-center">Nama</th>
-              <th class="text-center">Aksi</th>
+              <th class="text-center">Harga</th>
+              <th class="text-center">Stok</th>
+              <th class="text-center">Terjual</th>
+              <th class="text-center">Kategori</th>
+              <th class="text-center">Kategori</th>
+              <th class="text-center">Action</th>
             </tr>
           </thead>
         </table>
@@ -47,19 +53,34 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
 <script>
   $(document).ready(function() {
     $('.data-table').dataTable({
-      data: {!! $categories !!},
+      data: {!! $items !!},
       columns: [{
           data: 'id'
         },
         {
           data: 'name'
+        },
+        {
+          data: 'price'
+        },
+        {
+          data: 'stock'
+        },
+        {
+          data: 'sold'
+        },
+        {
+          data: 'category.name'
+        },
+        {
+          data: 'supplier.name'
         },
         {
           data: 'id',
