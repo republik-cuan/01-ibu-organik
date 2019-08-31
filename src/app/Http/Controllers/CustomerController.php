@@ -37,56 +37,64 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->gender);
         $validatedData = $request->validate([
           'name' => 'required',
           'phone' => 'required',
           'email' => 'required',
           'gender' => 'required',
           'adress' => 'required',
-        ]);
+          ]);
 
-        Customer::create($validatedData);
-      return redirect()->route('customer');
-    }
+          Customer::create($validatedData);
+          return redirect('/customer')->with('message', 'Tambah customer berhasil');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $customer = \App\Customer::find($id);
-        return view('pages.customer.edit',['customer'=>$customer]);
-    }
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function show($id)
+        {
+            // $customer = \App\Customer::find($id);
+            // return view('pages.customer.edit',['customer'=>$customer]);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $customer = \App\Customer::find($id);
-        return view('pages.customer.edit',['customer' => $customer]);
-    }
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function edit($id)
+        {
+            $customer = Customer::find($id);
+            return view('pages.customer.edit',['customer' => $customer]);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $customer = \App\Customer::find($id);
-        $customer->update($request->all());
-        return redirect('customer');
-    }
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function update(Request $request, $id)
+        {
+
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'phone' => 'required',
+                'email' => 'required',
+                'gender' => 'required',
+                'adress' => 'required',
+                ]);
+                $customer = Customer::find($id);
+                $customer->update($validatedData);
+                return redirect('/customer')->with('message', 'edit customer berhasil');
+            }
 
     /**
      * Remove the specified resource from storage.
@@ -98,6 +106,6 @@ class CustomerController extends Controller
     {
         $customer = \App\Customer::find($id);
         $customer->delete();
-        return redirect('customer');
+        return redirect('/customer');
     }
 }

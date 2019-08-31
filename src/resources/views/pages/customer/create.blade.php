@@ -1,24 +1,36 @@
 @extends('adminlte::page')
 
-@section('title', 'Admin')
+@section('title', 'Tambah Customer')
 
 @section('content_header')
-    <h1>Tambah Customer</h1>
+<div class="row">
+    <div class="col-md-6">
+      <h3>Tambah Customer<h3>
+    </div>
+    <div class="col-md-6 text-right">
+      <h3>
+        <a type="button" class="btn btn-info" href="{{route('customer')}}">
+
+          Kembali
+        </a>
+      </h3>
+    </div>
+  </div>
 @stop
 
 @section('content')
 <div class="edit box box-danger">
     <div class="box-body row">
-    <form class="col-md-6" action="{{ url('customer/') }}" method="POST">
-            <form action="{{route('customer.store')}}" method="post">
+   {{-- <form class="col-md-6" action="{{ url('customer') }}" method="POST"> --}}
+            <form action="{{route('customer')}}" method="post">
                     {{ csrf_field() }}
         <div class="form-group">
             <label for="exampleInputEmail1">Nama</label>
-            <input type="text" class="form-control" name="name" id="example = budi"  aria-describedby="emailHelp" placeholder="Enter Nama">
+            <input type="text" class="form-control" name="name" id="example = budi"  aria-describedby="emailHelp" placeholder="Nama">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">No Telepon</label>
-            <input type="text" class="form-control" name="phone" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="text" class="form-control" name="phone" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="no telp">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Email</label>
@@ -29,13 +41,13 @@
               <label class="col-form-label col-sm-2 pt-0">Gender</label>
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="laki-laki" checked>
+                  <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="male" checked>
                   <label class="form-check-label" for="gridRadios1">
                     Laki-laki
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="perempuan">
+                  <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="female">
                   <label class="form-check-label" for="gridRadios2">
                     Perempuan
                   </label>
@@ -44,9 +56,30 @@
             </div>
           </fieldset>
 
+
+          {{-- <div class="form-group">
+            <label for="exampleFormControlSelect1">Jenis Kelamin</label>
+            <select name="gender" class="form-control" id="exampleFormControlSelect1">
+                <option>-----</option>
+              <option value="male">Laki-Laki</option>
+              <option value="female">Perempuan</option>
+
+            </select>
+          </div> --}}
+
+          {{-- <fieldset
+          div class="form-group col-md-4">
+              <label for="inputState">Gender</label>
+              <select id="inputState" name="gender" class="form-control">
+                  <option  value="male" id="nilai1"selected>Laki-Laki</option >
+                    <option  value="female" id="nilai1" selected>Perempuan</option >
+                    </select>
+                </div>
+            </fieldset> --}}
+
         <div class="form-group">
             <label for="exampleInputPassword1">Address</label>
-            <input type="password" class="form-control" name="gender" id="exampleInputPassword1" placeholder="Password">
+            <input type="text" class="form-control" name="adress" id="exampleInputPassword1" placeholder="alamat">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

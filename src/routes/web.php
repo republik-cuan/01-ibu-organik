@@ -51,7 +51,6 @@ Route::group([
   Route::get('/', 'CustomerController@index');
   Route::get('/create', 'CustomerController@create')->name('.create');
   Route::post('/', 'CustomerController@store')->name('.store');
-  Route::get('/create', 'CustomerController@create')->name('.create');
   Route::get('/{id}', 'CustomerController@edit')->name('.edit');
   Route::put('/{id}', 'CustomerController@update')->name('.update');
   Route::delete('/{id}', 'CustomerController@destroy')->name('.destroy');
