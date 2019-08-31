@@ -20,12 +20,12 @@ class CreateItemsTable extends Migration
             $table->integer('stock');
             $table->integer('sold')->default(0);
             $table->unsignedBigInteger('category_id');
-            $table->foreign()
+            $table->foreign('category_id')
                   ->references('id')
                   ->on('categories')
                   ->onDelete('cascade');
             $table->unsignedBigInteger('supplier_id');
-            $table->foreign()
+            $table->foreign('supplier_id')
                   ->references('id')
                   ->on('suppliers')
                   ->onDelete('cascade');
