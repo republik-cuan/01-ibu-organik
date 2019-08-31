@@ -37,9 +37,9 @@ class SupplierController extends Controller
   public function store(Request $request)
   {
     Supplier::create([
-      'name' => $request-.name,
-      'phone' => $request-.phone,
-      'address' => $request-.address,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'address' => $request->address,
     ]);
 
     return redirect('supplier');
@@ -79,9 +79,9 @@ class SupplierController extends Controller
   {
     $supplier = Supplier::find($id);
     $supplier->update([
-      'name' => $request-.name,
-      'phone' => $request-.phone,
-      'address' => $request-.address,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'address' => $request->address,
     ]);
 
     return redirect('supplier');
