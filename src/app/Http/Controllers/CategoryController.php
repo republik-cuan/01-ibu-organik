@@ -84,7 +84,7 @@ class CategoryController extends Controller
         ]);
         $category= Category::find($id);
         $category->update($validatedData);
-        return redirect('/category')->with('message', 'Edit category berhasil'); 
+        return redirect('/category')->with('message', 'Edit category berhasil');
     }
 
     /**

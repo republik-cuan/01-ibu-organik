@@ -16,9 +16,7 @@ class CustomerController extends Controller
     {
       $customers = Customer::all();
 
-      return view('pages.customer.index', [
-        'customers' => $customers,
-      ]);
+      return view('pages.customer.index', ['customers' => $customers]);
     }
 
     /**
@@ -39,73 +37,64 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-      try {
+        // dd($request->gender);
         $validatedData = $request->validate([
           'name' => 'required',
-          'phone' => 'unique:customers|required',
-          'email' => 'unique:customers|required',
+          'phone' => 'required',
+          'email' => 'required',
           'gender' => 'required',
-        ]);
-      } catch (Exception $e) {
-        return response()->json([
-          'msg' => 'error guys',
-          'error' => $e,
-        ]);
-      } finally {
-        Customer::create($validatedData);
-      }
-      return redirect()->route('customer');
-    }
+          'adress' => 'required',
+          ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+          Customer::create($validatedData);
+          return redirect('/customer')->with('message', 'Tambah customer berhasil');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-      $customer = Customer::with('purchase.item')->where('id', $id);
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function show($id)
+        {
+            // $customer = \App\Customer::find($id);
+            // return view('pages.customer.edit',['customer'=>$customer]);
+        }
 
-      return view('pages.customer.edit', [
-        'customer' => $customer,
-      ]);
-    }
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function edit($id)
+        {
+            $customer = Customer::find($id);
+            return view('pages.customer.edit',['customer' => $customer]);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-      try {
-        $validatedData = $request->validate([
-          'name' => 'required',
-          'phone' => 'unique:customers|required',
-          'email' => 'unique:customers|required',
-          'gender' => 'required',
-        ]);
-      } catch (Exception $e) {
-        return abort(404, $e);
-      } finally {
-        Customer::where('id', $id)->update($validatedData);
-      }
-      return redirect()->route('customer');
-    }
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @param  \App\Customer  $customer
+         * @return \Illuminate\Http\Response
+         */
+        public function update(Request $request, $id)
+        {
+
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'phone' => 'required',
+                'email' => 'required',
+                'gender' => 'required',
+                'adress' => 'required',
+                ]);
+                $customer = Customer::find($id);
+                $customer->update($validatedData);
+                return redirect('/customer')->with('message', 'edit customer berhasil');
+            }
 
     /**
      * Remove the specified resource from storage.
@@ -115,13 +104,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-      $customer = Customer::find($id);
-      try {
+        $customer = \App\Customer::find($id);
         $customer->delete();
-      } catch (Exception $e) {
-        return abort(404, $e);
-      } finally {
-        return redirect()->route('customer');
-      }
+        return redirect('/customer');
     }
 }
