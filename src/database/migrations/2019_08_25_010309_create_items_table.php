@@ -19,6 +19,16 @@ class CreateItemsTable extends Migration
             $table->float('price');
             $table->integer('stock');
             $table->integer('sold')->default(0);
+            $table->unsignedBigInteger('category_id');
+            $table->foreign()
+                  ->references('id')
+                  ->on('categories')
+                  ->onDelete('cascade');
+            $table->unsignedBigInteger('supplier_id');
+            $table->foreign()
+                  ->references('id')
+                  ->on('suppliers')
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
