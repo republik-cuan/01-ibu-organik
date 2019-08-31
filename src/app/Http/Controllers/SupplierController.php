@@ -64,7 +64,7 @@ class SupplierController extends Controller
    */
   public function edit($id)
   {
-    $supplier = Supplier::with('item')->where('id', $id)->get();
+    $supplier = Supplier::with('items')->where('id', $id)->get();
     return view('pages.supplier.edit', ['supplier' => $supplier]);
   }
 

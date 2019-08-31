@@ -16,4 +16,8 @@ class Item extends Model
   public function purchases() {
     return $this->belongsToMany(Purchase::class);
   }
+
+  public function supplier() {
+    return $this->belongsTo(Supplier::class);
+  }
 }
