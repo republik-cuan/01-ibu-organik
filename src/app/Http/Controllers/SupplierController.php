@@ -37,9 +37,9 @@ class SupplierController extends Controller
   public function store(Request $request)
   {
     Supplier::create([
-      'name' => $request-.name,
-      'phone' => $request-.phone,
-      'address' => $request-.address,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'address' => $request->address,
     ]);
 
     return redirect('supplier');
@@ -64,7 +64,7 @@ class SupplierController extends Controller
    */
   public function edit($id)
   {
-    $supplier = Supplier::with('item')->where('id', $id)->get();
+    $supplier = Supplier::with('items')->where('id', $id)->get();
     return view('pages.supplier.edit', ['supplier' => $supplier]);
   }
 
@@ -79,9 +79,9 @@ class SupplierController extends Controller
   {
     $supplier = Supplier::find($id);
     $supplier->update([
-      'name' => $request-.name,
-      'phone' => $request-.phone,
-      'address' => $request-.address,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'address' => $request->address,
     ]);
 
     return redirect('supplier');

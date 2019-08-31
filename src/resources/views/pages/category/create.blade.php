@@ -21,19 +21,17 @@
 @section('content')
 <div class="box box-danger">
   <div class="box-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
         <form action="{{route ('category.store')}}" method="post">
-            {{ csrf_field() }}
-            <div class="form-group">
-              <label for="namaKelompok">Category</label>
-              <input type="text" class="form-control" name="name" value="" placeholder="Nama Category" autofocus>
-              {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
-            </div>
-            <button type="submit" class="btn btn-info">submit</button>
-          </form>
-        </div>
+          {{ csrf_field() }}
+          <div class="form-group">
+            <label for="namaKelompok">Category</label>
+            <input type="text" class="form-control" name="name" value="" placeholder="Nama Category" autofocus>
+            {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
+          </div>
+          <button type="submit" class="btn btn-info">submit</button>
+        </form>
       </div>
     </div>
   </div>
