@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-      $items = Item::all();
+      $items = Item::with(['supplier:id,name', 'category:id,name'])->get();
 
       return view('pages.item.index', [
         'items' => $items,

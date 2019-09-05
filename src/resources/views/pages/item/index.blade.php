@@ -54,7 +54,7 @@
 <script>
   $(document).ready(function() {
     $('.data-table').dataTable({
-      data: {!! $categories !!},
+      data: {!! $items !!},
       columns: [{
           data: 'id'
         },
