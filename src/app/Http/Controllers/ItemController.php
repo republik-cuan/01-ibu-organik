@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Category;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -28,7 +30,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-      return view('pages.item.create');
+      $categories = Category::select('id','name')->get();
+      $suppliers = Supplier::select('id','name')->get();
+      return view('pages.item.create', [ 'categories' => $categories, 'suppliers' => $suppliers ]);
     }
 
     /**
@@ -42,8 +46,10 @@ class ItemController extends Controller
       try {
         $validatedData = $request->validate([
           'name' => 'unique:items|required',
-          'price' => 'required',
-          'stock' => 'required',
+          'price' => 'required|integer',
+          'stock' => 'required|integer',
+          'category_id' => 'required|integer',
+          'supplier_id' => 'required|integer',
         ]);
       } catch (Exception $e) {
         return abort(404, $e);

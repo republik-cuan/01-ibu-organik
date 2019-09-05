@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
   protected $fillable = [
-    'supplier_id',
-    'category_id',
     'name',
     'price',
     'stock',
     'sold',
+    'category_id',
+    'supplier_id',
   ];
 
   public function supplier() {
