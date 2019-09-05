@@ -20,6 +20,10 @@ class CreatePurchasesTable extends Migration
               'preorder',
               'verified'
             ])->default('order');
+            $table->enum('bank', [
+              'bni',
+              'bri',
+            ]);
             $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')
                   ->references('id')
