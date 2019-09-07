@@ -27,7 +27,7 @@
 @stop
 
 @section('content')
-{{ $items }}
+<!-- {{ $items }} -->
 <div class="box box-danger">
   <div class="box-body">
     <div class="row">
@@ -41,7 +41,7 @@
               <th class="text-center">Stok</th>
               <th class="text-center">Terjual</th>
               <th class="text-center">Kategori</th>
-              <th class="text-center">Kategori</th>
+              <th class="text-center">Supplier</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
@@ -84,8 +84,8 @@
         },
         {
           data: 'id',
-          render: function(data) {
-            const link = "{{route('category')}}"+"/"+data;
+          render: function(data) { 
+            const link = "{{route('item')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
             const hapus = '<form role="form" action="' + link + '" stlye="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">delete</button></form>';
             return '<div class="text-center">' + detail + hapus + '</div>';

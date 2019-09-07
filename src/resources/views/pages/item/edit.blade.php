@@ -23,31 +23,32 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-        <form action="{{route ('item.store')}}" method="post">
+        <form action="{{route ('item.update', $item->id)}}" method="post">
             {{ csrf_field() }}
+            {{ method_field('put') }}
             <div class="form-group">
               <label for="name">Nama</label>
-            <input type="text" class="form-control" name="name" value="{{ $item->name }}" placeholder="Nama item" autofocus>
-              {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="text" class="form-control" name="name" value="{{ $item->name }}" placeholder="Nama Item" autofocus>
+              {!! $errors->first('name', '<p class="help-block text-danger">:message</p>')!!}
               <label for="price">Harga</label>
-              <input type="number" class="form-control" name="price" value="{{ $item->price }}" placeholder="Nama item" autofocus>
-              {!! $errors->first('price', '<p calss="help-block text-danger">:message</p>')!!}
+              <input type="number" class="form-control" name="price" value="{{ $item->price }}" placeholder="Harga Item" autofocus>
+              {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
               <label for="number">Stok</label>
-              <input type="text" class="form-control" name="stock" value="{{ $item->stock }}" placeholder="Nama item" autofocus>
-              {!! $errors->first('stock', '<p calss="help-block text-danger">:message</p>')!!}
+              <input type="text" class="form-control" name="stock" value="{{ $item->stock }}" placeholder="Stok Item" autofocus>
+              {!! $errors->first('stock', '<p class="help-block text-danger">:message</p>')!!}
               <label for="categoy_id">Kategori</label>
               <select name="category_id" id="" class="form-control">
-                <option value="">-- Choose Category --</option>
-                @foreach ($categories as $item)
-                  <option value="{{ $item->id }}">{{ $item->name }}</option>
+                <option disabled selected>{{ $item->category->name}}</option>
+                @foreach ($categories as $category)
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
               {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
               <label for="supplier_id">Supplier</label>
               <select name="supplier_id" id="" class="form-control">
-                  <option value="">-- Choose Supplier --</option>
-                  @foreach ($suppliers as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                  <option disabled selected>{{ $item->supplier->name }}</option>
+                  @foreach ($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                   @endforeach
               </select>
               {!! $errors->first('supplier_id', '<p calss="help-block text-danger">:message</p>')!!}

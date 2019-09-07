@@ -74,7 +74,7 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource.http://datatables.net/tn/4
      *
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
@@ -82,10 +82,10 @@ class ItemController extends Controller
     public function edit($id)
     {
       $item = Item::find($id);
-
-      return view('pages.item.edit', [
-        'item' => $item,
-      ]);
+      $categories = Category::all();
+      $suppliers = Supplier::all();
+      $item->load('category', 'supplier');
+      return view('pages.item.edit',['item' => $item, 'categories' => $categories, 'suppliers' => $suppliers ]);
     }
 
     /**
@@ -107,10 +107,9 @@ class ItemController extends Controller
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        Item::where('id', $id)->update($validatedData);
+        Item::where('id', $id)->update($request->except('_token','_method'));
+        return redirect()->route('item')->with('message','Edit Item Berhasil');
       }
-
-      return redirect()->route('item');
     }
 
     /**
