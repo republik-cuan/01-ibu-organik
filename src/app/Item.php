@@ -27,7 +27,7 @@ class Item extends Model
     return $this->belongsToMany(Purchase::class);
   }
 
-  public function supplier() {
-    return $this->belongsTo(Supplier::class);
-  }
+  // public function supplier() {
+  //   return $this->belongsTo(Supplier::class);
+  // }
 }
