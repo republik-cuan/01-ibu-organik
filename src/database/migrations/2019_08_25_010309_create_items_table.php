@@ -16,7 +16,9 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->float('price');
+            $table->float('modal');
+            $table->float('reseller');
+            $table->float('endUser');
             $table->integer('stock');
             $table->integer('sold')->default(0);
             $table->unsignedBigInteger('category_id')
@@ -30,6 +32,7 @@ class CreateItemsTable extends Migration
                   ->on('suppliers')
                   ->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
