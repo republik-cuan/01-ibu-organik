@@ -37,7 +37,9 @@
             <tr>
               <th class="text-center">No</th>
               <th class="text-center">Nama</th>
-              <th class="text-center">Harga</th>
+              <th class="text-center">Harga Modal</th>
+              <th class="text-center">Harga Reseller</th>
+              <th class="text-center">Harga Pelanggan</th>
               <th class="text-center">Stok</th>
               <th class="text-center">Terjual</th>
               <th class="text-center">Kategori</th>
@@ -68,7 +70,13 @@
           data: 'name'
         },
         {
-          data: 'price'
+          data: 'modal'
+        },
+        {
+          data: 'reseller'
+        },
+        {
+          data: 'endUser'
         },
         {
           data: 'stock'
