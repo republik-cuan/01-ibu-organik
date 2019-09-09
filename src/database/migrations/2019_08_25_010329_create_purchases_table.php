@@ -23,9 +23,11 @@ class CreatePurchasesTable extends Migration
             $table->enum('bank', [
               'bni',
               'bri',
+              'mandiri',
             ]);
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')
+            $table->string('accountNumber');
+            $table->unsignedBigInteger('customer_id')
+                  ->foreign()
                   ->references('id')
                   ->on('customers')
                   ->onDelete('cascade');
