@@ -36,7 +36,9 @@
             <tr>
               <th>No</th>
               <th>Nama</th>
-              <th>Harga</th>
+              <th>Modal</th>
+              <th>Reseller</th>
+              <th>End User</th>
               <th>Stok</th>
               <th>Terjual</th>
               <th>Kategori</th>
@@ -59,7 +61,7 @@
       columns: [{
           data: 'id',
           render: function(data) {
-            return args[3].row+=1;
+            return arguments[3].row+=1;
           },
         },
         {
