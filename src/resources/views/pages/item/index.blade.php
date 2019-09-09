@@ -27,24 +27,23 @@
 @stop
 
 @section('content')
-<!-- {{ $items }} -->
 <div class="box box-danger">
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <table class="data-table table table-bordered table-hover">
+        <table class="data-table table table-bordered table-hover text-center">
           <thead>
             <tr>
-              <th class="text-center">No</th>
-              <th class="text-center">Nama</th>
-              <th class="text-center">Harga Modal</th>
-              <th class="text-center">Harga Reseller</th>
-              <th class="text-center">Harga Pelanggan</th>
-              <th class="text-center">Stok</th>
-              <th class="text-center">Terjual</th>
-              <th class="text-center">Kategori</th>
-              <th class="text-center">Supplier</th>
-              <th class="text-center">Action</th>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Modal</th>
+              <th>Reseller</th>
+              <th>End User</th>
+              <th>Stok</th>
+              <th>Terjual</th>
+              <th>Kategori</th>
+              <th>Kategori</th>
+              <th>Action</th>
             </tr>
           </thead>
         </table>
@@ -54,17 +53,16 @@
 </div>
 @stop
 
-@section('css')
-{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
-
 @section('js')
 <script>
   $(document).ready(function() {
     $('.data-table').dataTable({
       data: {!! $items !!},
       columns: [{
-          data: 'id'
+          data: 'id',
+          render: function(data) {
+            return arguments[3].row+=1;
+          },
         },
         {
           data: 'name'
@@ -95,7 +93,7 @@
           render: function(data) { 
             const link = "{{route('item')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
-            const hapus = '<form role="form" action="' + link + '" stlye="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">delete</button></form>';
+            const hapus = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">delete</button></form>';
             return '<div class="text-center">' + detail + hapus + '</div>';
           }
         },
