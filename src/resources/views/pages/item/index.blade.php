@@ -51,23 +51,28 @@
 </div>
 @stop
 
-@section('css')
-{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
-
 @section('js')
 <script>
   $(document).ready(function() {
     $('.data-table').dataTable({
       data: {!! $items !!},
       columns: [{
-          data: 'id'
+          data: 'id',
+          render: function(data) {
+            return args[3].row+=1;
+          },
         },
         {
           data: 'name'
         },
         {
-          data: 'price'
+          data: 'modal'
+        },
+        {
+          data: 'reseller'
+        },
+        {
+          data: 'endUser'
         },
         {
           data: 'stock'
@@ -83,8 +88,8 @@
         },
         {
           data: 'id',
-          render: function(data) {
-            const link = "{{route('category')}}"+"/"+data;
+          render: function(data) { 
+            const link = "{{route('item')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
             const hapus = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">delete</button></form>';
             return '<div class="text-center">' + detail + hapus + '</div>';

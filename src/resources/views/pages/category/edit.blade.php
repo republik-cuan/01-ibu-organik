@@ -23,7 +23,7 @@
   <div class="box-body">
     <div class="row">
       <div class="col-md-6">
-        <form action="{{ route('category.update', $category->id)}}" method="post">
+        <form action="{{ route('category.update', $category->id) }}" method="post">
           {{ csrf_field() }}
           {{ method_field('put') }}
           <div class="form-group">

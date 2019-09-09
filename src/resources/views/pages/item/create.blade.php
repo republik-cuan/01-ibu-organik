@@ -23,16 +23,22 @@
     <div class="row">
       <div class="col-md-6">
         <form action="{{route ('item.store')}}" method="post">
-          {{ csrf_field() }}
+          @csrf
           <div class="form-group">
             <label for="name">Nama</label>
-            <input type="text" class="form-control" name="name" value="" placeholder="Nama item" autofocus>
+            <input type="text" class="form-control" name="name" value="" placeholder="Nama Item" autofocus>
             {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
-            <label for="price">Harga</label>
-            <input type="number" class="form-control" name="price" min="0" value="" placeholder="Nama item" autofocus>
-            {!! $errors->first('price', '<p calss="help-block text-danger">:message</p>')!!}
-            <label for="stock">Stok</label>
-            <input type="number" class="form-control" name="stock" min="0" value="" placeholder="Nama item" autofocus>
+            <label for="modal">Harga Modal</label>
+            <input type="number" class="form-control" name="modal" value="" placeholder="Harga Item" autofocus>
+            {!! $errors->first('modal', '<p calss="help-block text-danger">:message</p>')!!}
+            <label for="reseller">Harga Reseller</label>
+            <input type="number" class="form-control" name="reseller" value="" placeholder="Harga Item" autofocus>
+            {!! $errors->first('reseller', '<p calss="help-block text-danger">:message</p>')!!}
+            <label for="endUser">Harga Pelanggan</label>
+            <input type="number" class="form-control" name="endUser" value="" placeholder="Harga Item" autofocus>
+            {!! $errors->first('endUser', '<p calss="help-block text-danger">:message</p>')!!}
+            <label for="number">Stok</label>
+            <input type="text" class="form-control" name="stock" value="" placeholder="Stok Item" autofocus>
             {!! $errors->first('stock', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="categoy_id">Kategori</label>
             <select name="category_id" id="" class="form-control">
@@ -40,18 +46,18 @@
               @foreach ($categories as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach
-            </select>
-            {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
-            <label for="supplier_id">Supplier</label>
-            <select name="supplier_id" id="" class="form-control">
-              <option value="">-- Choose Supplier --</option>
-              @foreach ($suppliers as $item)
-                <option value="{{ $item->id }}">{{ $item->name }}</option>
-              @endforeach
-            </select>
-            {!! $errors->first('supplier_id', '<p calss="help-block text-danger">:message</p>')!!}
-          </div>
-          <button type="submit" class="btn btn-info">submit</button>
+          </select>
+          {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
+          <label for="supplier_id">Supplier</label>
+          <select name="supplier_id" id="" class="form-control">
+            <option value="">-- Choose Supplier --</option>
+            @foreach ($suppliers as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
+          </select>
+          {!! $errors->first('supplier_id', '<p calss="help-block text-danger">:message</p>')!!}
+        </div>
+        <button type="submit" class="btn btn-info">submit</button>
         </form>
       </div>
     </div>
