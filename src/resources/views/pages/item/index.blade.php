@@ -68,13 +68,31 @@
           data: 'name'
         },
         {
-          data: 'modal'
+          data: 'modal',
+          render: function(data) {
+            return data.toLocaleString('id', {
+              style: 'currency',
+              currency: 'IDR',
+            });
+          },
         },
         {
-          data: 'reseller'
+          data: 'reseller',
+          render: function(data) {
+            return data.toLocaleString('id', {
+              style: 'currency',
+              currency: 'IDR',
+            });
+          },
         },
         {
-          data: 'endUser'
+          data: 'endUser',
+          render: function(data) {
+            return data.toLocaleString('id', {
+              style: 'currency',
+              currency: 'IDR',
+            });
+          },
         },
         {
           data: 'stock'
