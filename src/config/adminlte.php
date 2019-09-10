@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'title' => 'Point Of Sale',
+    'title' => 'Ibu Organik',
 
-    'title_prefix' => 'PoS | ',
+    'title_prefix' => 'IO | ',
 
     'title_postfix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Point</b> of Sale',
+    'logo' => '<b>Ibu</b> Organik',
 
-    'logo_mini' => '<b>P</b>oS',
+    'logo_mini' => '<b>I</b>O',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'black',
 
     /*
     |--------------------------------------------------------------------------
