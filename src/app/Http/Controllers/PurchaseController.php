@@ -30,9 +30,12 @@ class PurchaseController extends Controller
     public function create()
     {
       $customers = Customer::all();
+      $temp = new Purchase();
 
       return view('pages.purchase.create', [
         'customers' => $customers,
+        'banks' => $temp->banks,
+        'status' => $temp->status,
       ]);
     }
 
@@ -47,7 +50,10 @@ class PurchaseController extends Controller
       $customer = Customer::find($request->customer);
 
       try {
-        $customer->purchases()->create();
+        $customer->purchases()->create([
+          'bank' => $request->bank,
+          'accountNumber' => $request->accountNumber,
+        ]);
       } catch (Exception $e) {
         return abort(404, $e);
       }

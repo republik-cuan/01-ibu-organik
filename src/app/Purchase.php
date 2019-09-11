@@ -6,12 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-  protected $fillable = ['status'];
+  protected $fillable = [
+    'status',
+    'bank',
+    'accountNumber',
+  ];
 
   public $status = [
     'order',
     'preorder',
     'verified',
+  ];
+
+  public $banks = [
+    'bni',
+    'bri',
+    'mandiri',
   ];
 
   public function customer() {

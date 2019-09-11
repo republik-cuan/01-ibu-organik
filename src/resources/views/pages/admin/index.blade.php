@@ -18,13 +18,13 @@
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <table class="data-table table table-bordered table-hover">
+        <table class="data-table table table-bordered table-hover text-center">
           <thead>
             <tr>
-              <th class="text-center">No</th>
-              <th class="text-center">Nama</th>
-              <th class="text-center">Email</th>
-              <th class="text-center">Actions</th>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Email</th>
+              <th>Actions</th>
             </tr>
           </thead>
         </table>
@@ -58,7 +58,7 @@
             const link = "{{route('admin')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
             const hapus = '<form role="form" style="margin: 0 3px; display: inline;" action="' + link + '"method="POST">@csrf @method("DELETE")<button class="btn btn-danger btn-xs">delete</button></form>';
-            return '<div class="text-center">' + detail + hapus + '</div>';
+            return '<div>' + detail + hapus + '</div>';
           }
         },
       ]

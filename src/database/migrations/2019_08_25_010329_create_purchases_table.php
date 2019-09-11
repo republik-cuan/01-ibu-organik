@@ -20,8 +20,14 @@ class CreatePurchasesTable extends Migration
               'preorder',
               'verified'
             ])->default('order');
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')
+            $table->enum('bank', [
+              'bni',
+              'bri',
+              'mandiri',
+            ]);
+            $table->string('accountNumber');
+            $table->unsignedBigInteger('customer_id')
+                  ->foreign()
                   ->references('id')
                   ->on('customers')
                   ->onDelete('cascade');
