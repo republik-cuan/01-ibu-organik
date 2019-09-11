@@ -19,6 +19,7 @@
   <div class="col-md-6 text-right">
     <h3>
       <a class="btn btn-info" href="{{route('category.create')}}">
+
         Tambah Kategori
       </a>
     </h3>
@@ -31,12 +32,12 @@
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <table class="data-table table table-bordered table-hover text-center">
+        <table class="data-table table table-bordered table-hover">
           <thead>
             <tr>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Aksi</th>
+              <th class="text-center">No</th>
+              <th class="text-center">Nama</th>
+              <th class="text-center">Aksi</th>
             </tr>
           </thead>
         </table>
@@ -63,7 +64,7 @@
                         render: function(data){
                             const link ="{{route('category')}}"+"/"+data;
                             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="'+link+'">edit</a>';
-                            const hapus = '<form role="form" action="'+link+'" stlye="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
+                            const hapus = '<form role="form" style="margin: 0 3px; display: inline;" action="'+link+'" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
                             return '<div class="text-center">'+detail+hapus+'</div>';
                         }
                     }
