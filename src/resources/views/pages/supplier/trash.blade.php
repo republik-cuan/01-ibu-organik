@@ -64,7 +64,7 @@
         {
           data: 'id',
           render: function(data){
-            const link ="{{route('supplier')}}"+"/"+data;
+            const link ="{{route('supplier.trash')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="'+link+'">edit</a>';
             const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
             return '<div class="text-center">'+detail+hapus+'</div>';

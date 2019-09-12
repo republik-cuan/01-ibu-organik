@@ -96,8 +96,31 @@ class SupplierController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function destroy($id)
-  {
-    Supplier::findOrfail($id)->delete();
-    return redirect('supplier');
-  }
+    {
+        $supplier = Supplier::findOrfail($id);
+        $supplier->delete();
+        return redirect('/supplier');
+    }
+
+    public function trash()
+    {
+        $supplier = Supplier::onlyTrashed()->get();
+        return view('pages.supplier.trash', [
+            'supplier' => $supplier
+        ]);
+    }
+
+    public function destroypermanent($id)
+    {
+        $supplier = Supplier::onlyTrashed()->findOrfail($id);
+        $supplier->forceDelete();
+        return redirect('supplier/trash');
+    }
+
+    public function restore($id)
+    {
+        $supplier = Supplier::onlyTrashed()->findOrfail($id);
+        $supplier->restore();
+        return redirect('supplier/trash');
+    }
 }
