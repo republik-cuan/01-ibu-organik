@@ -31,12 +31,12 @@
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <table class="data-table table table-bordered table-hover">
+        <table class="data-table table table-bordered table-hover text-center">
           <thead>
             <tr>
-              <th class="text-center">No</th>
-              <th class="text-center">Nama</th>
-              <th class="text-center">Aksi</th>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Aksi</th>
             </tr>
           </thead>
         </table>
