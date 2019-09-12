@@ -23,19 +23,23 @@
     <div class="box-body">
       <div class="row">
         <div class="col-md-6">
-          <form action="" method="post">
+          <form action="{{route('supplier.update', $supplier->id)}}" method="post">
             @csrf
+            {{method_field('put')}}
             <div class="form-group">
               <label for="namaSupplier">Nama</label>
-              <input type="text" class="form-control" id="namaSupplier" name="name" placeholder="nama supplier">
+              <input type="text" class="form-control" id="namaSupplier" name="name" value="{{$supplier->name}}">
+              {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <div class="form-group">
               <label for="phoneNumber">No.Telepon</label>
-              <input type="text" class="form-control" id="phoneNumber" name="phone" placeholder="nomer telepon">
+              <input type="text" class="form-control" id="phoneNumber" name="phone" value="{{$supplier->phone}}">
+              {!! $errors->first('phone', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <div class="form-group">
               <label for="address">Alamat</label>
-              <input type="text" class="form-control" id="address" name="address" placeholder="alamat">
+              <input type="text" class="form-control" id="address" name="address" value="{{$supplier->address}}">
+              {!! $errors->first('address', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <button type="submit" class="btn btn-info">submit</button>
           </form>

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Kategori')
+@section('title', 'Trash')
 
 @section('content_header')
 @if(session()->get('message'))
@@ -14,15 +14,12 @@
 @endif
 <div class="row">
   <div class="col-md-6">
-    <h3>Category</h3>
+    <h3>Trash</h3>
   </div>
   <div class="col-md-6 text-right">
     <h3>
-      <a class="btn btn-warning" href="{{route('category.trash')}}">
-        Sampah
-      </a>
-      <a class="btn btn-info" href="{{route('category.create')}}">
-        Tambah Kategori
+      <a class="btn btn-info" href="{{route('category')}}">
+        Kembali
       </a>
     </h3>
   </div>
@@ -70,10 +67,10 @@
         {
           data: 'id',
           render: function(data) { 
-            const link = "{{route('category')}}"+"/"+data;
-            const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
-            const hapus = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">delete</button></form>';
-            return '<div class="text-center">' + detail + hapus + '</div>';
+            const link = "{{route('category.trash')}}"+"/"+data;
+            const restore = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('put')}}<button class="btn btn-primary btn-xs">restore</button></form>';
+            const hapus = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
+            return '<div class="text-center">' + restore + hapus + '</div>';
           }
         },
       ]

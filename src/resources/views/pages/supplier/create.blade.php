@@ -27,14 +27,17 @@
             <div class="form-group">
               <label for="namaSupplier">Nama</label>
               <input type="text" class="form-control" id="namaSupplier" name="name" placeholder="nama supplier">
+              {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <div class="form-group">
               <label for="phoneNumber">No.Telepon</label>
               <input type="text" class="form-control" id="phoneNumber" name="phone" placeholder="nomer telepon">
+              {!! $errors->first('phone', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <div class="form-group">
               <label for="address">Alamat</label>
               <input type="text" class="form-control" id="address" name="address" placeholder="alamat">
+              {!! $errors->first('address', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
             <button type="submit" class="btn btn-info">submit</button>
           </form>

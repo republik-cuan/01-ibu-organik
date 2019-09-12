@@ -42,7 +42,7 @@ class CategoryController extends Controller
             'name'=> 'unique:categories|required'
         ]);
         Category::create($validatedData);
-        return redirect('/category')->with('message', 'Tambah category berhasil');
+        return redirect('category')->with('message', 'Tambah category berhasil');
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrfail($id);
         return view('pages.category.edit',[
             'category' => $category
         ]);
@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
             'name'=> 'required'
         ]);
-        $category= Category::find($id);
+        $category= Category::findOrfail($id);
         $category->update($validatedData);
         return redirect('/category')->with('message', 'Edit category berhasil');
     }
@@ -95,8 +95,27 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrfail($id);
         $category->delete();
         return redirect('/category');
+    }
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('pages.category.trash', [
+            'categories' => $categories
+        ]);
+    }
+    public function destroypermanent($id)
+    {
+        $category = Category::onlyTrashed()->findOrfail($id);
+        $category->forceDelete();
+        return redirect('category/trash');
+    }
+    public function restore($id)
+    {
+        $category = Category::onlyTrashed()->findOrfail($id);
+        $category->restore();
+        return redirect('category/trash');
     }
 }

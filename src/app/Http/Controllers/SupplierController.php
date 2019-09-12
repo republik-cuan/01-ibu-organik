@@ -36,11 +36,12 @@ class SupplierController extends Controller
    */
   public function store(Request $request)
   {
-    Supplier::create([
-      'name' => $request->name,
-      'phone' => $request->phone,
-      'address' => $request->address,
-    ]);
+    $validatedData = $request->validate([
+      'name'=> 'required',
+      'phone'=> 'required',
+      'address'=> 'required'
+  ]);
+    Supplier::create($validatedData);
 
     return redirect('supplier');
   }
@@ -64,7 +65,7 @@ class SupplierController extends Controller
    */
   public function edit($id)
   {
-    $supplier = Supplier::with('items')->where('id', $id)->get();
+    $supplier = Supplier::with('items')->findOrfail($id);
     return view('pages.supplier.edit', ['supplier' => $supplier]);
   }
 
@@ -77,12 +78,13 @@ class SupplierController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $supplier = Supplier::find($id);
-    $supplier->update([
-      'name' => $request->name,
-      'phone' => $request->phone,
-      'address' => $request->address,
-    ]);
+    $validatedData = $request->validate([
+      'name'=> 'required',
+      'phone'=> 'required',
+      'address'=> 'required'
+  ]);
+    $supplier = Supplier::findOrfail($id);
+    $supplier->update($validatedData);
 
     return redirect('supplier');
   }
@@ -95,7 +97,7 @@ class SupplierController extends Controller
    */
   public function destroy($id)
   {
-    Supplier::where('id', $id)->delete();
+    Supplier::findOrfail($id)->delete();
     return redirect('supplier');
   }
 }
