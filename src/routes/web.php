@@ -89,11 +89,14 @@ Route::group([
     'prefix' => 'supplier',
   ], function () {
     Route::get('/', 'SupplierController@index');
+    Route::get('/trash', 'CategoryController@trash')->name('.trash');
     Route::post('/', 'SupplierController@store')->name('.store');
     Route::get('/create', 'SupplierController@create')->name('.create');
     Route::get('/{id}', 'SupplierController@edit')->name('.edit');
     Route::put('/{id}', 'SupplierController@update')->name('.update');
-    Route::delete('/{id}', 'SupplierController@destroy')->name('.destroy');
+    Route::put('/trash/{id}', 'CategoryController@restore')->name('.restore');
+    Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'CategoryController@destroypermanent')->name('.destroypermanent');
   });
 
   Route::group([
