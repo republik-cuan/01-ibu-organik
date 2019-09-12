@@ -99,4 +99,23 @@ class CategoryController extends Controller
         $category->delete();
         return redirect('/category');
     }
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('pages.category.trash', [
+            'categories' => $categories
+        ]);
+    }
+    public function destroypermanent($id)
+    {
+        $category = Category::onlyTrashed()->findOrfail($id);
+        $category->forceDelete();
+        return redirect('category/trash');
+    }
+    public function restore($id)
+    {
+        $category = Category::onlyTrashed()->findOrfail($id);
+        $category->restore();
+        return redirect('category/trash');
+    }
 }
