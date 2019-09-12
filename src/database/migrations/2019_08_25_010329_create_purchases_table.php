@@ -32,6 +32,7 @@ class CreatePurchasesTable extends Migration
                   ->on('customers')
                   ->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
