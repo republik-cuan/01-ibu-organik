@@ -44,6 +44,7 @@ class CustomerController extends Controller
         'email' => 'required',
         'gender' => 'required',
         'address' => 'required',
+        'patokan' => 'required',
       ]);
 
       Customer::create($validatedData);
@@ -89,6 +90,7 @@ class CustomerController extends Controller
         'email' => 'required',
         'gender' => 'required',
         'adress' => 'required',
+        'patokan' => 'required',
       ]);
       $customer = Customer::find($id);
       $customer->update($validatedData);

@@ -21,9 +21,7 @@
     </div>
     <div class="col-md-6 text-right">
         <h3>
-                <a class="btn btn-warning" href="{{route('supplier.trash')}}">
-                        Sampah
-                      </a>
+
             <a class="btn btn-info" href="{{route('customer.create')}}">
 
                 Tambah Customer
@@ -49,6 +47,7 @@
                             <th>Email</th>
                             <th>Jenis Kelamin</th>
                             <th>Alamat</th>
+                            <th>Patokan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -76,6 +75,7 @@
                     {data: 'email'},
                     {data: 'gender'},
                     {data: 'address'},
+                    {data: 'patokan'},
                     {
                         data: 'id',
                         render: function(data){
