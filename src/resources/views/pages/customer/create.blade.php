@@ -60,6 +60,10 @@
               <label for="exampleInputPassword1">Address</label>
               <input type="text" class="form-control" name="address" id="exampleInputPassword1" placeholder="alamat">
             </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Patokan</label>
+              <input type="text" class="form-control" name="patokan" id="exampleInputPassword1" placeholder="patokan">
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
