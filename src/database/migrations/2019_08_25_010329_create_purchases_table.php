@@ -23,15 +23,30 @@ class CreatePurchasesTable extends Migration
             $table->enum('bank', [
               'bni',
               'bri',
+              'bca',
               'mandiri',
+              'cash',
             ]);
             $table->string('accountNumber');
+            $table->enum('statusHarga', [
+              'agen',
+              'modal',
+              'distributor',
+              'end user',
+            ])->default('end user');
+            $table->enum('statusPembayaran', [
+              'belum bayar',
+              'preorder',
+              'terbayar',
+            ])->default('belum bayar');
+            $table->boolean('statusPengiriman')->default(false);
             $table->unsignedBigInteger('customer_id')
                   ->foreign()
                   ->references('id')
                   ->on('customers')
                   ->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
