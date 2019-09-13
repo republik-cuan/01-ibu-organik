@@ -9,12 +9,7 @@
     </div>
     <div class="col-md-6 text-right">
       <h3>
-        <a class="btn btn-warning" href="{{route('supplier.trash')}}">
-          Sampah
-        </a>
-        <a class="btn btn-info" href="{{route('supplier.create')}}">
-          Tambah Supplier
-        </a>
+        <a class="btn btn-info" href="{{route('supplier')}}">Kembali</a>
       </h3>
     </div>
   </div>
@@ -65,9 +60,9 @@
           data: 'id',
           render: function(data){
             const link ="{{route('supplier.trash')}}"+"/"+data;
-            const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="'+link+'">edit</a>';
+            const restore = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">@csrf @method("put")<button class="btn btn-primary btn-xs">restore</button></form>';
             const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
-            return '<div class="text-center">'+detail+hapus+'</div>';
+            return '<div class="text-center">'+restore+hapus+'</div>';
           }
         },
       ],
