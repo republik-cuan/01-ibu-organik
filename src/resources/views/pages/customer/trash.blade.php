@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Customer')
+@section('title', 'Trash')
 
 @section('content_header')
 
@@ -21,9 +21,7 @@
     </div>
     <div class="col-md-6 text-right">
         <h3>
-                <a class="btn btn-warning" href="{{route('supplier.trash')}}">
-                        Sampah
-                      </a>
+
             <a class="btn btn-info" href="{{route('customer.create')}}">
 
                 Tambah Customer

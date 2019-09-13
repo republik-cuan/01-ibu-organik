@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Customer;
 use Illuminate\Http\Request;
 
@@ -105,5 +106,26 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->delete();
         return redirect('/customer');
+    }
+    public function trash()
+    {
+        $customers = Customer::onlyTrashed()->get();
+        return view('pages.customer.trash',[
+            'customers' => $customers
+
+        ]);
+    }
+    public function destroypermanent($id)
+    {
+        $customer = Customer::onlyTrashed()->findOrfail($id);
+        $customer->forceDelete();
+        return redirect('customer/trash');
+
+    }
+    public function restore($id)
+    {
+        $customer = Customer::onlyTrashed()->findOrfail($id);
+        $customer->restore();
+        return redirect('customer/trash');
     }
 }
