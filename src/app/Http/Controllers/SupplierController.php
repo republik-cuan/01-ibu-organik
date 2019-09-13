@@ -106,7 +106,7 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::onlyTrashed()->get();
         return view('pages.supplier.trash', [
-            'supplier' => $supplier
+            'suppliers' => $supplier
         ]);
     }
 
@@ -121,6 +121,6 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::onlyTrashed()->findOrfail($id);
         $supplier->restore();
-        return redirect('supplier/trash');
+        return redirect('supplier');
     }
 }
