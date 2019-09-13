@@ -104,9 +104,9 @@ class SupplierController extends Controller
 
     public function trash()
     {
-        $supplier = Supplier::onlyTrashed()->get();
+        $suppliers = Supplier::onlyTrashed()->get();
         return view('pages.supplier.trash', [
-            'supplier' => $supplier
+            'suppliers' => $suppliers
         ]);
     }
 
