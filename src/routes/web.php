@@ -43,7 +43,22 @@ Route::group([
     Route::get('/{id}', 'ItemController@edit')->name('.edit');
     Route::put('/{id}', 'ItemController@update')->name('.update');
     Route::delete('/{id}', 'ItemController@destroy')->name('.destroy');
-  });
+});
+
+Route::group([
+  'as' => 'category',
+  'prefix' => 'category',
+], function () {
+  Route::get('/', 'CategoryController@index');
+  Route::get('/trash', 'CategoryController@trash')->name('.trash');
+  Route::post('/', 'CategoryController@store')->name('.store');
+  Route::get('/create', 'CategoryController@create')->name('.create');
+  Route::get('/{id}', 'CategoryController@edit')->name('.edit');
+  Route::put('/{id}', 'CategoryController@update')->name('.update');
+  Route::put('/trash/{id}', 'CategoryController@restore')->name('.restore');
+  Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
+  Route::delete('/trash/{id}', 'CategoryController@destroypermanent')->name('.destroypermanent');
+});
 
   Route::group([
     'as' => 'customer',
@@ -55,6 +70,9 @@ Route::group([
     Route::get('/{id}', 'CustomerController@edit')->name('.edit');
     Route::put('/{id}', 'CustomerController@update')->name('.update');
     Route::delete('/{id}', 'CustomerController@destroy')->name('.destroy');
+    Route::delete('/trash', 'CustomerController@trash')->name('.trash');
+    Route::delete('/trash/{id}', 'CustomerController@destroypermanent')->name('.destroypermanent');
+    Route::delete('/trash/{id}', 'CustomerController@restore')->name('.restore');
   });
 
   Route::group([
@@ -69,20 +87,6 @@ Route::group([
     Route::delete('/{id}', 'PurchaseController@destroy')->name('.destroy');
   });
 
-  Route::group([
-    'as' => 'category',
-    'prefix' => 'category',
-  ], function () {
-    Route::get('/', 'CategoryController@index');
-    Route::get('/trash', 'CategoryController@trash')->name('.trash');
-    Route::post('/', 'CategoryController@store')->name('.store');
-    Route::get('/create', 'CategoryController@create')->name('.create');
-    Route::get('/{id}', 'CategoryController@edit')->name('.edit');
-    Route::put('/{id}', 'CategoryController@update')->name('.update');
-    Route::put('/trash/{id}', 'CategoryController@restore')->name('.restore');
-    Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
-    Route::delete('/trash/{id}', 'CategoryController@destroypermanent')->name('.destroypermanent');
-  });
 
   Route::group([
     'as' => 'supplier',
