@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
   return redirect('login');
 });
@@ -38,11 +40,14 @@ Route::group([
     'prefix' => 'item',
   ], function () {
     Route::get('/', 'ItemController@index');
+    Route::get('/trash','ItemController@trash')->name('.trash');
     Route::post('/', 'ItemController@store')->name('.store');
     Route::get('/create', 'ItemController@create')->name('.create');
     Route::get('/{id}', 'ItemController@edit')->name('.edit');
     Route::put('/{id}', 'ItemController@update')->name('.update');
+    Route::put('/trash/{id}','ItemController@restore')->name('.restore');
     Route::delete('/{id}', 'ItemController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}','ItemController@destroypermanent')->name('.destroypermanent');
 });
 
 Route::group([
