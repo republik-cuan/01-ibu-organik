@@ -42,7 +42,7 @@
               <th>Stok</th>
               <th>Terjual</th>
               <th>Kategori</th>
-              <th>Kategori</th>
+              <th>Supplier</th>
               <th>Action</th>
             </tr>
           </thead>

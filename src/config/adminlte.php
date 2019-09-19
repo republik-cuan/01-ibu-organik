@@ -116,7 +116,7 @@ return [
         [
           'text'    => 'Admin',
           'url'     => 'admin',
-          'icon'    => 'fas fa-user-secret',
+          'icon'    => 'fas fa-user',
         ],
         [
           'text'    => 'Category',
@@ -127,6 +127,11 @@ return [
           'text'    => 'Customer',
           'icon'    => 'fas fa-users',
           'url'     => 'customer',
+        ],
+        [
+          'text'    => 'Sales',
+          'icon'    => 'fas fa-user-secret',
+          'url'     => 'sales',
         ],
         [
           'text'    => 'Item',
