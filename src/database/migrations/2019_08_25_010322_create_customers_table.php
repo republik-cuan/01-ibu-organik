@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('address');
             $table->string('patokan');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });

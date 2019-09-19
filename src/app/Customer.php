@@ -16,8 +16,12 @@ class Customer extends Model
     'gender',
     'address',
     'patokan',
+    'status'
   ];
 
+  protected $attributes = [
+      'status'=>'customer'
+  ];
   public function purchases() {
     return $this->hasMany(Purchase::class);
   }

@@ -119,4 +119,18 @@ Route::group([
     Route::put('/{id}', 'InvoiceController@update')->name('.update');
     Route::delete('/{id}', 'InvoiceController@destroy')->name('.destroy');
   });
+  Route::group([
+    'as' => 'sales',
+    'prefix' => 'sales',
+  ], function () {
+    Route::get('/', 'SalesController@index');
+    Route::get('/trash', 'SalesController@trash')->name('.trash');
+    Route::post('/', 'SalesController@store')->name('.store');
+    Route::get('/create', 'SalesController@create')->name('.create');
+    Route::get('/{id}', 'SalesController@edit')->name('.edit');
+    Route::put('/{id}', 'SalesController@update')->name('.update');
+    Route::put('/trash/{id}', 'SalesController@restore')->name('.restore');
+    Route::delete('/{id}', 'SalesController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'SalesController@destroypermanent')->name('.destroypermanent');
+  });
 });
