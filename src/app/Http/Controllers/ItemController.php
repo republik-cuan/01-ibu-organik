@@ -128,4 +128,31 @@ class ItemController extends Controller
 
       return redirect()->route('item');
     }
+    public function trash()
+    {
+      $item = Item::onlyTrashed()->get();
+      // $categories = Category::all();
+      // $suppliers = Supplier::all();
+      return view('pages.item.trash',[
+        'item'=>$item,
+        // 'categories'=>$categories,
+        // 'supplier'=>$suppliers
+      ]);
+    }
+    public function destroypermanent($id)
+    {
+      $item = Item::onlyTrashed()->findOrFail($id);
+      $categories = Category::all();
+      $suppliers = Supplier::all();
+      $item->forceDelete();
+      return redirect('item/trash');
+    }
+    public function restore($id)
+    {
+      $item = Item::onlyTrashed()->findOrFail($id);
+      $categories = Category::all();
+      $suppliers = Supplier::all();
+      $item->restore();
+      return redirect('item/trash');
+    }
 }
