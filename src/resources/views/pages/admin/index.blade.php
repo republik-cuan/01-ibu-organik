@@ -2,12 +2,25 @@
 @section('title', 'Admin')
 
 @section('content_header')
+  @if (session()->get('message'))
+    <div class="row">
+      <div class="col-md-6">
+        <div class="alert alert-success alert-dismissable" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{strtoupper(session()->get('message'))}}
+        </div>
+      </div>
+    </div>
+  @endif
 <div class="row">
   <div class="col-md-6">
     <h3>Admin</h3>
   </div>
   <div class="col-md-6 text-right">
     <h3>
+      <a class="btn btn-warning" href="{{route('admin.trash')}}">Sampah</a>
       <a class="btn btn-info" href="{{route('admin.create')}}">Tambah Admin</a>
     </h3>
   </div>
@@ -40,8 +53,12 @@
   $(document).ready(function() {
     $('.data-table').dataTable({
       data: {!! $admins !!},
-      columns: [{
-          data: 'id'
+      columns: [
+        {
+          data: 'id',
+          render: function(data) {
+            return arguments[3].row+=1;
+          },
         },
         {
           data: 'name'

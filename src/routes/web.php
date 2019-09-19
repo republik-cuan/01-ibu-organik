@@ -28,11 +28,14 @@ Route::group([
     'prefix' => 'admin',
   ], function () {
     Route::get('/', 'AdminController@index');
+    Route::get('/trash', 'AdminController@trash')->name('.trash');
     Route::post('/', 'AdminController@store')->name('.store');
     Route::get('/create', 'AdminController@create')->name('.create');
     Route::get('/{id}', 'AdminController@edit')->name('.edit');
     Route::put('/{id}', 'AdminController@update')->name('.update');
+    Route::put('/trash/{id}', 'AdminController@restore')->name('.restore');
     Route::delete('/{id}', 'AdminController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'AdminController@destroypermanent')->name('.destroypermanent');
   });
 
   Route::group([
