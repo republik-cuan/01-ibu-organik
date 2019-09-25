@@ -63,20 +63,13 @@
             </fieldset>
             <div class="form-group">
               <label for="exampleInputPassword1">Address</label>
-            <input type="text" class="form-control" name="address" value="{{$sales->address}}" id="exampleInputPassword1" placeholder="alamat">
+              <input type="text" class="form-control" name="address" value="{{$sales->address}}" id="exampleInputPassword1" placeholder="alamat">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Patokan</label>
-            <input type="text" class="form-control" name="patokan" value="{{$sales->patokan}}" id="exampleInputPassword1" placeholder="patokan">
+              <input type="text" class="form-control" name="patokan" value="{{$sales->patokan}}" id="exampleInputPassword1" placeholder="patokan">
             </div>
-            <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" id="status" name='status'>
-                      <option value="">--Select Status--</option>
-                      <option value="agen" {{($sales->status == 'agen')? 'selected':''}}>Agen</option>
-                      <option value="distributor" {{ ($sales->status == 'distributor')? 'selected':''}}>Distributor</option>
-                    </select>
-            </div>
+            <input type="text" value="{{$sales->status}}" name="status" id="status" hidden/>
             <button type="submit" class="btn btn-info">Submit</button>
           </form>
         </div>
