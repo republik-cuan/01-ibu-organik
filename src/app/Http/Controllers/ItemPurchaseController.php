@@ -9,32 +9,6 @@ use Illuminate\Http\Request;
 
 class ItemPurchaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       $item = Item::find($request->item);
@@ -73,48 +47,21 @@ class ItemPurchaseController extends Controller
       return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menambahkan item baru kedalam pembelian');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+      $inventory = ItemPurchase::with('purchase', 'item')->where('id', $id)->first();
+      $purchase = $inventory->purchase;
+      $item = $inventory->item;
+      try {
+        $item->update([
+          'sold' => $item->sold - $inventory->total,
+        ]);
+      } catch (Exception $e) {
+        return abort(400, $e);
+      } finally {
+        $purchase->items()->detach($item->id);
+      }
+
+      return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menghapus item dari penjualan');
     }
 }
