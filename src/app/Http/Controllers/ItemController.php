@@ -130,29 +130,21 @@ class ItemController extends Controller
     }
     public function trash()
     {
-      $item = Item::onlyTrashed()->get();
-      // $categories = Category::all();
-      // $suppliers = Supplier::all();
+      $item = Item::with(['category:id,name', 'supplier:id,name'])->onlyTrashed()->get();
       return view('pages.item.trash',[
         'item'=>$item,
-        // 'categories'=>$categories,
-        // 'supplier'=>$suppliers
       ]);
     }
     public function destroypermanent($id)
     {
       $item = Item::onlyTrashed()->findOrFail($id);
-      $categories = Category::all();
-      $suppliers = Supplier::all();
       $item->forceDelete();
       return redirect('item/trash');
     }
     public function restore($id)
     {
       $item = Item::onlyTrashed()->findOrFail($id);
-      $categories = Category::all();
-      $suppliers = Supplier::all();
       $item->restore();
-      return redirect('item/trash');
+      return redirect('item');
     }
 }
