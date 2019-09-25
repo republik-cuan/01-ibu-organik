@@ -38,8 +38,8 @@
             <label for="endUser">End User</label>
             <input type="number" class="form-control" name="endUser" value="{{ $item->endUser }}" placeholder="End User" autofocus>
             {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
-            <label for="number">Stok</label>
-            <input type="text" class="form-control" name="stock" value="{{ $item->stock }}" placeholder="Stok Item" autofocus>
+            <label for="stock">Stok</label>
+            <input type="number" class="form-control" name="stock" value="{{ $item->stock }}" placeholder="Stok Item" autofocus>
             {!! $errors->first('stock', '<p class="help-block text-danger">:message</p>')!!}
             <label for="categoy_id">Kategori</label>
             <select name="category_id" id="" class="form-control">

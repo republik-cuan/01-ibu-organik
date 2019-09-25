@@ -110,4 +110,39 @@ class AdminController extends Controller
 
       return redirect()->route('admin');
     }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function trash()
+    {
+      $admins = User::onlyTrashed()->get();
+      return view('pages.admin.trash', ['admins' => $admins]);
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function restore($id)
+    {
+      $admin = User::onlyTrashed()->findOrfail($id);
+      $admin->restore();
+      return redirect('admin')->with('message', 'Success restoring admin');
+    }
+    
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public function destroypermanent($id)
+    {
+      $admin = User::onlyTrashed()->where('id', $id)->delete();
+      return redirect('admin')->with('message', 'Success removing admin permanently');
+    }
+    
 }

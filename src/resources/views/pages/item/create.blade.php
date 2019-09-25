@@ -26,23 +26,23 @@
           @csrf
           <div class="form-group">
             <label for="name">Nama</label>
-            <input type="text" class="form-control" name="name" value="" placeholder="Nama Item" autofocus>
+            <input type="text" class="form-control" name="name" placeholder="Nama Item" autofocus>
             {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="modal">Harga Modal</label>
-            <input type="number" class="form-control" name="modal" value="" placeholder="Harga Item" autofocus>
+            <input type="number" class="form-control" name="modal" placeholder="Harga Item" autofocus>
             {!! $errors->first('modal', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="reseller">Harga Reseller</label>
-            <input type="number" class="form-control" name="reseller" value="" placeholder="Harga Item" autofocus>
+            <input type="number" class="form-control" name="reseller" placeholder="Harga Item" autofocus>
             {!! $errors->first('reseller', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="endUser">Harga Pelanggan</label>
-            <input type="number" class="form-control" name="endUser" value="" placeholder="Harga Item" autofocus>
+            <input type="number" class="form-control" name="endUser" placeholder="Harga Item" autofocus>
             {!! $errors->first('endUser', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="number">Stok</label>
-            <input type="text" class="form-control" name="stock" value="" placeholder="Stok Item" autofocus>
+            <input type="number" class="form-control" name="stock" placeholder="Stok Item" autofocus>
             {!! $errors->first('stock', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="categoy_id">Kategori</label>
             <select name="category_id" id="" class="form-control">
-              <option value="">-- Choose Category --</option>
+              <option>-- Choose Category --</option>
               @foreach ($categories as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach
@@ -50,7 +50,7 @@
           {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
           <label for="supplier_id">Supplier</label>
           <select name="supplier_id" id="" class="form-control">
-            <option value="">-- Choose Supplier --</option>
+            <option>-- Choose Supplier --</option>
             @foreach ($suppliers as $item)
               <option value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach

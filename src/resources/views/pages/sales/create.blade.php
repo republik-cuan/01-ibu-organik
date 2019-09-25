@@ -3,7 +3,7 @@
 @section('title', 'Tambah Sales')
 
 @section('content_header')
-<div class="row">
+  <div class="row">
     <div class="col-md-6">
       <h3>Tambah Sales<h3>
     </div>
@@ -63,14 +63,6 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Patokan</label>
               <input type="text" class="form-control" name="patokan" id="exampleInputPassword1" placeholder="patokan">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Status</label>
-                <select class="form-control" name="status" id="exampleFormControlSelect1">
-                <option value="">--select status--</option>
-                <option value="agen">Agen</option>
-                <option value="distributor">Distributor</option>
-                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>

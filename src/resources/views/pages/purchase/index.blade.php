@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Customer')
+@section('title', 'Penjualan')
 
 @section('content_header')
   <div class="row">
@@ -58,15 +58,16 @@
           {data: 'customer.name'},
           {data: 'customer.phone'},
           {data: 'bank'},
-          {data: 'accountNumber'},
-          {data: 'status'},
+          {data: 'rekening'},
+          {data: 'statusPembayaran'},
           {
             data: 'id',
             render: function(data){
               const link ="{{route('purchase')}}"+"/"+data;
-              const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="'+link+'">edit</a>';
+              const detail = '<a class="btn btn-success btn-xs" style="margin: 0 3px;" href="'+link+'/add">detail</a>'
+              const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">edit</a>';
               const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
-              return '<div class="text-center">'+detail+hapus+'</div>';
+              return '<div class="text-center">'+detail+edit+hapus+'</div>';
             }
           }
         ]

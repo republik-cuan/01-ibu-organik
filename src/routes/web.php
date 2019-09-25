@@ -28,11 +28,14 @@ Route::group([
     'prefix' => 'admin',
   ], function () {
     Route::get('/', 'AdminController@index');
+    Route::get('/trash', 'AdminController@trash')->name('.trash');
     Route::post('/', 'AdminController@store')->name('.store');
     Route::get('/create', 'AdminController@create')->name('.create');
     Route::get('/{id}', 'AdminController@edit')->name('.edit');
     Route::put('/{id}', 'AdminController@update')->name('.update');
+    Route::put('/trash/{id}', 'AdminController@restore')->name('.restore');
     Route::delete('/{id}', 'AdminController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'AdminController@destroypermanent')->name('.destroypermanent');
   });
 
   Route::group([
@@ -88,6 +91,7 @@ Route::group([
     Route::post('/', 'PurchaseController@store')->name('.store');
     Route::get('/create', 'PurchaseController@create')->name('.create');
     Route::get('/{id}', 'PurchaseController@edit')->name('.edit');
+    Route::get('/{id}/add', 'PurchaseController@add')->name('.add');
     Route::put('/{id}', 'PurchaseController@update')->name('.update');
     Route::delete('/{id}', 'PurchaseController@destroy')->name('.destroy');
   });
@@ -119,6 +123,7 @@ Route::group([
     Route::put('/{id}', 'InvoiceController@update')->name('.update');
     Route::delete('/{id}', 'InvoiceController@destroy')->name('.destroy');
   });
+
   Route::group([
     'as' => 'sales',
     'prefix' => 'sales',
@@ -132,5 +137,13 @@ Route::group([
     Route::put('/trash/{id}', 'SalesController@restore')->name('.restore');
     Route::delete('/{id}', 'SalesController@destroy')->name('.destroy');
     Route::delete('/trash/{id}', 'SalesController@destroypermanent')->name('.destroypermanent');
+  });
+
+  ROute::group([
+    'as' => 'inventories',
+    'prefix' => 'inventories',
+  ], function() {
+    Route::post('/', 'ItemPurchaseController@store')->name('.store');
+    Route::delete('/{id}', 'ItemPurchaseController@destroy')->name('.destroy');
   });
 });
