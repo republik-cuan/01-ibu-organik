@@ -129,17 +129,12 @@ return [
           'url'     => 'customer',
         ],
         [
-          'text'    => 'Sales',
-          'icon'    => 'fas fa-user-secret',
-          'url'     => 'sales',
-        ],
-        [
           'text'    => 'Item',
           'icon'    => 'fas fa-box-open',
           'url'     => 'item',
         ],
         [
-          'text'    => 'Purchases',
+          'text'    => 'Invoice',
           'icon'    => 'fas fa-cash-register',
           'url'     => 'purchase',
         ],
