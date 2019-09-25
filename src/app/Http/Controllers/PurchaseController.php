@@ -51,7 +51,7 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
-      $jml = Purchase::whereDate('created_at', date('Y-m-d'))->get()->count();
+      $jml = Purchase::withTrashed()->whereDate('created_at', date('Y-m-d'))->get()->count();
       $jml += 1;
       $kode = date('ymd').sprintf("%03s",$jml);
 
@@ -68,7 +68,7 @@ class PurchaseController extends Controller
         return abort(404, $e);
       }
 
-      return redirect()->route('customer.edit', $customer->id);
+      return redirect('purchase');
     }
 
     /**
@@ -124,15 +124,22 @@ class PurchaseController extends Controller
      */
     public function destroy($id)
     {
-      $purchase = Purchase::find($id);
-      $customer = $purchase->customer;
+      $purchase = Purchase::with('inventories.item', 'customer')->find($id);
+      $inventories = $purchase->inventories;
+
       try {
         $purchase->delete();
       } catch (Exception $e) {
         return abort(404, $e);
+      } finally {
+        foreach ($inventories as $inventory) {
+          $inventory->item->update([
+            'sold' => $inventory->item->sold - $inventory->total,
+          ]);
+        }
       }
 
-      return redirect()->route('customer.edit', $customer->id);
+      return redirect()->route('purchase');
     }
 
     public function add($id) {

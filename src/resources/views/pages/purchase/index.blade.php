@@ -28,6 +28,7 @@
             <thead>
               <tr>
                 <th>No</th>
+                <th>Kode</th>
                 <th>Nama</th>
                 <th>No HP</th>
                 <th>Bank</th>
@@ -55,6 +56,7 @@
               return arguments[3].row+=1;
             },
           },
+          {data: 'kode'},
           {data: 'customer.name'},
           {data: 'customer.phone'},
           {data: 'bank'},

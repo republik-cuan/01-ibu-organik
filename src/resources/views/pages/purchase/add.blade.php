@@ -43,6 +43,28 @@
             </div>
           </div>
         </div>
+        <div class="col-md-3 col-md-offset-6">
+          <div class="form-horizontal">
+            <label class="col-md-5 control-label">Kode</label>
+            <div class="col-md-7">
+              <p class="form-control-static">{{$purchase->kode}}</p>
+            </div>
+            <label class="col-md-5 control-label">Metode Pembayaran</label>
+            <div class="col-md-7">
+              <p class="form-control-static">{{strtoupper($purchase->bank)}}</p>
+            </div>
+            <label class="col-md-5 control-label">Status Harga</label>
+            <div class="col-md-7">
+              <p class="form-control-static">{{strtoupper($purchase['statusHarga'])}}</p>
+            </div>
+            <label class="col-md-5 control-label">Pengiriman Barang</label>
+            <div class="col-md-7">
+              <p class="form-control-static">
+                {{strtoupper($purchase->deliveryOption)}} | {{"Rp. ".number_format($purchase->deliveryPrice,2)}}
+              </p>
+            </div>
+          </div>
+        </div>
         <div class="col-md-12">
           <table class="data-table table table-bordered table-hover text-center">
             <thead>
@@ -77,20 +99,20 @@
                   <td>
                     @php
                       $totalItem += $item->total;
-                      echo $item->total." buah";
+                      echo $item->total." gram";
                     @endphp
                   </td>
                   <td>
                     @php
                       switch ($purchase['statusHarga']) {
                         case 'reseller' : 
-                          $harga = $item->item->reseller;
+                          $harga = $item->item->reseller * (100 - ($item->discount/100));
                           break;
                         case 'modal' :
-                          $harga = $item->item->modal;
+                          $harga = $item->item->modal * (100 - ($item->discount/100));
                           break;
                         case 'end user' :
-                          $harga = $item->item->endUser;
+                          $harga = $item->item->endUser * (100 - ($item->discount/100));
                           break;
                       }
                       echo "Rp. ".number_format($harga, 2);
@@ -144,7 +166,12 @@
           <table class="data-table table table-bordered table-hover text-center">
             <tr>
               <th>Total Harga</th>
-              <td>{{"Rp. ".number_format($subTotal, 2)}}</td>
+              <td>
+                @php
+                  $hasil = $subTotal + $purchase->deliveryPrice;
+                  echo "Rp. ".number_format($hasil, 2);
+                @endphp
+              </td>
             </tr>
             <tr>
               <th>Discount</th>
