@@ -15,11 +15,7 @@ class CreatePurchasesTable extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('status', [
-              'order',
-              'preorder',
-              'verified'
-            ])->default('order');
+            $table->string('kode')->unique();
             $table->enum('bank', [
               'bni',
               'bri',
@@ -27,11 +23,10 @@ class CreatePurchasesTable extends Migration
               'mandiri',
               'cash',
             ]);
-            $table->string('accountNumber');
+            $table->string('rekening')->default('-');
             $table->enum('statusHarga', [
-              'agen',
+              'reseller',
               'modal',
-              'distributor',
               'end user',
             ])->default('end user');
             $table->enum('statusPembayaran', [
@@ -40,11 +35,20 @@ class CreatePurchasesTable extends Migration
               'terbayar',
             ])->default('belum bayar');
             $table->boolean('statusPengiriman')->default(false);
+            $table->enum('deliveryOption', [
+              'kurir',
+              'grab',
+              'expedisi',
+              'free ongkir',
+              'ambil sendiri',
+            ]);
+            $table->integer('deliveryPrice')->default(0);
             $table->unsignedBigInteger('customer_id')
                   ->foreign()
                   ->references('id')
                   ->on('customers')
                   ->onDelete('cascade');
+            $table->date('pembayaran')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Item;
 use App\Purchase;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,9 @@ class PurchaseController extends Controller
       return view('pages.purchase.create', [
         'customers' => $customers,
         'banks' => $temp->banks,
-        'status' => $temp->status,
+        'status' => $temp->statusPembayaran,
+        'statusHarga' => $temp->statusHarga,
+        'deliveries' => $temp->deliveries,
       ]);
     }
 
@@ -48,11 +51,18 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
+      $jml = Purchase::whereDate('created_at', date('Y-m-d'))->get()->count();
+      $jml += 1;
+      $kode = date('ymd').sprintf("%03s",$jml);
 
       try {
         $customer->purchases()->create([
+          'kode' => $kode,
           'bank' => $request->bank,
-          'accountNumber' => $request->accountNumber,
+          'rekening' => $request->rekening,
+          'statusHarga' => $request->statusHarga,
+          'deliveryPrice' => $request->deliveryPrice,
+          'deliveryOption' => $request->deliveryOption,
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
@@ -123,5 +133,20 @@ class PurchaseController extends Controller
       }
 
       return redirect()->route('customer.edit', $customer->id);
+    }
+
+    public function add($id) {
+      $purchase = Purchase::with('customer', 'inventories')->where('id', $id)->first();
+      $items = Item::all();
+
+      /* return $purchase; */
+
+      return view('pages.purchase.add', [
+        'purchase' => $purchase,
+        'statusHarga' => $purchase->statusHarga,
+        'customer' => $purchase->customer,
+        'inventories' => $purchase->inventories,
+        'items' => $items,
+      ]);
     }
 }

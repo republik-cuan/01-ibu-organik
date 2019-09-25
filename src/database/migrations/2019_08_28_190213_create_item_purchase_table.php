@@ -26,6 +26,7 @@ class CreateItemPurchaseTable extends Migration
                   ->on('purchases')
                   ->onDelete('cascade');
             $table->integer('total')->default(0);
+            $table->float('discount')->default(0);
             $table->timestamps();
         });
     }

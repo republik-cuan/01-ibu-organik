@@ -10,24 +10,43 @@ class Purchase extends Model
   use SoftDeletes;
 
   protected $fillable = [
-    'status',
-    'statusHarga',
-    'statusPembayaran',
-    'statusPengiriman',
+    'kode',
     'bank',
-    'accountNumber',
+    'rekening',
+    'statusHarga',
+    'statusPengiriman',
+    'statusPembayaran',
+    'deliveryPrice',
+    'deliveryOption',
+    'pembayaran',
   ];
 
-  public $status = [
-    'order',
+  public $statusPembayaran = [
+    'belum bayar',
     'preorder',
-    'verified',
+    'terbayar',
+  ];
+
+  public $statusHarga = [
+    'reseller',
+    'modal',
+    'end user',
   ];
 
   public $banks = [
     'bni',
     'bri',
+    'bca',
     'mandiri',
+    'cash',
+  ];
+
+  public $deliveries = [
+    'kurir',
+    'grab',
+    'expedisi',
+    'free ongkir',
+    'ambil sendiri',
   ];
 
   public function customer() {
@@ -35,6 +54,11 @@ class Purchase extends Model
   }
 
   public function items() {
-    return $this->belongsToMany(Item::class);
+    return $this->belongsToMany(Item::class)
+                ->withPivot(['discount','total']);
+  }
+
+  public function inventories() {
+    return $this->hasMany(ItemPurchase::class);
   }
 }

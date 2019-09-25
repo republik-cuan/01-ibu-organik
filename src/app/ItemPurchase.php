@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ItemPurchase extends Pivot
 {
-  protected $fillable = ['total'];
+  protected $fillable = ['total', 'discount'];
 
   public function item() {
     return $this->belongsTo(Item::class);

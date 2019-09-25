@@ -34,26 +34,46 @@
               <select name="customer" id="customer" class="form-control" required>
                 <option value="">Pilih</option>
                 @foreach ($customers as $customer) 
-                  <option value="{{ $customer->id }}">{{ $customer->name }} - {{ $customer->email }}</option>
+                  <option value="{{ $customer->id }}">
+                    {{ $customer->name }} - {{ $customer->phone }}
+                  </option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
-              <label for="bank">Bank</label>
+              <label for="bank">Metode Pembayaran</label>
               <select name="bank" id="bank" class="form-control" required>
                 <option>Pilih</option>
                 @foreach ($banks as $bank) 
-                  <option value="{{$bank}}">{{$bank}}</option>
+                  <option value="{{$bank}}">{{strtoupper($bank)}}</option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
-              <label for="accountNumber">No Rekening</label>
-              <input class="form-control" type="text" name="accountNumber" id="accountNumber" placeholder="nomor rekening 11xxx" required>
+              <label for="statusHarga">Status Harga</label>
+              <select name="statusHarga" id="statusHarga" class="form-control" required>
+                <option>Pilih</option>
+                @foreach ($statusHarga as $harga) 
+                    <option value="{{$harga}}">{{strtoupper($harga)}}</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
-              <label for="discount">Discount</label>
-              <input class="form-control" type="number" min="0" name="discount" id="discount" placeholder="0 ~ 100%" required>
+              <label for="rekening">No Rekening</label>
+              <input class="form-control" type="text" name="rekening" id="rekening" placeholder="nomor rekening 11xxx" required>
+            </div>
+            <div class="form-group">
+              <label for="deliveryOption">Opsi Pengiriman</label>
+              <select class="form-control" name="deliveryOption" id="deliveryOption" required>
+                <option>Pilih</option>
+                @foreach ($deliveries as $delivery)
+                  <option value="{{$delivery}}">{{strtoupper($delivery)}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="deliveryPrice">Biaya Pengiriman</label>
+              <input class="form-control" type="number" name="deliveryPrice" id="deliveryPrice" min="0" placeholder="xxx.xxx" required/>
             </div>
             <div class="form-group">
               <button class="btn btn-primary btn-sm" type="submit">Tambah</button>
