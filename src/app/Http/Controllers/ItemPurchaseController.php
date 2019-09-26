@@ -47,6 +47,22 @@ class ItemPurchaseController extends Controller
       return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menambahkan item baru kedalam pembelian');
     }
 
+    public function verified($id) {
+      $hasil = "";
+      $purchase = Purchase::find($id);
+
+      if ($purchase['statusPembayaran']=="terbayar") {
+        $hasil = "belum bayar";
+      } else {
+        $hasil = "terbayar";
+      }
+
+      $purchase->update([
+        'statusPembayaran' => $hasil,
+      ]);
+      return redirect('purchase');
+    }
+
     public function destroy($id)
     {
       $inventory = ItemPurchase::with('purchase', 'item')->where('id', $id)->first();

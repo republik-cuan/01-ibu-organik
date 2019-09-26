@@ -31,7 +31,7 @@
             @csrf
             <div class="form-group">
               <label for="customer">Pelanggan</label>
-              <select name="customer" id="customer" class="form-control" required>
+              <select name="customer" id="customer" class="form-control js-example-basic-single" required>
                 <option value="">Pilih</option>
                 @foreach ($customers as $customer) 
                   <option value="{{ $customer->id }}">
@@ -85,3 +85,17 @@
     </div>
   </div>
 @endsection
+
+
+@section('css')
+  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" type="text/css" media="screen" title="no title" charset="utf-8"/>
+@stop
+
+@section('js')
+  <script src="{{asset('js/select2.min.js')}}" charset="utf-8"></script>
+  <script charset="utf-8">
+    $(document).ready(function() {
+      $('.js-example-basic-single').select2();
+    });
+  </script>
+@stop
