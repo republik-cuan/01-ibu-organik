@@ -106,13 +106,13 @@
                     @php
                       switch ($purchase['statusHarga']) {
                         case 'reseller' : 
-                          $harga = $item->item->reseller * (100 - ($item->discount/100));
+                          $harga = $item->item->reseller;
                           break;
                         case 'modal' :
-                          $harga = $item->item->modal * (100 - ($item->discount/100));
+                          $harga = $item->item->modal;
                           break;
                         case 'end user' :
-                          $harga = $item->item->endUser * (100 - ($item->discount/100));
+                          $harga = $item->item->endUser;
                           break;
                       }
                       echo "Rp. ".number_format($harga, 2);
@@ -120,7 +120,8 @@
                   </td>
                   <td>
                     @php
-                      $temp = $harga * $item->total;
+                      $temp = $item->total * $harga;
+                      $temp *= (100-$item->discount);
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
                     @endphp
