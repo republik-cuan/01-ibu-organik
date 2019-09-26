@@ -139,11 +139,12 @@ Route::group([
     Route::delete('/trash/{id}', 'SalesController@destroypermanent')->name('.destroypermanent');
   });
 
-  ROute::group([
+  Route::group([
     'as' => 'inventories',
     'prefix' => 'inventories',
   ], function() {
     Route::post('/', 'ItemPurchaseController@store')->name('.store');
+    Route::put('/{id}', 'ItemPurchaseController@verified')->name('.verified');
     Route::delete('/{id}', 'ItemPurchaseController@destroy')->name('.destroy');
   });
 });
