@@ -90,8 +90,7 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-      $purchase = Purchase::with('customer')->where('id', $id);
-
+      $purchase = Purchase::with('customer', 'inventories.item')->find($id);
       return view('pages.purchase.edit', [
         'purchase' => $purchase,
       ]);
