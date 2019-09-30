@@ -51,9 +51,20 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
+      switch ($request->statusHarga) {
+        case 'end user':
+          $kode = "E";
+          break;
+        case 'reseller':
+          $kode = "R";
+          break;
+        case 'distributor':
+          $kode = "D";
+          break;
+      }
       $jml = Purchase::withTrashed()->whereDate('created_at', date('Y-m-d'))->get()->count();
       $jml += 1;
-      $kode = date('ymd').sprintf("%03s",$jml);
+      $kode += date('ymd').sprintf("%03s",$jml);
 
       try {
         $customer->purchases()->create([
@@ -109,7 +120,6 @@ class PurchaseController extends Controller
 
       try {
         $purchase->update([
-          'kode' => $request->kode,
           'bank' => $request->bank,
           'rekening' => $request->rekening,
           'statusHarga' => $request->statusHarga,
