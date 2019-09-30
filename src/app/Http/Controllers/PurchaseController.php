@@ -105,9 +105,20 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $purchase = Purchase::with('customer', $id)->first();
+      $purchase = Purchase::find($id);
+
       try {
-        $purchase->update($request);
+        $purchase->update([
+          'kode' => $request->kode,
+          'bank' => $request->bank,
+          'rekening' => $request->rekening,
+          'statusHarga' => $request->statusHarga,
+          'statusPengiriman' => $request->statusPengiriman,
+          'statusPembayaran' => $request->statusPembayaran,
+          'deliveryPrice' => $request->deliveryPrice,
+          'deliveryOption' => $request->deliveryOption,
+          'pembayaran' => $request->pembayaran,
+        ]);
       } catch (Exception $e) {
         return abort(404, $e);
       }

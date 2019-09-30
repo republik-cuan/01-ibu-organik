@@ -86,13 +86,7 @@
   </div>
 @endsection
 
-
-@section('css')
-  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" type="text/css" media="screen" title="no title" charset="utf-8"/>
-@stop
-
 @section('js')
-  <script src="{{asset('js/select2.min.js')}}" charset="utf-8"></script>
   <script charset="utf-8">
     $(document).ready(function() {
       $('.js-example-basic-single').select2();

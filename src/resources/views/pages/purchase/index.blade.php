@@ -59,7 +59,12 @@
           {data: 'kode'},
           {data: 'customer.name'},
           {data: 'customer.phone'},
-          {data: 'bank'},
+          {
+            data: 'bank',
+            render: function(data) {
+              return data.toUpperCase()
+            }
+          },
           {data: 'rekening'},
           {data: 'statusPembayaran'},
           {

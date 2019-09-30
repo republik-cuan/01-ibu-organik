@@ -25,43 +25,29 @@
       <div class="row">
         <div class="col-md-3">
           <div class="form-horizontal">
+            <label class="col-md-5 control-label" style="text-align: left;">No Invoice</label>
+            <div class="col-md-7">
+              <p class="form-control-static">{{$purchase->kode}}</p>
+            </div>
             <label class="col-md-5 control-label" style="text-align: left;">Nama</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{$customer->name}}</p>
-            </div>
-            <label class="col-md-5 control-label" style="text-align: left;">Telephone</label>
-            <div class="col-md-7">
-              <p class="form-control-static">{{$customer->phone}}</p>
+              <p class="form-control-static">{{ucwords($customer->name)}}</p>
             </div>
             <label class="col-md-5 control-label" style="text-align: left;">Alamat</label>
             <div class="col-md-7">
               <p class="form-control-static">{{$customer->address}}</p>
             </div>
-            <label class="col-md-5 control-label" style="text-align: left;">Patokan</label>
+            <label class="col-md-5 control-label" style="text-align: left;">Telp</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{$customer->patokan}}</p>
+              <p class="form-control-static">{{$customer->phone}}</p>
             </div>
-          </div>
-        </div>
-        <div class="col-md-3 col-md-offset-6">
-          <div class="form-horizontal">
-            <label class="col-md-5 control-label">Kode</label>
+            <label class="col-md-5 control-label" style="text-align: left;">Delivery By</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{$purchase->kode}}</p>
+              <p class="form-control-static">{{strtoupper($purchase->deliveryOption)}}</p>
             </div>
-            <label class="col-md-5 control-label">Metode Pembayaran</label>
+            <label class="col-md-5 control-label" style="text-align: left;">Date</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{strtoupper($purchase->bank)}}</p>
-            </div>
-            <label class="col-md-5 control-label">Status Harga</label>
-            <div class="col-md-7">
-              <p class="form-control-static">{{strtoupper($purchase['statusHarga'])}}</p>
-            </div>
-            <label class="col-md-5 control-label">Pengiriman Barang</label>
-            <div class="col-md-7">
-              <p class="form-control-static">
-                {{strtoupper($purchase->deliveryOption)}} | {{"Rp. ".number_format($purchase->deliveryPrice,2)}}
-              </p>
+              <p class="form-control-static">{{date_format($purchase->created_at, "d M Y")}}</p>
             </div>
           </div>
         </div>
@@ -82,7 +68,7 @@
               @php
                 $harga = 0;
                 $subTotal = 0;
-                $totalItem = 0;
+                $berat = 0;
                 $discount = 0;
                 $total = 0;
               @endphp
@@ -98,7 +84,7 @@
                   </td>
                   <td>
                     @php
-                      $totalItem += $item->total;
+                      $berat += $item->total;
                       echo $item->total." gram";
                     @endphp
                   </td>
@@ -160,24 +146,24 @@
                   </td>
                 </tr>
               </form>
+              <tr>
+                <th colspan="2" style="text-align: right;">Total</th>
+                <td></td>
+                <td>{{number_format($berat, 2)}}</td>
+                <td></td>
+                <td colspan="2">{{"Rp. ".number_format($subTotal,2)}}</td>
+              </tr>
+              <tr>
+                <th colspan="2" style="text-align: right;">Delivery</th>
+                <td colspan="3"></td>
+                <td colspan="2">{{"Rp. ".number_format($purchase->deliveryPrice, 2)}}</td>
+              </tr>
+              <tr>
+                <th colspan="2" style="text-align: right;">Grand Total</th>
+                <td colspan="3"></td>
+                <td colspan="2">{{"Rp. ".number_format($purchase->deliveryPrice+$subTotal, 2)}}</td>
+              </tr>
             </tbody>
-          </table>
-        </div>
-        <div class="col-md-3 col-md-offset-9">
-          <table class="data-table table table-bordered table-hover text-center">
-            <tr>
-              <th>Total Harga</th>
-              <td>
-                @php
-                  $hasil = $subTotal + $purchase->deliveryPrice;
-                  echo "Rp. ".number_format($hasil, 2);
-                @endphp
-              </td>
-            </tr>
-            <tr>
-              <th>Discount</th>
-              <td>{{$discount." %"}}</td>
-            </tr>
           </table>
         </div>
       </div>
@@ -185,12 +171,7 @@
   </div>
 @stop
 
-@section('css')
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
-@stop
-
 @section('js')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
   <script charset="utf-8">
     $(document).ready(function() {
       $('.js-example-basic-single').select2();
