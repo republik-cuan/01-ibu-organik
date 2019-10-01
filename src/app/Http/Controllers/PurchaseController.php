@@ -51,9 +51,20 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
+      switch ($request->statusHarga) {
+        case 'end user':
+          $kode = "E";
+          break;
+        case 'reseller':
+          $kode = "R";
+          break;
+        case 'distributor':
+          $kode = "D";
+          break;
+      }
       $jml = Purchase::withTrashed()->whereDate('created_at', date('Y-m-d'))->get()->count();
       $jml += 1;
-      $kode = date('ymd').sprintf("%03s",$jml);
+      $kode .= date('ymd').sprintf("%03s",$jml);
 
       try {
         $customer->purchases()->create([
@@ -105,9 +116,19 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $purchase = Purchase::with('customer', $id)->first();
+      $purchase = Purchase::find($id);
+
       try {
-        $purchase->update($request);
+        $purchase->update([
+          'bank' => $request->bank,
+          'rekening' => $request->rekening,
+          'statusHarga' => $request->statusHarga,
+          'statusPengiriman' => $request->statusPengiriman,
+          'statusPembayaran' => $request->statusPembayaran,
+          'deliveryPrice' => $request->deliveryPrice,
+          'deliveryOption' => $request->deliveryOption,
+          'pembayaran' => $request->pembayaran,
+        ]);
       } catch (Exception $e) {
         return abort(404, $e);
       }

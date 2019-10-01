@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Item;
 use App\Purchase;
 use App\ItemPurchase;
@@ -45,6 +46,19 @@ class ItemPurchaseController extends Controller
       }
 
       return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menambahkan item baru kedalam pembelian');
+    }
+
+    public function print($id) {
+      $purchase = Purchase::with('customer', 'inventories.item')->find($id);
+
+      $pdf = PDF::loadView('pages.purchase.pdf', [
+        'purchase' => $purchase,
+        'statusHarga' => $purchase->statusHarga,
+        'customer' => $purchase->customer,
+        'inventories' => $purchase->inventories,
+      ]);
+
+      return $pdf->stream();
     }
 
     public function verified($id) {

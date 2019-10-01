@@ -15,6 +15,12 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
 
+    <style type="text/css">
+      input[type="date"] {
+        line-height: normal !important;
+      }
+    </style>
+
     @include('adminlte::plugins', ['type' => 'css'])
 
     @if(config('adminlte.pace.active'))

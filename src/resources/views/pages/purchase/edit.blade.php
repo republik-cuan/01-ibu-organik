@@ -32,11 +32,31 @@
             </div>
             <div class="form-group">
               <label for="customer">Nama Pelanggan</label>
-              <input type="text" class="form-control" name="customer" value="{{$purchase->customer->name}}" id="customer" readonly>
+              <input type="text" class="form-control" name="customer" value="{{$purchase->customer->name." - ".$purchase->customer->phone}}" id="customer" readonly>
             </div>
             <div class="form-group">
               <label for="phone">Telephone Pelanggan</label>
               <input type="text" class="form-control" name="phone" value="{{$purchase->customer->phone}}" id="phone" readonly>
+            </div>
+            <div class="form-group">
+              <label for="statusHarga">Status Harga</label>
+              <select id="statusHarga" class="form-control" name="statusHarga">
+                @foreach ($purchase->statusHarga as $opt)
+                  <option value="{{$opt}}" {{$purchase['statusHarga']==$opt ? 'selected' : ''}}>{{ucwords($opt)}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bank">Opsi Pembayaran</label>
+              <select id="bank" class="form-control" name="bank">
+                @foreach ($purchase->banks as $bank)
+                  <option value="{{$bank}}" {{$purchase->bank==$bank ? 'selected' : ''}}>{{strtoupper($bank)}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="rekening">Rekening</label>
+              <input class="form-control" type="text" id="rekening" name="rekening" value="{{$purchase->rekening}}" required>
             </div>
             <div class="form-group">
               <label for="statusPembayaran">Status Pembayaran</label>
@@ -50,7 +70,18 @@
             </div>
             <div class="form-group">
               <label for="pembayaran">Tanggal Pembayaran</label>
-              <input type="date" class="form-control" name="pembayaran" value="{{$purchase->pembayaran}}" id="pembayaran" style="line-height: normal;" required>
+              <input type="date" class="form-control" name="pembayaran" value="{{$purchase->pembayaran==null ? '' : date_format($purchase->pembayaran, 'Y-m-d')}}" id="pembayaran">
+            </div>
+            <div class="form-group">
+              <label for="pemesanan">Tanggal Pesan</label>
+              <input class="form-control" type="date" name="pemesanan" id="pemesanan" value="{{date_format($purchase->created_at, 'Y-m-d')}}">
+            </div>
+            <div class="form-group">
+              <label for="statusPengiriman">Status Pengiriman</label>
+              <select id="statusPengiriman" class="form-control" name="statusPengiriman">
+                <option value="0" {{$purchase->statusPengiriman ? 'selected' : ''}}>Siap Kirim</option>
+                <option value="1" {{$purchase->statusPengiriman ? 'selected' : ''}}>Terkirim</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="deliveryOption">Opsi Pengiriman</label>
@@ -64,9 +95,10 @@
             </div>
             <div class="form-group">
               <label for="deliveryPrice">Ongkos Kirim</label>
-              <input class="form-control" type="number" value="{{$purchase->deliveryPrice}}" required>
+              <input class="form-control" type="number" name="deliveryPrice" id="deliveryPrice" value="{{$purchase->deliveryPrice}}" required>
             </div>
             <button type="submit" class="btn btn-info">Submit</button>
+            <button type="cancel" class="btn btn-warning">Cancel</button>
           </form>
         </div>
       </div>

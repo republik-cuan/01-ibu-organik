@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        /* $this->middleware('auth'); */
+        $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,45 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $users = App\User::count();
+        $customers = App\Customer::count();
+        $purchases = App\Purchase::count();
+        $items = App\Item::count();
+
+        $chartLabelPurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->pluck('deliveryOption');
+        $chartValuePurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->get();
+
+        return view('home', [
+          'cards' => [
+            'items' => [
+              'color' => 'bg-aqua',
+              'icon' => 'ion-ios-box-outline',
+              'title' => 'Barang',
+              'value' => $items,
+            ],
+            'customers' => [
+              'color' => 'bg-yellow',
+              'icon' => 'ion-ios-people-outline',
+              'title' => 'Customer',
+              'value' => $customers,
+            ],
+            'purchases' => [
+              'color' => 'bg-green',
+              'icon' => 'ion-ios-cart-outline',
+              'title' => 'Pembelian',
+              'value' => $purchases,
+            ],
+            'users' => [
+              'color' => 'bg-red',
+              'icon' => 'ion-ios-person-outline',
+              'title' => 'Admin',
+              'value' => $users,
+            ],
+          ],
+          'purchases' => [
+            'label' => $chartLabelPurchase,
+            'value' => $chartValuePurchase,
+          ],
+        ]);
     }
 }
