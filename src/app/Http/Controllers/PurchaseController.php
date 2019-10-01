@@ -64,7 +64,7 @@ class PurchaseController extends Controller
       }
       $jml = Purchase::withTrashed()->whereDate('created_at', date('Y-m-d'))->get()->count();
       $jml += 1;
-      $kode += date('ymd').sprintf("%03s",$jml);
+      $kode .= date('ymd').sprintf("%03s",$jml);
 
       try {
         $customer->purchases()->create([

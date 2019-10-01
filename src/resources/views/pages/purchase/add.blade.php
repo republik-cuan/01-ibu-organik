@@ -12,18 +12,19 @@
         <a class="btn btn-info" href="{{route('purchase')}}">
           Kembali
         </a>
+        <a class="btn btn-success" href="{{route('inventories.print', $purchase->id)}}">
+          Cetak
+        </a>
       </h3>
     </div>
   </div>
 @stop
 
-
-
 @section('content')
   <div class="box box-danger">
     <div class="box-body">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4 col-sm-12">
           <div class="form-horizontal">
             <label class="col-md-5 control-label" style="text-align: left;">No Invoice</label>
             <div class="col-md-7">
