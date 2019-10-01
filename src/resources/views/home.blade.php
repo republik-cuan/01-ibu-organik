@@ -49,21 +49,38 @@
 @section('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script charset="utf-8">
-    const invoice = document.getElementById('invoice').getContext('2d');
-    const item = document.getElementById('item').getContext('2d');
-    const MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const invoice = document.getElementById('invoice').getContext('2d')
+    const item = document.getElementById('item').getContext('2d')
+    const purchaseValue = {!! $purchases['value'] !!}
+    const tempPurchaseLabel = {!! $purchases['label'] !!}
+    const purchaseValue = tempPurchaseLabel.map(value => ({
+      'label': value.deliveryOption,
+      'data': value.total,
+    }))
     const chartInvoice = new Chart(invoice, {
-    type: 'pie',
-    data: {
-      datasets: [{
-        data: [10,30,27,19,29],
-        backgroundColor: function(context) {
-          const index = context.dataIndex;
-          return index % 2 ? 'blue' : 'green';
-        },
-      }],
-      labels: ['hello', 'world', 'hello', 'happy', 'world'],
-    }
+      type: 'bar',
+      data: {
+        labels: purchaseLabel,
+        datasets: purchaseValue,
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Bulan'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Jumlah'
+            }
+          }],
+        }
+      }
     });
   </script>
 @stop

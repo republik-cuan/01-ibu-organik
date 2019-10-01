@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,9 @@ class HomeController extends Controller
         $customers = App\Customer::count();
         $purchases = App\Purchase::count();
         $items = App\Item::count();
+
+        $chartLabelPurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->pluck('deliveryOption');
+        $chartValuePurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->get();
 
         return view('home', [
           'cards' => [
@@ -55,6 +59,10 @@ class HomeController extends Controller
               'title' => 'Admin',
               'value' => $users,
             ],
+          ],
+          'purchases' => [
+            'label' => $chartLabelPurchase,
+            'value' => $chartValuePurchase,
           ],
         ]);
     }
