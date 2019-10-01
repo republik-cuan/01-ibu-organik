@@ -144,6 +144,7 @@ Route::group([
     'prefix' => 'inventories',
   ], function() {
     Route::post('/', 'ItemPurchaseController@store')->name('.store');
+    Route::get('/{id}', 'ItemPurchaseController@print')->name('.print');
     Route::put('/{id}', 'ItemPurchaseController@verified')->name('.verified');
     Route::delete('/{id}', 'ItemPurchaseController@destroy')->name('.destroy');
   });
