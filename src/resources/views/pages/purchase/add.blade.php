@@ -80,7 +80,7 @@
                   <td>
                     @php
                       $discount += $item->discount;
-                      echo sprintf("%02s", $item->discount)." %";
+                      echo "Rp. ".number_format($item->discount, 2);
                     @endphp
                   </td>
                   <td>
@@ -108,7 +108,7 @@
                   <td>
                     @php
                       $temp = $item->total * $harga;
-                      $temp *= (100-$item->discount);
+                      $temp -= $item->discount;
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
                     @endphp
