@@ -148,4 +148,12 @@ Route::group([
     Route::put('/{id}', 'ItemPurchaseController@verified')->name('.verified');
     Route::delete('/{id}', 'ItemPurchaseController@destroy')->name('.destroy');
   });
+
+  Route::group([
+    'as' => 'rekap',
+    'prefix' => 'rekap',
+  ], function() {
+    Route::get('/', 'RekapController@index');
+    Route::get('/{id}', 'RekapController@show')->name('.show');
+  });
 });

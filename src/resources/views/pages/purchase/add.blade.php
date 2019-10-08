@@ -130,7 +130,22 @@
                     <select class="js-example-basic-single form-control" name="item" id="item" required>
                       <option>Pilih</option>
                       @foreach ($items as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        @php
+                          switch ($purchase['statusHarga']) {
+                            case 'reseller' : 
+                              $hrg = $item->reseller;
+                              break;
+                            case 'modal' :
+                              $hrg = $item->modal;
+                              break;
+                            case 'end user' :
+                              $hrg = $item->endUser;
+                              break;
+                          }
+                        @endphp
+                        <option value="{{$item->id}}">
+                        {{$item->name." | Rp. ".number_format($hrg)}}
+                        </option>
                       @endforeach
                     </select>
                   </td>
