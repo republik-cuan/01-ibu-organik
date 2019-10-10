@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-      $admins = User::all();
+      $admins = User::where('role', 'admin')->get();
 
       return view('pages.admin.index', [
         'admins' => $admins,
@@ -39,6 +39,7 @@ class AdminController extends Controller
         $verifiedData = $request->validate([
           'name' => 'required',
           'email' => 'required|email',
+          'role' => 'admin',
           'password' => 'required',
         ]);
       } catch (Exception $e) {
