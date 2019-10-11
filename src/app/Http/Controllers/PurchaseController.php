@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Item;
+use App\Bank;
 use App\Purchase;
 use Illuminate\Http\Request;
 
@@ -31,11 +32,12 @@ class PurchaseController extends Controller
     public function create()
     {
       $customers = Customer::all();
+      $banks = Bank::all();
       $temp = new Purchase();
 
       return view('pages.purchase.create', [
         'customers' => $customers,
-        'banks' => $temp->banks,
+        'banks' => $banks,
         'status' => $temp->statusPembayaran,
         'statusHarga' => $temp->statusHarga,
         'deliveries' => $temp->deliveries,
