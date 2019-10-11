@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Bank;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,8 +12,7 @@ class Purchase extends Model
 
   protected $fillable = [
     'kode',
-    'bank',
-    'rekening',
+    'bank_id',
     'statusHarga',
     'statusPengiriman',
     'statusPembayaran',
@@ -54,7 +54,7 @@ class Purchase extends Model
     return $this->hasMany(ItemPurchase::class);
   }
 
-  public function banks(){
+  public function bank(){
     return $this->belongsTo(Bank::class);
   }
 }

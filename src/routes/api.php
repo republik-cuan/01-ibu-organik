@@ -18,6 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group([
+  'as' => 'api.admin',
+  'prefix' => 'admin',
+], function() {
+  Route::get('/', 'ApiAdminController@index');
+  Route::post('/', 'ApiAdminController@store')->name('.store');
+});
+
+Route::group([
   'as' => 'item',
   'prefix' => 'item',
 ], function() {

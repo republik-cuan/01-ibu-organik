@@ -16,14 +16,6 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode')->unique();
-            $table->enum('bank', [
-              'bni',
-              'bri',
-              'bca',
-              'mandiri',
-              'cash',
-            ]);
-            $table->string('rekening')->default('-');
             $table->enum('statusHarga', [
               'reseller',
               'modal',
@@ -49,6 +41,10 @@ class CreatePurchasesTable extends Migration
                   ->on('customers')
                   ->onDelete('cascade');
             $table->date('pembayaran')->nullable()->default(null);
+            $table->unsignedBigInteger('bank_id')
+                  ->foreign()
+                  ->references('id')
+                  ->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -17,7 +17,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-      $purchases = Purchase::with('customer')->get();
+      $purchases = Purchase::with(['bank', 'customer', 'inventories.item'])->get();
 
       return view('pages.purchase.index', [
         'purchases' => $purchases,
@@ -53,6 +53,7 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
+      $kode = "";
       switch ($request->statusHarga) {
         case 'end user':
           $kode = "E";
@@ -69,19 +70,18 @@ class PurchaseController extends Controller
       $kode .= date('ymd').sprintf("%03s",$jml);
 
       try {
-        $customer->purchases()->create([
+        $temp = $customer->purchases()->create([
           'kode' => $kode,
-          'bank' => $request->bank,
-          'rekening' => $request->rekening,
           'statusHarga' => $request->statusHarga,
           'deliveryPrice' => $request->deliveryPrice,
           'deliveryOption' => $request->deliveryOption,
+          'bank_id' => $request->bank,
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
       }
 
-      return redirect('purchase');
+      return redirect()->route('purchase.add', $temp->id);
     }
 
     /**
@@ -104,8 +104,10 @@ class PurchaseController extends Controller
     public function edit($id)
     {
       $purchase = Purchase::with('customer', 'inventories.item')->find($id);
+      $banks = Bank::all();
       return view('pages.purchase.edit', [
         'purchase' => $purchase,
+        'banks' => $banks,
       ]);
     }
 
@@ -122,20 +124,16 @@ class PurchaseController extends Controller
 
       try {
         $purchase->update([
-          'bank' => $request->bank,
-          'rekening' => $request->rekening,
+          'bank_id' => $request->bank,
           'statusHarga' => $request->statusHarga,
-          'statusPengiriman' => $request->statusPengiriman,
-          'statusPembayaran' => $request->statusPembayaran,
           'deliveryPrice' => $request->deliveryPrice,
           'deliveryOption' => $request->deliveryOption,
-          'pembayaran' => $request->pembayaran,
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
       }
 
-      return redirect()->route('customer.edit', $purchase->customer->id);
+      return redirect()->route('purchase.add', $purchase->id);
     }
 
     /**
