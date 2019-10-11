@@ -45,7 +45,7 @@
               <select name="bank" id="bank" class="form-control" required>
                 <option>Pilih</option>
                 @foreach ($banks as $bank) 
-                  <option value="{{$bank->bank}}">{{$bank->bank}}</option>
+                  <option value="{{$bank->id}}">{{$bank->bank}}</option>
                 @endforeach
               </select>
             </div>
@@ -57,10 +57,6 @@
                     <option value="{{$harga}}">{{strtoupper($harga)}}</option>
                 @endforeach
               </select>
-            </div>
-            <div class="form-group">
-              <label for="rekening">No Rekening</label>
-              <input class="form-control" type="text" name="rekening" id="rekening" placeholder="nomor rekening 11xxx" required>
             </div>
             <div class="form-group">
               <label for="deliveryOption">Opsi Pengiriman</label>
@@ -88,8 +84,15 @@
 
 @section('js')
   <script charset="utf-8">
+    const biaya = $('#deliveryPrice')[0];
+    biaya.value = 0;
     $(document).ready(function() {
       $('.js-example-basic-single').select2();
+      $('#deliveryOption').on('change', function(data) {
+        if (data.target.value!="free ongkir") {
+          biaya.value = 0;
+        }
+      });
     });
   </script>
 @stop

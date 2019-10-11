@@ -53,6 +53,7 @@ class PurchaseController extends Controller
     public function store(Request $request)
     {
       $customer = Customer::find($request->customer);
+      $kode = "";
       switch ($request->statusHarga) {
         case 'end user':
           $kode = "E";
@@ -71,11 +72,10 @@ class PurchaseController extends Controller
       try {
         $temp = $customer->purchases()->create([
           'kode' => $kode,
-          'bank' => $request->bank,
-          'rekening' => $request->rekening,
           'statusHarga' => $request->statusHarga,
           'deliveryPrice' => $request->deliveryPrice,
           'deliveryOption' => $request->deliveryOption,
+          'bank_id' => $request->bank,
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
@@ -104,8 +104,10 @@ class PurchaseController extends Controller
     public function edit($id)
     {
       $purchase = Purchase::with('customer', 'inventories.item')->find($id);
+      $banks = Bank::all();
       return view('pages.purchase.edit', [
         'purchase' => $purchase,
+        'banks' => $banks,
       ]);
     }
 
@@ -122,14 +124,10 @@ class PurchaseController extends Controller
 
       try {
         $purchase->update([
-          'bank' => $request->bank,
-          'rekening' => $request->rekening,
+          'bank_id' => $request->bank,
           'statusHarga' => $request->statusHarga,
-          'statusPengiriman' => $request->statusPengiriman,
-          'statusPembayaran' => $request->statusPembayaran,
           'deliveryPrice' => $request->deliveryPrice,
           'deliveryOption' => $request->deliveryOption,
-          'pembayaran' => $request->pembayaran,
         ]);
       } catch (Exception $e) {
         return abort(404, $e);

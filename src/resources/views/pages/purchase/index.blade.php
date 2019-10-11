@@ -31,6 +31,7 @@
                 <th>Nama</th>
                 <th>Bank</th>
                 <th>Tanggal Transfer</th>
+                <th>Pengiriman</th>
                 <th>Total Bayar</th>
                 <th>Status Pembayaran</th>
                 <th>Action</th>
@@ -59,25 +60,49 @@
           {
             data: 'bank',
             render: function(data) {
-              return `${bank.name} | ${bank.rekening}`;
+              return `${data.bank} | ${data.rekening}`;
             }
           },
           {
             data: 'created_at',
             render: function(data) {
-              const temp = new Date(date);
+              const temp = new Date(data);
               return temp.toLocaleString('id-ID', { timezone: 'UTC' });
             }
           },
+          { data: 'deliveryOption' },
           {
-            data: 'deliveryOption',
+            data: 'statusHarga',
             render: function(data) {
-              return `${data} | Rp. ${new Intl.NumberFormat().format(arguments[2].deliveryPrice)}`
+              let hasil = 0;
+              switch(data) {
+                case 'reseller':
+                  hasil = arguments[2].inventories.map(datum => {
+                    return (datum.total*datum.item.reseller) - datum.discount;
+                  });
+                  break;
+                case 'modal':
+                  hasil = arguments[2].inventories.map(datum => {
+                    return (datum.total*datum.item.modal) - datum.discount;
+                  });
+                  break;
+                case 'end user':
+                  hasil = arguments[2].inventories.map(datum => {
+                    return (datum.total*datum.item.endUser) - datum.discount;
+                  });
+                  break;
+                default:
+                  hasil = 0;
+                  break;
+              }
+              const temp = hasil.reduce((acc, datum) => acc + datum);
+              return `${data} | Rp. ${new Intl.NumberFormat().format(temp)}`
             }
           },
           {
             data: 'statusPembayaran',
             render: function(data) {
+              return data;
             }
           },
           {
@@ -89,7 +114,6 @@
               const detail = '<a class="btn btn-info btn-xs" style="margin: 0 3px;" href="'+link+'/add">detail</a>';
               const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">edit</a>';
               const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
-              verified = arguments[2].statusPembayaran !== "terbayar" ? verified : '';
               return '<div class="text-center">'+verified+detail+edit+hapus+'</div>';
             }
           }

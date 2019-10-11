@@ -49,38 +49,9 @@
             <div class="form-group">
               <label for="bank">Opsi Pembayaran</label>
               <select id="bank" class="form-control" name="bank">
-                @foreach ($purchase->banks as $bank)
-                  <option value="{{$bank}}" {{$purchase->bank==$bank ? 'selected' : ''}}>{{strtoupper($bank)}}</option>
+                @foreach ($banks as $bank)
+                  <option value="{{$bank->id}}" {{$purchase->bank->id==$bank->id ? 'selected' : ''}}>{{strtoupper($bank->bank)}}</option>
                 @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="rekening">Rekening</label>
-              <input class="form-control" type="text" id="rekening" name="rekening" value="{{$purchase->rekening}}" required>
-            </div>
-            <div class="form-group">
-              <label for="statusPembayaran">Status Pembayaran</label>
-              <select class="form-control" name="statusPembayaran" id="statusPembayaran">
-                @foreach ($purchase->statusPembayaran as $stat)
-                  <option value="{{$stat}}" {{$purchase['statusPembayaran']==$stat ? 'selected' : ''}}>
-                    {{ucwords($stat)}}
-                  </option>
-                @endforeach
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="pembayaran">Tanggal Pembayaran</label>
-              <input type="date" class="form-control" name="pembayaran" value="{{$purchase->pembayaran==null ? '' : date_format($purchase->pembayaran, 'Y-m-d')}}" id="pembayaran">
-            </div>
-            <div class="form-group">
-              <label for="pemesanan">Tanggal Pesan</label>
-              <input class="form-control" type="date" name="pemesanan" id="pemesanan" value="{{date_format($purchase->created_at, 'Y-m-d')}}">
-            </div>
-            <div class="form-group">
-              <label for="statusPengiriman">Status Pengiriman</label>
-              <select id="statusPengiriman" class="form-control" name="statusPengiriman">
-                <option value="0" {{$purchase->statusPengiriman ? 'selected' : ''}}>Siap Kirim</option>
-                <option value="1" {{$purchase->statusPengiriman ? 'selected' : ''}}>Terkirim</option>
               </select>
             </div>
             <div class="form-group">
