@@ -75,6 +75,7 @@
             data: 'statusHarga',
             render: function(data) {
               let hasil = 0;
+              let temp = 0;
               if (arguments[2].inventories.length>0) {
                 switch(data) {
                   case 'reseller':
@@ -96,8 +97,8 @@
                     hasil = 0;
                     break;
                 }
+                temp = hasil.reduce((acc, datum) => acc + datum);
               }
-              const temp = hasil.reduce((acc, datum) => acc + datum);
               return `${data} | Rp. ${new Intl.NumberFormat().format(temp)}`
             }
           },
