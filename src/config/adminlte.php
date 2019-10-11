@@ -143,6 +143,11 @@ return [
           'icon'    => 'fas fa-dolly',
           'url'     => 'supplier',
         ],
+        [
+          'text'    => 'Bank',
+          'icon'    => 'fas fa-university',
+          'url'     => 'bank',
+        ],
     ],
 
     /*
