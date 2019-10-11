@@ -45,7 +45,7 @@
               <select name="bank" id="bank" class="form-control" required>
                 <option>Pilih</option>
                 @foreach ($banks as $bank) 
-                  <option value="{{$bank}}">{{strtoupper($bank)}}</option>
+                  <option value="{{$bank->bank}}">{{$bank->bank}}</option>
                 @endforeach
               </select>
             </div>
