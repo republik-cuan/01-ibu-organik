@@ -41,16 +41,14 @@
             <input type="number" class="form-control" name="stock" placeholder="Stok Item" autofocus>
             {!! $errors->first('stock', '<p calss="help-block text-danger">:message</p>')!!}
             <label for="categoy_id">Kategori</label>
-            <select name="category_id" id="" class="form-control">
-              <option>-- Choose Category --</option>
+            <select name="category_id" id="" class="js-example-basic-single form-control">
               @foreach ($categories as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach
           </select>
           {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
           <label for="supplier_id">Supplier</label>
-          <select name="supplier_id" id="" class="form-control">
-            <option>-- Choose Supplier --</option>
+          <select name="supplier_id" id="" class="js-example-basic-single form-control">
             @foreach ($suppliers as $item)
               <option value="{{ $item->id }}">{{ $item->name }}</option>
             @endforeach
@@ -68,6 +66,8 @@
 
 @section('js')
 <script>
-  console.log('Hi!');
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
 </script>
 @stop

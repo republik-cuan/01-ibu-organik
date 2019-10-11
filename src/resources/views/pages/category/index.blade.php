@@ -18,9 +18,6 @@
   </div>
   <div class="col-md-6 text-right">
     <h3>
-      <a class="btn btn-warning" href="{{route('category.trash')}}">
-        Sampah
-      </a>
       <a class="btn btn-info" href="{{route('category.create')}}">
         Tambah Kategori
       </a>

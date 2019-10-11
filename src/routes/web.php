@@ -51,22 +51,22 @@ Route::group([
     Route::put('/trash/{id}','ItemController@restore')->name('.restore');
     Route::delete('/{id}', 'ItemController@destroy')->name('.destroy');
     Route::delete('/trash/{id}','ItemController@destroypermanent')->name('.destroypermanent');
-});
+  });
 
-Route::group([
-  'as' => 'category',
-  'prefix' => 'category',
-], function () {
-  Route::get('/', 'CategoryController@index');
-  Route::get('/trash', 'CategoryController@trash')->name('.trash');
-  Route::post('/', 'CategoryController@store')->name('.store');
-  Route::get('/create', 'CategoryController@create')->name('.create');
-  Route::get('/{id}', 'CategoryController@edit')->name('.edit');
-  Route::put('/{id}', 'CategoryController@update')->name('.update');
-  Route::put('/trash/{id}', 'CategoryController@restore')->name('.restore');
-  Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
-  Route::delete('/trash/{id}', 'CategoryController@destroypermanent')->name('.destroypermanent');
-});
+  Route::group([
+    'as' => 'category',
+    'prefix' => 'category',
+  ], function () {
+    Route::get('/', 'CategoryController@index');
+    Route::get('/trash', 'CategoryController@trash')->name('.trash');
+    Route::post('/', 'CategoryController@store')->name('.store');
+    Route::get('/create', 'CategoryController@create')->name('.create');
+    Route::get('/{id}', 'CategoryController@edit')->name('.edit');
+    Route::put('/{id}', 'CategoryController@update')->name('.update');
+    Route::put('/trash/{id}', 'CategoryController@restore')->name('.restore');
+    Route::delete('/{id}', 'CategoryController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'CategoryController@destroypermanent')->name('.destroypermanent');
+  });
 
   Route::group([
     'as' => 'customer',
@@ -163,5 +163,12 @@ Route::group([
     Route::delete('/{id}', 'BankController@destroy')->name('.destroy');
     Route::delete('/trash/{id}', 'BankController@destroypermanent')->name('.destroypermanent');
   });
-
+  
+  Route::group([
+    'as' => 'rekap',
+    'prefix' => 'rekap',
+  ], function() {
+    Route::get('/', 'RekapController@index');
+    Route::get('/{id}', 'RekapController@show')->name('.show');
+  });
 });
