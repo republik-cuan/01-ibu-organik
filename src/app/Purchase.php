@@ -33,14 +33,6 @@ class Purchase extends Model
     'end user',
   ];
 
-  public $banks = [
-    'bni',
-    'bri',
-    'bca',
-    'mandiri',
-    'cash',
-  ];
-
   public $deliveries = [
     'kurir',
     'grab',
@@ -60,5 +52,9 @@ class Purchase extends Model
 
   public function inventories() {
     return $this->hasMany(ItemPurchase::class);
+  }
+
+  public function banks(){
+    return $this->belongsTo(Bank::class);
   }
 }
