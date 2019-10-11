@@ -150,6 +150,21 @@ Route::group([
   });
 
   Route::group([
+    'as' => 'bank',
+    'prefix' => 'bank',
+  ], function () {
+    Route::get('/', 'BankController@index');
+    Route::get('/trash', 'BankController@trash')->name('.trash');
+    Route::post('/', 'BankController@store')->name('.store');
+    Route::get('/create', 'BankController@create')->name('.create');
+    Route::get('/{id}', 'BankController@edit')->name('.edit');
+    Route::put('/{id}', 'BankController@update')->name('.update');
+    Route::put('/trash/{id}', 'BankController@restore')->name('.restore');
+    Route::delete('/{id}', 'BankController@destroy')->name('.destroy');
+    Route::delete('/trash/{id}', 'BankController@destroypermanent')->name('.destroypermanent');
+  });
+  
+  Route::group([
     'as' => 'rekap',
     'prefix' => 'rekap',
   ], function() {

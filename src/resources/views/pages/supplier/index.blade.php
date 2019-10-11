@@ -9,9 +9,6 @@
     </div>
     <div class="col-md-6 text-right">
       <h3>
-        <a class="btn btn-warning" href="{{route('supplier.trash')}}">
-          Sampah
-        </a>
         <a class="btn btn-info" href="{{route('supplier.create')}}">
           Tambah Supplier
         </a>

@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
 
     'logout_url' => 'logout',
 
@@ -142,6 +142,11 @@ return [
           'text'    => 'Supplier',
           'icon'    => 'fas fa-dolly',
           'url'     => 'supplier',
+        ],
+        [
+          'text'    => 'Bank',
+          'icon'    => 'fas fa-university',
+          'url'     => 'bank',
         ],
         [
           'text'    => 'Rekap',
