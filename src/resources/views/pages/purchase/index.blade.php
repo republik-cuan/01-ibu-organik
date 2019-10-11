@@ -75,25 +75,27 @@
             data: 'statusHarga',
             render: function(data) {
               let hasil = 0;
-              switch(data) {
-                case 'reseller':
-                  hasil = arguments[2].inventories.map(datum => {
-                    return (datum.total*datum.item.reseller) - datum.discount;
-                  });
-                  break;
-                case 'modal':
-                  hasil = arguments[2].inventories.map(datum => {
-                    return (datum.total*datum.item.modal) - datum.discount;
-                  });
-                  break;
-                case 'end user':
-                  hasil = arguments[2].inventories.map(datum => {
-                    return (datum.total*datum.item.endUser) - datum.discount;
-                  });
-                  break;
-                default:
-                  hasil = 0;
-                  break;
+              if (arguments[2].inventories.length>0) {
+                switch(data) {
+                  case 'reseller':
+                    hasil = arguments[2].inventories.map(datum => {
+                      return (datum.total*datum.item.reseller) - datum.discount;
+                    });
+                    break;
+                  case 'modal':
+                    hasil = arguments[2].inventories.map(datum => {
+                      return (datum.total*datum.item.modal) - datum.discount;
+                    });
+                    break;
+                  case 'end user':
+                    hasil = arguments[2].inventories.map(datum => {
+                      return (datum.total*datum.item.endUser) - datum.discount;
+                    });
+                    break;
+                  default:
+                    hasil = 0;
+                    break;
+                }
               }
               const temp = hasil.reduce((acc, datum) => acc + datum);
               return `${data} | Rp. ${new Intl.NumberFormat().format(temp)}`
