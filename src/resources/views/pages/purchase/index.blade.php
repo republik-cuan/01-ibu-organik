@@ -28,12 +28,10 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Kode</th>
                 <th>Nama</th>
-                <th>No HP</th>
                 <th>Bank</th>
-                <th>No Rekening</th>
-                <th>Status Harga</th>
+                <th>Tanggal Transfer</th>
+                <th>Total Bayar</th>
                 <th>Status Pembayaran</th>
                 <th>Action</th>
               </tr>
@@ -57,18 +55,31 @@
               return arguments[3].row+=1;
             },
           },
-          {data: 'kode'},
-          {data: 'customer.name'},
-          {data: 'customer.phone'},
+          { data: 'customer.name' },
           {
             data: 'bank',
             render: function(data) {
-              return data.toUpperCase()
+              return `${bank.name} | ${bank.rekening}`;
             }
           },
-          {data: 'rekening'},
-          {data: 'statusHarga'},
-          {data: 'statusPembayaran'},
+          {
+            data: 'created_at',
+            render: function(data) {
+              const temp = new Date(date);
+              return temp.toLocaleString('id-ID', { timezone: 'UTC' });
+            }
+          },
+          {
+            data: 'deliveryOption',
+            render: function(data) {
+              return `${data} | Rp. ${new Intl.NumberFormat().format(arguments[2].deliveryPrice)}`
+            }
+          },
+          {
+            data: 'statusPembayaran',
+            render: function(data) {
+            }
+          },
           {
             data: 'id',
             render: function(data){

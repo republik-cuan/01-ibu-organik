@@ -16,7 +16,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-      $purchases = Purchase::with('customer')->get();
+      $purchases = Purchase::with(['bank', 'customer', 'inventories.item'])->get();
 
       return view('pages.purchase.index', [
         'purchases' => $purchases,
@@ -67,7 +67,7 @@ class PurchaseController extends Controller
       $kode .= date('ymd').sprintf("%03s",$jml);
 
       try {
-        $customer->purchases()->create([
+        $temp = $customer->purchases()->create([
           'kode' => $kode,
           'bank' => $request->bank,
           'rekening' => $request->rekening,
@@ -79,7 +79,7 @@ class PurchaseController extends Controller
         return abort(404, $e);
       }
 
-      return redirect('purchase');
+      return redirect()->route('purchase.add', $temp->id);
     }
 
     /**
@@ -133,7 +133,7 @@ class PurchaseController extends Controller
         return abort(404, $e);
       }
 
-      return redirect()->route('customer.edit', $purchase->customer->id);
+      return redirect()->route('purchase.add', $purchase->id);
     }
 
     /**
