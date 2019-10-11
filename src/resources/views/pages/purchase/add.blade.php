@@ -188,6 +188,9 @@
             </tbody>
           </table>
         </div>
+        <div class="col-md-12 text-right">
+          <a class="btn btn-warning btn" href="{{route('purchase')}}">Simpan</a>
+        </div>
       </div>
     </div>
   </div>
