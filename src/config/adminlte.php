@@ -117,6 +117,7 @@ return [
           'text'    => 'Admin',
           'url'     => 'admin',
           'icon'    => 'fas fa-user',
+          'can'     => 'super-admin',
         ],
         [
           'text'    => 'Category',
@@ -132,6 +133,7 @@ return [
           'text'    => 'Item',
           'icon'    => 'fas fa-box-open',
           'url'     => 'item',
+          'can'     => 'super-admin',
         ],
         [
           'text'    => 'Invoice',
@@ -147,11 +149,13 @@ return [
           'text'    => 'Bank',
           'icon'    => 'fas fa-university',
           'url'     => 'bank',
+          'can'     => 'super-admin',
         ],
         [
           'text'    => 'Rekap',
           'icon'    => 'fas fa-clipboard',
           'url'     => 'rekap',
+          'can'     => 'super-admin',
         ],
     ],
 
