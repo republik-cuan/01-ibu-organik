@@ -5,6 +5,7 @@
       <th>Pelanggan</th>
       <th>Status Harga</th>
       <th>Ongkir</th>
+      <th>Margin</th>
       <th>Total Harga</th>
       <th>Grand Total</th>
     </tr>
@@ -15,10 +16,11 @@
         <td>{{$key+=1}}</td>
         <td>{{$purchase['customer']->name}}</td>
         <td>{{$purchase['statusHarga']}}</td>
-        <td>{{$purchase['deliveryOption']}}</td>
+        <td>{{"Rp. ".number_format($purchase['deliveryPrice'], 2)}}</td>
         <td>
           @php
-            $hasil = 0;
+            $total = 0;
+            $margin = 0;
             $harga = 0;
             foreach($purchase['inventories'] as $inventory) {
               switch($purchase['statusHarga']) {
@@ -32,12 +34,14 @@
                   $harga = $inventory->item->modal;
                   break;
               }
-              $hasil += ($harga*$inventory->total);
+              $total += ($harga*$inventory->total);
+              $margin += ($harga-$inventory->item->modal)*$inventory->total;
             }
-            echo "Rp. ".number_format($hasil, 2);
+            echo "Rp. ".number_format($margin, 2);
           @endphp
         </td>
-        <td>{{"Rp. ".number_format($hasil+=$purchase['deliveryPrice'])}}</td>
+        <td>{{"Rp. ".number_format($total, 2)}}</td>
+        <td>{{"Rp. ".number_format($total+=$purchase['deliveryPrice'])}}</td>
       </tr>
     @endforeach
   </tbody>
