@@ -25,6 +25,7 @@ Route::group([
   Route::get('dashboard', 'HomeController@index')->name('home');
   Route::group([
     'as' => 'admin',
+    'can' => 'super-admin',
     'prefix' => 'admin',
   ], function () {
     Route::get('/', 'AdminController@index');
