@@ -120,7 +120,8 @@
               const detail = '<a class="btn btn-info btn-xs" style="margin: 0 3px;" href="'+link+'/add">detail</a>';
               const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">edit</a>';
               const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
-              return '<div class="text-center">'+verified+detail+edit+hapus+'</div>';
+              const hasil = arguments[2].statusPembayaran === "terbayar" ? '<div class="text-center">'+verified+'</div>' : '<div class="text-center">'+verified+detail+edit+hapus+'</div>';
+              return hasil;
             }
           }
         ]
