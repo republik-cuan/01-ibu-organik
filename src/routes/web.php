@@ -27,6 +27,7 @@ Route::group([
     'as' => 'admin',
     'can' => 'super-admin',
     'prefix' => 'admin',
+    'middleware' => 'check-role',
   ], function () {
     Route::get('/', 'AdminController@index');
     Route::get('/trash', 'AdminController@trash')->name('.trash');
@@ -42,6 +43,7 @@ Route::group([
   Route::group([
     'as' => 'item',
     'prefix' => 'item',
+    'middleware' => 'check-role',
   ], function () {
     Route::get('/', 'ItemController@index');
     Route::get('/trash','ItemController@trash')->name('.trash');
@@ -168,6 +170,7 @@ Route::group([
   Route::group([
     'as' => 'rekap',
     'prefix' => 'rekap',
+    'middleware' => 'check-role',
   ], function() {
     Route::get('/', 'RekapController@index');
     Route::get('/{id}', 'RekapController@show')->name('.show');
