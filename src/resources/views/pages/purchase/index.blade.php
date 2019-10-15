@@ -105,7 +105,8 @@
           {
             data: 'statusPembayaran',
             render: function(data) {
-              return data;
+              const color = data==="terbayar" ? 'bg-green' : 'bg-red';
+              return '<p class="'+color+'">'+data+'</p>';
             }
           },
           {
@@ -113,7 +114,9 @@
             render: function(data){
               const link ="{{route('purchase')}}"+"/"+data;
               const hh = "/inventories/"+data;
-              let verified = '<form action="'+hh+'" style="margin: 0 3px; display: inline;" method="post">@csrf @method('put')<button class="btn btn-success btn-xs">verified</button></form>';
+              const color = arguments[2].statusPembayaran === "terbayar" ? "btn-warning" : "btn-success";
+              const label = arguments[2].statusPembayaran === "terbayar" ? "Batal" : "Verifikasi";
+              let verified = '<form action="'+hh+'" style="margin: 0 3px; display: inline;" method="post">@csrf @method('put')<button class="btn '+color+' btn-xs">'+label+'</button></form>';
               const detail = '<a class="btn btn-info btn-xs" style="margin: 0 3px;" href="'+link+'/add">detail</a>';
               const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">edit</a>';
               const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
