@@ -29,9 +29,11 @@ class HomeController extends Controller
         $customers = App\Customer::count();
         $purchases = App\Purchase::count();
         $items = App\Item::count();
+        $purchase = new App\Purchase;
 
-        $chartLabelPurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->pluck('deliveryOption');
         $chartValuePurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->get();
+
+        return $purchase->deliveries;
 
         return view('home', [
           'cards' => [
@@ -61,7 +63,7 @@ class HomeController extends Controller
             ],
           ],
           'purchases' => [
-            'label' => $chartLabelPurchase,
+            'label' => $purchase->deliveries,
             'value' => $chartValuePurchase,
           ],
         ]);

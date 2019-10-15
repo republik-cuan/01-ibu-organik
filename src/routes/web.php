@@ -173,6 +173,7 @@ Route::group([
     'middleware' => 'check-role',
   ], function() {
     Route::get('/', 'RekapController@index');
+    Route::get('/item', 'RekapController@itemExport')->name('.export-item');
     Route::get('/{id}', 'RekapController@show')->name('.show');
   });
 });

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
+use App\Purchase;
 use App\Exports\PurchaseExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class RekapController extends Controller
 {
@@ -15,7 +19,15 @@ class RekapController extends Controller
      */
     public function index()
     {
-      return Excel::download(new PurchaseExport, 'hello.xlsx');
+      $items = Item::with('purchases:purchase_id,statusHarga')->get();
+      $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])->get()->groupBy(function($item){
+        return Carbon::parse($item->created_at)->format('Y-m');
+      });
+
+      return view('pages.rekap.index', [
+        'items' => $items,
+        'purchases' => $purchases,
+      ]);
     }
 
     /**
@@ -82,5 +94,9 @@ class RekapController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function itemExport() {
+      return Excel::download(new PurchaseExport, 'rekap.xlsx');
     }
 }
