@@ -130,47 +130,4 @@
     });
   });
 </script>
-<script charset="utf-8">
-  $(document).ready(function(){
-    $('#table-month').dataTable({
-      data: {!! $purchases !!},
-      columns: [
-        { 
-          data: 'id',
-          render: function(data){
-            console.log('hello')
-            return arguments[3].row+=1;
-          },
-        },
-        {
-          data: 'created_at',
-          render: function(data){
-            const month = new Date(data);
-            return month;
-          },
-        },
-        {
-          data: 'inventories',
-          render: function(data){
-            data.map(datum => {
-              switch(arguments[2].statusHarga){
-                case 'reseller':
-                  harga = datum.item.reseller;
-                  break;
-                case 'modal':
-                  harga = datum.item.modal;
-                  break;
-                case 'end user':
-                  harga = datum.item.endUser;
-                  break;
-              }
-              hasil += ((harga-datum.item.modal)*datum.total);
-            });
-            return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
-          },
-        }
-      ],
-    })
-  })
-</script>
 @endsection
