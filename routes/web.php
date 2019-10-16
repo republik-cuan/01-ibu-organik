@@ -172,8 +172,9 @@ Route::group([
     'prefix' => 'rekap',
     'middleware' => 'check-role',
   ], function() {
-    Route::get('/', 'RekapController@index');
-    Route::get('/item', 'RekapController@itemExport')->name('.export-item');
-    Route::get('/{id}', 'RekapController@show')->name('.show');
+    Route::get('/item', 'RekapController@item')->name('.item');
+    Route::get('/item/export', 'RekapController@itemExport')->name('.export-item');
+    Route::get('/month', 'RekapController@month')->name('.monthly');
+    Route::get('/month/export', 'RekapController@monthExport')->name('.export-monthly');
   });
 });

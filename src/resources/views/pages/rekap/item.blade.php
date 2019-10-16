@@ -1,64 +1,37 @@
 @extends('adminlte::page')
 
-@section('title', 'Rekap')
+@section('title', 'Rekap Barang')
 
 @section('content_header')
-    <h1>Rekap</h1>
+    <h1>Rekap Barang</h1>
 @stop
 
 @section('content')
-  <div class="nav-tabs-custom">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#tab-01" data-toggle="tab">Barang</a>
-      </li>
-      <li>
-        <a href="#tab-02" data-toggle="tab">Bulanan</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <div id="tab-01" class="tab-pane active">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-6 text-right">
-            <a class="btn btn-success" href="{{route('rekap.export-item')}}" style="margin-bottom: 10px;">Cetak</a>
-          </div>
-          <div class="col-md-12">
-            <table id="table-item" class="data-table table table-bordered table-hover text-center">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama Barang</th>
-                  <th>Terjual</th>
-                  <th>Harga Modal</th>
-                  <th>Total Bayar</th>
-                  <th>Margin</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
+  <div class="box box-danger">
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6 text-right">
+          <a class="btn btn-success" href="{{route('rekap.export-item')}}" style="margin-bottom: 10px;">Cetak</a>
         </div>
-      </div>
-      <div id="tab-02" class="tab-pane">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-6 text-right">
-            <a class="btn btn-success" href="{{route('admin')}}" style="margin-bottom: 10px;">Cetak</a>
-          </div>
-          <div class="col-md-12">
-            <table id="table-item" class="data-table table table-bordered table-hover text-center">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Bulan</th>
-                  <th>Total Bayar</th>
-                </tr>
-              </thead>
-            </table>
-          </div>
+        <div class="col-md-12">
+          <table id="table-item" class="data-table table table-bordered table-hover text-center">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Terjual</th>
+                <th>Modal</th>
+                <th>Total Harga</th>
+                <th>Margin</th>
+              </tr>
+            </thead>
+          </table>
         </div>
       </div>
     </div>
   </div>
 @stop
+
 
 @section('js')
 <script charset="utf-8">
@@ -90,6 +63,8 @@
           render: function(data) {
             let harga = 0;
             let hasil = 0;
+            subtotal = 0;
+            margin = 0;
             if (data.length > 0) {
              data.map((datum) => {
                 switch(datum.statusHarga) {
@@ -123,7 +98,7 @@
             } else {
               margin = 0;
             }
-            return `Rp. ${new Intl.NumberFormat().format(margin)}`;
+            return `Rp. ${new Intl.NumberFormat().format(subtotal-margin)}`;
           },
         },
       ]
