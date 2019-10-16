@@ -154,8 +154,20 @@ return [
         [
           'text'    => 'Rekap',
           'icon'    => 'fas fa-clipboard',
-          'url'     => 'rekap',
-          'can'     => 'super-admin',
+          'submenu' => [
+            [
+              'text'  => 'Bulan',
+              'url'   => 'rekap/month',
+              'can'     => 'super-admin',
+              'icon'  => 'none',
+            ],
+            [
+              'text'  => 'Barang',
+              'url'   => 'rekap/item',
+              'can'     => 'super-admin',
+              'icon'  => 'none',
+            ],
+          ],
         ],
     ],
 
