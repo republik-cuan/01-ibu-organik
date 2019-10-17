@@ -8,24 +8,21 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class PurchaseExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
-    {
-        return Purchase::all();
-    }
+  protected $val = [];
+  protected $label = "";
 
-    /**
-     * undocumented function
-     *
-     * @return void
-     */
-    public function view(): View
-    {
-      return view('pages.rekap.xlsx', [
-        'purchases' => Purchase::all(),
-      ]);
-    }
+  public function __construct($val, $label)
+  {
+    $this->val = $val;
+    $this->label = $label;
+  }
+  
+  public function view(): View
+  {
+    return view('pages.rekap.month-xlsx', [
+      'purchases' => $this->val,
+      'label' => $this->label,
+    ]);
+  }
     
 }
