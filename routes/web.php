@@ -175,6 +175,6 @@ Route::group([
     Route::get('/item', 'RekapController@item')->name('.item');
     Route::get('/item/export', 'RekapController@itemExport')->name('.export-item');
     Route::get('/month', 'RekapController@month')->name('.monthly');
-    Route::get('/month/export', 'RekapController@monthExport')->name('.export-monthly');
+    Route::post('/month', 'RekapController@monthExport')->name('.export-month');
   });
 });
