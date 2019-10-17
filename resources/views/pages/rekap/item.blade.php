@@ -43,6 +43,7 @@
       columns: [{
           data: 'id',
           render: function(data) {
+            console.log(arguments);
             return arguments[3].row+=1;
           },
         },

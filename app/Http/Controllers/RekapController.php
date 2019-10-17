@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Purchase;
 use App\Exports\ItemExport;
+use App\Exports\MonthlyExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
@@ -30,24 +31,43 @@ class RekapController extends Controller
     }
 
     public function month(Request $request) {
-      $purchases = [];
-      if ($request!=null) {
+      $label = "";
+      if ($request->year!="") {
+        $label = "with";
         $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])
           ->whereYear('created_at', $request->year)
           ->whereMonth('created_at', $request->month)
           ->get();
       } else {
+        $label = "without";
         $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])->get()->groupBy(function($item){
           return Carbon::parse($item->created_at)->format('Y-m');
         });
       }
 
-      return view('pages.rekap.index', [
+      return view('pages.rekap.month', [
         'purchases' => $purchases,
+        'label' => $label,
       ]);
     }
 
-    public function monthExport() {
-      return Excel::download(new PurchaseExport, 'rekap-bulanan.xlsx');
+    public function monthExport(Request $request) {
+      $purchases = [];
+      $label = "";
+      if ($request->year!="") {
+        $label = "with";
+        $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])
+          ->whereYear('created_at', $request->year)
+          ->whereMonth('created_at', $request->month)
+          ->get();
+      } else {
+        $label = "without";
+        $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])->get()->groupBy(function($item){
+          return Carbon::parse($item->created_at)->format('Y-m');
+        });
+      }
+
+      $collection = new MonthlyExport($purchases, $label);
+      return Excel::download($collection, 'rekap-bulanan.xlsx');
     }
 }
