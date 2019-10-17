@@ -2,18 +2,23 @@
 
 namespace App\Exports;
 
-use App\Purchase;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class MonthlyExport implements FromCollection
+class MonthlyExport implements FromView
 {
     protected $invoices;
+    protected $label;
 
-    public function __construct(array $invoices) {
+    public function __construct(object $invoices, string $label) {
       $this->invoices = $invoices;
+      $this->label = $label;
     }
 
-    public function collection() {
-        return Purchase::all();
+    public function view(): View {
+      return view('pages.rekap.month-xlsx', [
+        'purchases' => $this->invoices,
+        'label'     => $this->label,
+      ]);
     }
 }

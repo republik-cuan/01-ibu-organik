@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Purchase;
 use App\Exports\ItemExport;
-use App\Exports\PurchaseExport;
+use App\Exports\MonthlyExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
@@ -44,7 +44,7 @@ class RekapController extends Controller
           return Carbon::parse($item->created_at)->format('Y-m');
         });
       }
-      return $purchases;
+
       return view('pages.rekap.month', [
         'purchases' => $purchases,
         'label' => $label,
@@ -67,7 +67,7 @@ class RekapController extends Controller
         });
       }
 
-      $collection = new PurchaseExport($purchases, $label);
+      $collection = new MonthlyExport($purchases, $label);
       return Excel::download($collection, 'rekap-bulanan.xlsx');
     }
 }
