@@ -114,24 +114,27 @@
                     @endphp
                   </td>
                   <td>
-                    <form action="{{route('inventories.destroy', $item->id)}}" method="post">
-                      @csrf
-                      @method('delete')
-                      <button class="btn btn-danger btn-xs">hapus</button>
-                    </form>
+                    @if ($purchase['statusPembayaran']!="terbayar")
+                      <form action="{{route('inventories.destroy', $item->id)}}" method="post" disable>
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-danger btn-xs">hapus</button>
+                      </form>
+                    @endif
                   </td>
                 </tr>
               @endforeach
-              <form action="{{route('inventories.store')}}" method="post">
-                @csrf
-                <tr>
-                  <td><input type="number" name="purchase" id="purchase" value="{{$purchase->id}}" hidden></td>
-                  <td>
-                    <select class="js-example-basic-single form-control" name="item" id="item" required>
-                      <option>Pilih</option>
-                      @foreach ($items as $item)
-                        @php
-                          switch ($purchase['statusHarga']) {
+              @if ($purchase['statusPembayaran']!="terbayar")
+                <form action="{{route('inventories.store')}}" method="post">
+                  @csrf
+                  <tr>
+                    <td><input type="number" name="purchase" id="purchase" value="{{$purchase->id}}" hidden></td>
+                    <td>
+                      <select class="js-example-basic-single form-control" name="item" id="item" required>
+                        <option>Pilih</option>
+                        @foreach ($items as $item)
+                          @php
+                            switch ($purchase['statusHarga']) {
                             case 'reseller' : 
                               $hrg = $item->reseller;
                               break;
@@ -147,21 +150,22 @@
                         {{$item->name." | Rp. ".number_format($hrg)}}
                         </option>
                       @endforeach
-                    </select>
-                  </td>
-                  <td>
-                    <input class="form-control" type="number" min="0" placeholder="Discount" name="discount" id="discount" required/>
-                  </td>
-                  <td>
-                    <input class="form-control" type="number" min="0" placeholder="Jumlah" name="total" id="total" required/>
-                  </td>
-                  <td colspan="3">
-                    <button class="btn btn-primary" type="submit">
-                      Submit
-                    </button>
-                  </td>
-                </tr>
-              </form>
+                      </select>
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" min="0" placeholder="Discount" name="discount" id="discount" required/>
+                    </td>
+                    <td>
+                      <input class="form-control" type="number" min="0" placeholder="Jumlah" name="total" id="total" required/>
+                    </td>
+                    <td colspan="3">
+                      <button class="btn btn-primary" type="submit">
+                        Submit
+                      </button>
+                    </td>
+                  </tr>
+                </form>
+              @endif
               <tr>
                 <th colspan="2" style="text-align: right;">Total</th>
                 <td></td>
