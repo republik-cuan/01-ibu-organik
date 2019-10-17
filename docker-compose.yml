@@ -16,7 +16,7 @@ services:
     container_name: webapp
     working_dir: /var/www
     volumes:
-      - ./src:/var/www
+      - .:/var/www
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=database"
@@ -30,7 +30,7 @@ services:
     container_name: webserver
     working_dir: /var/www
     volumes:
-      - ./src:/var/www
+      - .:/var/www
     ports:
       - 8000:80
     networks:
