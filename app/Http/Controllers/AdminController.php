@@ -84,12 +84,23 @@ class AdminController extends Controller
         $verifiedData = $request->validate([
           'name' => 'required',
           'email' => 'required|email',
-          'password' => 'required',
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        $admin->update($verifiedData);
+        if ($request->password != "") {
+          $temp = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+          ];
+        } else {
+          $temp = [
+            'name' => $request->name,
+            'email' => $request->email,
+          ];
+        }
+        $admin->update($temp);
       }
 
       return redirect()->route('admin');

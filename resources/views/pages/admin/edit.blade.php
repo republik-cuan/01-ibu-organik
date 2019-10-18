@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Edit Kelompok')
+@section('title', 'Edit Admin')
 
 @section('content_header')
 <div class="row">
@@ -22,7 +22,7 @@
         <div class="box-body">
           <div class="row">
             <div class="col-md-6">
-              <form action="{{route('admin', $admin->id)}}" method="post">
+              <form action="{{route('admin.update', $admin->id)}}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
