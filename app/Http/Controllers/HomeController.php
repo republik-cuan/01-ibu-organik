@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -27,13 +26,9 @@ class HomeController extends Controller
     {
         $users = App\User::count();
         $customers = App\Customer::count();
-        $purchases = App\Purchase::count();
         $items = App\Item::count();
         $purchase = new App\Purchase;
-
-        $chartValuePurchase = App\Purchase::select('deliveryOption', DB::raw('count(*) as total'))->groupBy('deliveryOption')->get();
-
-        return $purchase->deliveries;
+        $item = App\Item::all();
 
         return view('home', [
           'cards' => [
@@ -53,7 +48,7 @@ class HomeController extends Controller
               'color' => 'bg-green',
               'icon' => 'ion-ios-cart-outline',
               'title' => 'Pembelian',
-              'value' => $purchases,
+              'value' => $purchase->count(),
             ],
             'users' => [
               'color' => 'bg-red',
@@ -62,10 +57,9 @@ class HomeController extends Controller
               'value' => $users,
             ],
           ],
-          'purchases' => [
-            'label' => $purchase->deliveries,
-            'value' => $chartValuePurchase,
-          ],
+          'purchase' => $purchase,
+          'purchases' => App\Purchase::whereMonth('created_at', Carbon::now())->get(),
+          'items' => $item,
         ]);
     }
 }
