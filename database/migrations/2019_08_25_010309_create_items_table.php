@@ -31,6 +31,7 @@ class CreateItemsTable extends Migration
                   ->references('id')
                   ->on('suppliers')
                   ->onDelete('cascade');
+            $table->string('amount');
             $table->timestamps();
             $table->softDeletes();
         });

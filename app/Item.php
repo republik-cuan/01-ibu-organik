@@ -16,6 +16,7 @@ class Item extends Model
     'endUser',
     'stock',
     'sold',
+    'amount',
     'category_id',
     'supplier_id',
   ];

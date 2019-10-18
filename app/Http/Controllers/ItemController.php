@@ -50,6 +50,7 @@ class ItemController extends Controller
           'reseller' => 'required|integer',
           'endUser' => 'required|integer',
           'stock' => 'required|integer',
+          'amount' => 'required|string',
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
         ]);

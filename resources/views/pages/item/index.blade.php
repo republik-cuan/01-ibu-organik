@@ -95,7 +95,11 @@
           },
         },
         {
-          data: 'stock'
+          data: 'stock',
+          render: function(data) {
+            const temp = data - arguments[2].sold;
+            return `${temp} ${arguments[2].amount}`;
+          }
         },
         {
           data: 'sold'
