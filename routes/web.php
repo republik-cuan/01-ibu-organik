@@ -14,7 +14,35 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-  return redirect('login');
+  $about = [
+    [
+      'icon' => 'fas fa-apple-alt',
+      'label' => 'Alami',
+      'description' => 'Sayuran tumbuh diladang sendiri dan tanpa memakai bahan pengawet'
+    ],
+    [
+      'icon' => 'fas fa-wallet',
+      'label' => 'Terjangkau',
+      'description' => 'Harga dari produk kami tidak berdasarkan merk, namun kami menyesuaikan harga pasar'
+    ],
+    [
+      'icon' => 'fas fa-smile',
+      'label' => 'Ramah',
+      'description' => 'Penjual dan para staf yang ramah akan siap melayani pesanan anda'
+    ],
+    [
+      'icon' => 'fas fa-handshake',
+      'label' => 'Terpercaya',
+      'description' => 'Poin diatas merupakan bukti '
+    ],
+  ];
+
+  $items = range(1, 8);
+
+  return view('welcome', [
+    'about' => $about,
+    'items' => $items,
+  ]);
 });
 
 Auth::routes();
