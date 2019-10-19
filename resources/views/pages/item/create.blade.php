@@ -36,7 +36,13 @@
             <label for="number">Stok</label>
             <input type="number" class="form-control" name="stock" placeholder="Stok Item" required>
             <label for="amount">Satuan</label>
-            <input type="text" class="form-control" name="amount" placeholder="Satuan Item" required>
+            <select class="form-control" name="amount" id="amount" required>
+              @foreach ($amounts as $amount)
+                <option value="{{$amount}}">
+                  {{$amount}}
+                </option>
+              @endforeach
+            </select>
             <label for="categoy_id">Kategori</label>
             <select name="category_id" id="" class="js-example-basic-single form-control" required>
               @foreach ($categories as $item)

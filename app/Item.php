@@ -21,6 +21,8 @@ class Item extends Model
     'supplier_id',
   ];
 
+  public $amount = ['satuan', 'kilogram', 'gram'];
+
   public function supplier() {
     return $this->belongsTo(Supplier::class);
   }
