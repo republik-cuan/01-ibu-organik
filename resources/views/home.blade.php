@@ -29,7 +29,7 @@
           <h3 class="box-title">Grafik Penjualan</h3>
         </div>
         <div class="box-body">
-          <canvas id="invoice" width="800" height="450"></canvas>
+          <canvas id="invoice"></canvas>
         </div>
       </div>
     </div>
@@ -74,13 +74,16 @@
       });
     });
 
+    console.log(purchases)
+
     new Chart(invoice, {
       type: 'bar',
       data: {
         labels: penjualan.map(datum => datum.label),
-        datasets: {
+        datasets: [{
+          label: "Jumlah Penjualan",
           data: penjualan.map(datum => datum.value),
-        },
+        }],
       },
     });
 
