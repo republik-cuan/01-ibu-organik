@@ -19,17 +19,26 @@ class ItemPurchaseController extends Controller
         'purchase_id' => $purchase->id,
       ])->first();
 
+      if ($request->bobot=="kilogram" && $item['satuan']=="gram") {
+        $request->total *= 1000;
+      }
+
       if ($inventory!=null) {
-        $inventory->update([
-          'total' => $inventory->total + $request->total,
-          'discount' => $inventory->discount + $request->discount,
-        ]);
+        $temp = $item->sold + $request->total;
+        if ($item->stock > $temp) {
+          $inventory->update([
+            'total' => $inventory->total + $request->total,
+            'discount' => $inventory->discount + $request->discount,
+          ]);
 
-        $item->update([
-          'sold' => $item->sold + $request->total,
-        ]);
+          $item->update([
+            'sold' => $temp,
+          ]);
 
-        return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menambahkan item baru kedalam pembelian');
+          return redirect()->route('purchase.add', $purchase->id)->with('message', 'Sukses menambahkan item baru kedalam pembelian');
+        } else {
+          return abort(400, 'Stock tidak mencukupi');
+        }
       }
 
       try {

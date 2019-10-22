@@ -39,12 +39,14 @@
             <input type="number" class="form-control" name="endUser" value="{{ $item->endUser }}" placeholder="End User" autofocus>
             {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
             <label for="stock">Stok</label>
-            <input type="number" class="form-control" name="stock" value="{{ $item->stock }}" placeholder="Stok Item" autofocus>
+            <input type="number" class="form-control" name="stock" value="{{ ($item->stock-$item->sold) }}" placeholder="Stok Item" autofocus>
             {!! $errors->first('stock', '<p class="help-block text-danger">:message</p>')!!}
             <label for="satuan">Satuan</label>
             <select name="satuan" id="satuan" class="form-control">
               @foreach ($item->satuan as $datum)
-                <option value="{{$datum}}" {{$datum==$item['satuan'] ? "selected" : ""}}></option>
+                <option value="{{$datum}}" {{$datum==$item['satuan'] ? "selected" : ""}}>
+                  {{$datum}}
+                </option>
               @endforeach
             </select>
             <label for="categoy_id">Kategori</label>

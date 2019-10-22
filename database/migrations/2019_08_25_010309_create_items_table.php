@@ -21,11 +21,6 @@ class CreateItemsTable extends Migration
             $table->float('endUser');
             $table->integer('stock');
             $table->integer('sold')->default(0);
-            $table->enum('berat', [
-              'satuan',
-              'gram',
-              'kilogram',
-            ]);
             $table->enum('satuan', [
               'satuan',
               'gram',

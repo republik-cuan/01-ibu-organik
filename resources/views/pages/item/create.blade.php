@@ -35,14 +35,6 @@
             <input type="number" class="form-control" name="endUser" placeholder="Harga Item" required>
             <label for="number">Stok</label>
             <input type="number" class="form-control" name="stock" placeholder="Stok Item" required>
-            <label for="berat">Berat</label>
-            <select class="form-control" name="berat" id="berat" required>
-              @foreach ($berat as $item)
-                <option value="{{$item}}">
-                  {{$item}}
-                </option>
-              @endforeach
-            </select>
             <label for="satuan">Satuan</label>
             <select class="form-control" name="satuan" id="satuan" required>
               @foreach ($satuan as $item)

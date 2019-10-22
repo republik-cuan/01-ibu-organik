@@ -158,7 +158,14 @@
                     <td>
                       <input class="form-control" type="number" min="0" placeholder="Jumlah" name="total" id="total" required/>
                     </td>
-                    <td colspan="3">
+                    <td>
+                      <select name="bobot" id="bobot" class="form-control">
+                        <option value="kilogram">Kilogram</option>
+                        <option value="gram">Gram</option>
+                        <option value="satuan">Satuan</option>
+                      </select>
+                    </td>
+                    <td colspan="2">
                       <button class="btn btn-primary" type="submit">
                         Submit
                       </button>
