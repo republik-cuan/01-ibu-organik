@@ -105,7 +105,7 @@
       'label': dt.toLocaleDateString("id", {year: "numeric", month: "long"}),
       'total_harga': foo,
       'ongkir': ongkir,
-      'margin': (foo-baz),
+      'margin': (foo-(baz+ongkir)),
     }]
   }
   $(document).ready(function(){

@@ -92,7 +92,7 @@
           render: function(data) {
             let harga = 0;
             let hasil = 0;
-            if (data.length>1) {
+            if (data.length>0) {
               data.map((datum) => {
                 margin += (arguments[2].modal * datum.pivot.total);
               });
