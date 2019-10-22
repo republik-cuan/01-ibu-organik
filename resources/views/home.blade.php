@@ -49,38 +49,54 @@
 @section('js')
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script charset="utf-8">
-    const invoice = document.getElementById('invoice').getContext('2d')
-    const item = document.getElementById('item').getContext('2d')
-    const purchaseValue = {!! $purchases['value'] !!}
-    const tempPurchaseLabel = {!! $purchases['label'] !!}
-    const purchaseValue = tempPurchaseLabel.map(value => ({
-      'label': value.deliveryOption,
-      'data': value.total,
-    }))
-    const chartInvoice = new Chart(invoice, {
+    const invoice = document.getElementById('invoice');
+    const item = document.getElementById('item');
+    const purchases = {!! $purchases !!};
+    const items = {!! $items !!};
+    let temp = [];
+
+    @foreach ($purchase->deliveries as $delivery)
+      temp = [...temp, "{{$delivery}}"];
+    @endforeach
+
+    let penjualan = temp.map((datum, id) => {
+      return ({
+        'label': datum,
+        'value': 0,
+      });
+    });
+
+    purchases.map(data => {
+      penjualan.map(datum => {
+        if (data.deliveryOption===datum.label) {
+          datum.value++;
+        }
+      });
+    });
+
+    console.log(purchases)
+
+    new Chart(invoice, {
       type: 'bar',
       data: {
-        labels: purchaseLabel,
-        datasets: purchaseValue,
+        labels: penjualan.map(datum => datum.label),
+        datasets: [{
+          label: "Jumlah Penjualan",
+          data: penjualan.map(datum => datum.value),
+        }],
       },
-      options: {
-        scales: {
-          xAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Bulan'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'Jumlah'
-            }
-          }],
-        }
-      }
     });
+
+    new Chart(item, {
+      type: 'pie',
+      data: {
+        labels: items.map(datum => datum.name),
+        datasets: [{
+          label: "Jumlah Barang",
+          data: items.map(datum => datum.sold),
+        }]
+      },
+      options: {}
+    })
   </script>
 @stop

@@ -86,7 +86,7 @@
                   <td>
                     @php
                       $berat += $item->total;
-                      echo $item->total." gram";
+                      echo $item->total." ".$item->item['amount'];
                     @endphp
                   </td>
                   <td>

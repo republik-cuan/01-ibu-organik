@@ -32,7 +32,12 @@ class ItemController extends Controller
     {
       $categories = Category::select('id','name')->get();
       $suppliers = Supplier::select('id','name')->get();
-      return view('pages.item.create', [ 'categories' => $categories, 'suppliers' => $suppliers ]);
+      $item = new Item();
+      return view('pages.item.create', [
+        'categories' => $categories,
+        'suppliers' => $suppliers ,
+        'amounts' => $item->amount,
+      ]);
     }
 
     /**
@@ -43,6 +48,10 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+      if ($request->amount=="kilogram") {
+        $request->stock *= 1000;
+      }
+
       try {
         $validatedData = $request->validate([
           'name' => 'unique:items|required',
@@ -50,6 +59,7 @@ class ItemController extends Controller
           'reseller' => 'required|integer',
           'endUser' => 'required|integer',
           'stock' => 'required|integer',
+          'amount' => 'required|string',
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
         ]);

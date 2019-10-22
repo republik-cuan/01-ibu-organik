@@ -3,7 +3,7 @@
 @section('title', 'Rekap Barang')
 
 @section('content_header')
-    <h1>Rekap Barang</h1>
+    <h1>Rekap Bulanan</h1>
 @stop
 
 @section('content')
@@ -23,6 +23,7 @@
                 <th>No</th>
                 <th>Bulan</th>
                 <th>Total Harga</th>
+                <th>Ongkir</th>
                 <th>Margin</th>
               </tr>
             </thead>
@@ -40,6 +41,7 @@
   let foo = 0;
   let baz = 0;
   let bar = 0;
+  let ongkir = 0;
   let purchases = [];
   const label = "{!! $label !!}";
   const purchasesBefore = {!! $purchases !!};
@@ -66,16 +68,13 @@
             baz += (val.total*val.item.modal);
           });
         }
-        return ({
-          'label': id,
-          'total_harga': foo,
-          'margin': foo-baz,
-        });
+        ongkir += datum.deliveryPrice;
       });
       let dt = new Date(id);
       purchases = [...purchases, {
         'label': dt.toLocaleDateString("id", {year: "numeric", month: "long"}),
         'total_harga': foo,
+        'ongkir': ongkir,
         'margin': (foo-baz),
       }];
     }
@@ -83,6 +82,7 @@
     purchasesBefore.map(data => {
       if (data.inventories.length>0) {
         data.inventories.map(datum => {
+          console.log(datum);
           switch(data.statusHarga) {
             case 'reseller':
               harga = datum.item.reseller;
@@ -96,6 +96,7 @@
           }
           foo += (datum.total * harga);
           baz += (datum.total * datum.item.modal);
+          ongkir += data.deliveryPrice;
         })
       }
     });
@@ -103,6 +104,7 @@
     purchases = [...purchases, {
       'label': dt.toLocaleDateString("id", {year: "numeric", month: "long"}),
       'total_harga': foo,
+      'ongkir': ongkir,
       'margin': (foo-baz),
     }]
   }
@@ -118,6 +120,12 @@
         { data: 'label' },
         {
           data: 'total_harga',
+          render: function(data) {
+            return `Rp. ${new Intl.NumberFormat().format(data)}`;
+          },
+        },
+        {
+          data: 'ongkir',
           render: function(data) {
             return `Rp. ${new Intl.NumberFormat().format(data)}`;
           },

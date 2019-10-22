@@ -123,6 +123,7 @@ return [
           'text'    => 'Category',
           'icon'    => 'fas fa-tags',
           'url'     => 'category',
+          'can'     => 'super-admin',
         ],
         [
           'text'    => 'Customer',
@@ -144,6 +145,7 @@ return [
           'text'    => 'Supplier',
           'icon'    => 'fas fa-dolly',
           'url'     => 'supplier',
+          'can'     => 'super-admin',
         ],
         [
           'text'    => 'Bank',
@@ -154,17 +156,16 @@ return [
         [
           'text'    => 'Rekap',
           'icon'    => 'fas fa-clipboard',
+          'can'     => 'super-admin',
           'submenu' => [
             [
               'text'  => 'Bulan',
               'url'   => 'rekap/month',
-              'can'     => 'super-admin',
               'icon'  => 'none',
             ],
             [
               'text'  => 'Barang',
               'url'   => 'rekap/item',
-              'can'     => 'super-admin',
               'icon'  => 'none',
             ],
           ],

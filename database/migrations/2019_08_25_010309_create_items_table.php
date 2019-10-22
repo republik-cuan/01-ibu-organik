@@ -31,6 +31,11 @@ class CreateItemsTable extends Migration
                   ->references('id')
                   ->on('suppliers')
                   ->onDelete('cascade');
+            $table->enum('amount', [
+              'satuan',
+              'kilogram',
+              'gram',
+            ]);
             $table->timestamps();
             $table->softDeletes();
         });

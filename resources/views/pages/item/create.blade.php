@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="row">
   <div class="col-md-6">
-    <h3>Tambah item<h3>
+    <h3>Tambah Item<h3>
   </div>
   <div class="col-md-6 text-right">
     <h3>
@@ -26,36 +26,37 @@
           @csrf
           <div class="form-group">
             <label for="name">Nama</label>
-            <input type="text" class="form-control" name="name" placeholder="Nama Item" autofocus>
-            {!! $errors->first('name', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="text" class="form-control" name="name" placeholder="Nama Item" required>
             <label for="modal">Harga Modal</label>
-            <input type="number" class="form-control" name="modal" placeholder="Harga Item" autofocus>
-            {!! $errors->first('modal', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="number" class="form-control" name="modal" placeholder="Harga Item" required>
             <label for="reseller">Harga Reseller</label>
-            <input type="number" class="form-control" name="reseller" placeholder="Harga Item" autofocus>
-            {!! $errors->first('reseller', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="number" class="form-control" name="reseller" placeholder="Harga Item" required>
             <label for="endUser">Harga Pelanggan</label>
-            <input type="number" class="form-control" name="endUser" placeholder="Harga Item" autofocus>
-            {!! $errors->first('endUser', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="number" class="form-control" name="endUser" placeholder="Harga Item" required>
             <label for="number">Stok</label>
-            <input type="number" class="form-control" name="stock" placeholder="Stok Item" autofocus>
-            {!! $errors->first('stock', '<p calss="help-block text-danger">:message</p>')!!}
+            <input type="number" class="form-control" name="stock" placeholder="Stok Item" required>
+            <label for="amount">Satuan</label>
+            <select class="form-control" name="amount" id="amount" required>
+              @foreach ($amounts as $amount)
+                <option value="{{$amount}}">
+                  {{$amount}}
+                </option>
+              @endforeach
+            </select>
             <label for="categoy_id">Kategori</label>
-            <select name="category_id" id="" class="js-example-basic-single form-control">
+            <select name="category_id" id="" class="js-example-basic-single form-control" required>
               @foreach ($categories as $item)
                 <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach
-          </select>
-          {!! $errors->first('categoy_id', '<p calss="help-block text-danger">:message</p>')!!}
-          <label for="supplier_id">Supplier</label>
-          <select name="supplier_id" id="" class="js-example-basic-single form-control">
-            @foreach ($suppliers as $item)
-              <option value="{{ $item->id }}">{{ $item->name }}</option>
-            @endforeach
-          </select>
-          {!! $errors->first('supplier_id', '<p calss="help-block text-danger">:message</p>')!!}
-        </div>
-        <button type="submit" class="btn btn-info">submit</button>
+            </select>
+            <label for="supplier_id">Supplier</label>
+            <select name="supplier_id" id="" class="js-example-basic-single form-control" required>
+              @foreach ($suppliers as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <button type="submit" class="btn btn-info">submit</button>
         </form>
       </div>
     </div>

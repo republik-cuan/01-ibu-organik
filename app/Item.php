@@ -16,9 +16,12 @@ class Item extends Model
     'endUser',
     'stock',
     'sold',
+    'amount',
     'category_id',
     'supplier_id',
   ];
+
+  public $amount = ['satuan', 'kilogram', 'gram'];
 
   public function supplier() {
     return $this->belongsTo(Supplier::class);
