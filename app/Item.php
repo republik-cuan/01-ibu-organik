@@ -16,13 +16,11 @@ class Item extends Model
     'endUser',
     'stock',
     'sold',
-    'berat',
     'satuan',
     'category_id',
     'supplier_id',
   ];
 
-  public $berat = ['satuan', 'kilogram', 'gram'];
   public $satuan = ['satuan', 'gram'];
 
   public function supplier() {

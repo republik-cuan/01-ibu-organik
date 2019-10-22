@@ -56,7 +56,6 @@ class ItemController extends Controller
           'reseller' => 'required|integer',
           'endUser' => 'required|integer',
           'stock' => 'required|integer',
-          'berat' => 'required',
           'satuan' => 'required',
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
@@ -64,9 +63,6 @@ class ItemController extends Controller
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        if ($validatedData['berat']=="kilogram") {
-          $validatedData['stock'] *= 1000;
-        }
         Item::create($validatedData);
       }
 
@@ -114,16 +110,17 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
       try {
-        $validatedData = $request->validate([
-          'name' => 'unique:items|required',
-          'price' => 'required',
-          'stock' => 'required',
-          'sold' => 'required',
-        ]);
+        $item = Item::find($id);
+        $temp = ($request->stock - ($item->stock-$item->sold));
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        Item::where('id', $id)->update($request->except('_token','_method'));
+        $item->update([
+          'name' => $request->name,
+          'price' => $request->price,
+          'stock' => $item->stock + $temp,
+          'satuan' => $request->satuan,
+        ]);
         return redirect()->route('item')->with('message','Edit Item Berhasil');
       }
     }
