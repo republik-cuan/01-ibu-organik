@@ -36,7 +36,8 @@ class ItemController extends Controller
       return view('pages.item.create', [
         'categories' => $categories,
         'suppliers' => $suppliers ,
-        'amounts' => $item->amount,
+        'berat' => $item->berat,
+        'satuan' => $item->satuan,
       ]);
     }
 
@@ -48,10 +49,6 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-      if ($request->amount=="kilogram") {
-        $request->stock *= 1000;
-      }
-
       try {
         $validatedData = $request->validate([
           'name' => 'unique:items|required',
@@ -59,13 +56,17 @@ class ItemController extends Controller
           'reseller' => 'required|integer',
           'endUser' => 'required|integer',
           'stock' => 'required|integer',
-          'amount' => 'required|string',
+          'berat' => 'required',
+          'satuan' => 'required',
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
         ]);
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
+        if ($validatedData['berat']=="kilogram") {
+          $validatedData['stock'] *= 1000;
+        }
         Item::create($validatedData);
       }
 
@@ -91,11 +92,16 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-      $item = Item::find($id);
+      $item = Item::with(['category', 'supplier'])->find($id);
       $categories = Category::all();
       $suppliers = Supplier::all();
-      $item->load('category', 'supplier');
-      return view('pages.item.edit',['item' => $item, 'categories' => $categories, 'suppliers' => $suppliers ]);
+
+      return view('pages.item.edit', [
+        'item' => $item,
+        'categories' => $categories,
+        'suppliers' => $suppliers,
+        'satuan' => $item->satuan,
+      ]);
     }
 
     /**

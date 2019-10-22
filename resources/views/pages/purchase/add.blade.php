@@ -86,7 +86,7 @@
                   <td>
                     @php
                       $berat += $item->total;
-                      echo $item->total." ".$item->item['amount'];
+                      echo $item->total." ".$item->item['satuan'];
                     @endphp
                   </td>
                   <td>

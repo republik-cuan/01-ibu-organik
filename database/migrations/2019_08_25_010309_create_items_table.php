@@ -21,6 +21,15 @@ class CreateItemsTable extends Migration
             $table->float('endUser');
             $table->integer('stock');
             $table->integer('sold')->default(0);
+            $table->enum('berat', [
+              'satuan',
+              'gram',
+              'kilogram',
+            ]);
+            $table->enum('satuan', [
+              'satuan',
+              'gram',
+            ]);
             $table->unsignedBigInteger('category_id')
                   ->foreign()
                   ->references('id')
@@ -31,11 +40,6 @@ class CreateItemsTable extends Migration
                   ->references('id')
                   ->on('suppliers')
                   ->onDelete('cascade');
-            $table->enum('amount', [
-              'satuan',
-              'kilogram',
-              'gram',
-            ]);
             $table->timestamps();
             $table->softDeletes();
         });

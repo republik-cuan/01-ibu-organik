@@ -16,12 +16,14 @@ class Item extends Model
     'endUser',
     'stock',
     'sold',
-    'amount',
+    'berat',
+    'satuan',
     'category_id',
     'supplier_id',
   ];
 
-  public $amount = ['satuan', 'kilogram', 'gram'];
+  public $berat = ['satuan', 'kilogram', 'gram'];
+  public $satuan = ['satuan', 'gram'];
 
   public function supplier() {
     return $this->belongsTo(Supplier::class);
