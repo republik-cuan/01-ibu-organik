@@ -98,7 +98,7 @@
           data: 'stock',
           render: function(data) {
             const temp = data - arguments[2].sold;
-            return `${temp} ${arguments[2].amount}`;
+            return `${temp} ${arguments[2].satuan}`;
           }
         },
         {
