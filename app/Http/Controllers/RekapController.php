@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Item;
 use App\Purchase;
-use App\Exports\ItemExport;
-use App\Exports\MonthlyExport;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Carbon;
 
 class RekapController extends Controller
@@ -27,7 +25,12 @@ class RekapController extends Controller
     }
 
     public function itemExport() {
-      return Excel::download(new ItemExport, 'rekap-barang.xlsx');
+      $items = Item::with('purchases:purchase_id,statusHarga')->get();
+      $pdf = PDF::loadView('pages.rekap.item-pdf', [
+        'items' => $items,
+      ]);
+
+      return $pdf->stream();
     }
 
     public function month(Request $request) {
@@ -67,7 +70,11 @@ class RekapController extends Controller
         });
       }
 
-      $collection = new MonthlyExport($purchases, $label);
-      return Excel::download($collection, 'rekap-bulanan.xlsx');
+      $pdf = PDF::loadView('pages.rekap.month-pdf', [
+        'purchases' => $purchases,
+        'label'     => $label,
+      ]);
+
+      return $pdf->stream();
     }
 }
