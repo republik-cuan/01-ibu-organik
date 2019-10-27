@@ -26,11 +26,12 @@ class RekapController extends Controller
 
     public function itemExport() {
       $items = Item::with('purchases:purchase_id,statusHarga')->get();
+      $date = Date("d F Y");
       $pdf = PDF::loadView('pages.rekap.item-pdf', [
         'items' => $items,
       ]);
 
-      return $pdf->stream();
+      return $pdf->stream('Rekap Item - '.$date.'.pdf');
     }
 
     public function month(Request $request) {
@@ -57,6 +58,8 @@ class RekapController extends Controller
     public function monthExport(Request $request) {
       $purchases = [];
       $label = "";
+      $date = Date("F Y");
+
       if ($request->year!="") {
         $label = "with";
         $purchases = Purchase::with(['inventories.item:id,modal,reseller,endUser'])
@@ -75,6 +78,6 @@ class RekapController extends Controller
         'label'     => $label,
       ]);
 
-      return $pdf->stream();
+      return $pdf->stream("Rekap Bulan - ".$date.".pdf");
     }
 }
