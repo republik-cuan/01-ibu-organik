@@ -74,8 +74,6 @@
       });
     });
 
-    console.log(purchases)
-
     new Chart(invoice, {
       type: 'bar',
       data: {
@@ -83,6 +81,7 @@
         datasets: [{
           label: "Jumlah Penjualan",
           data: penjualan.map(datum => datum.value),
+          backgroundColor: ['red', 'green', 'orange', 'yellow', 'lightblue'],
         }],
       },
     });
@@ -94,6 +93,7 @@
         datasets: [{
           label: "Jumlah Barang",
           data: items.map(datum => datum.sold),
+          backgroundColor: ['salmon', 'lightgreen', 'lightblue', 'lightseagreen'],
         }]
       },
       options: {}
