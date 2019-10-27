@@ -81,7 +81,7 @@
         datasets: [{
           label: "Jumlah Penjualan",
           data: penjualan.map(datum => datum.value),
-          backgroundColor: ['red', 'green', 'orange', 'yellow', 'lightblue'],
+          backgroundColor: ['red', 'green', 'orange', 'yellow', 'blue'],
         }],
       },
     });
