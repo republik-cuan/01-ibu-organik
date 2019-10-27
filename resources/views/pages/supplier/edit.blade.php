@@ -10,7 +10,6 @@
     <div class="col-md-6 text-right">
       <h3>
         <a type="button" class="btn btn-info" href="{{route('supplier')}}">
-
           Kembali
         </a>
       </h3>
@@ -41,7 +40,7 @@
               <input type="text" class="form-control" id="address" name="address" value="{{$supplier->address}}">
               {!! $errors->first('address', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
-            <button type="submit" class="btn btn-info">submit</button>
+            <button type="submit" class="btn btn-info">Submit</button>
           </form>
           </ div>
         </div>

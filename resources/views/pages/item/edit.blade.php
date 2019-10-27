@@ -66,7 +66,7 @@
             </select>
             {!! $errors->first('supplier_id', '<p calss="help-block text-danger">:message</p>')!!}
           </div>
-          <button type="submit" class="btn btn-info">submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </form>
       </div>
     </div>

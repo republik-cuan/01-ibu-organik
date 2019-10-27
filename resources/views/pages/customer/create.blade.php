@@ -3,14 +3,13 @@
 @section('title', 'Tambah Customer')
 
 @section('content_header')
-<div class="row">
+  <div class="row">
     <div class="col-md-6">
       <h3>Tambah Customer<h3>
     </div>
     <div class="col-md-6 text-right">
       <h3>
         <a type="button" class="btn btn-info" href="{{route('customer')}}">
-
           Kembali
         </a>
       </h3>

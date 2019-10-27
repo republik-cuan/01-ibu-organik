@@ -10,7 +10,6 @@
   <div class="col-md-6 text-right">
     <h3>
       <a type="button" class="btn btn-info" href="{{route('bank')}}">
-
         Kembali
       </a>
     </h3>
@@ -35,20 +34,10 @@
             <input type="text" class="form-control" name="rekening" id="rekening" placeholder="Nomor rekening" autofocus>
             {!! $errors->first('rekening', '<p calss="help-block text-danger">:message</p>')!!}
           </div>
-          <button type="submit" class="btn btn-info">submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-@stop
-
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-<script>
-  console.log('Hi!');
-</script>
 @stop

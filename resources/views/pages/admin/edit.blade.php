@@ -37,7 +37,7 @@
                   <label for="password">Kata Sandi</label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
                 </div>
-                <button type="submit" class="btn btn-info">submit</button>
+                <button type="submit" class="btn btn-info">Submit</button>
               </form>
             </div>
           </div>

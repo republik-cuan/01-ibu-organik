@@ -39,7 +39,7 @@
               <input type="text" class="form-control" id="address" name="address" placeholder="alamat">
               {!! $errors->first('address', '<p calss="help-block text-danger">:message</p>')!!}
             </div>
-            <button type="submit" class="btn btn-info">submit</button>
+            <button type="submit" class="btn btn-info">Submit</button>
           </form>
           </ div>
         </div>
