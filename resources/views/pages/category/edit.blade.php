@@ -30,7 +30,7 @@
             <label for="namaKelompok">Category</label>
             <input type="text" class="form-control" name="name" value="{{$category->name}}" placeholder="Nama Category" autofocus>
           </div>
-          <button type="submit" class="btn btn-info">submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </form>
       </div>
     </div>

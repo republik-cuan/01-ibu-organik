@@ -36,20 +36,10 @@
             <input type="text" class="form-control" name="rekening" id="rekening" value="{{$bank->rekening}}">
             {!! $errors->first('rekening', '<p calss="help-block text-danger">:message</p>')!!}
           </div>
-          <button type="submit" class="btn btn-info">submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-@stop
-
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-<script>
-  console.log('Hi!');
-</script>
 @stop

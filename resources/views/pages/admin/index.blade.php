@@ -69,8 +69,8 @@
           data: 'id',
           render: function(data) {
             const link = "{{route('admin')}}"+"/"+data;
-            const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">edit</a>';
-            const hapus = '<form role="form" style="margin: 0 3px; display: inline;" action="' + link + '"method="POST">@csrf @method("DELETE")<button class="btn btn-danger btn-xs">delete</button></form>';
+            const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">Edit</a>';
+            const hapus = '<form role="form" style="margin: 0 3px; display: inline;" action="' + link + '"method="POST">@csrf @method("DELETE")<button class="btn btn-danger btn-xs">Delete</button></form>';
             return '<div>' + detail + hapus + '</div>';
           }
         },

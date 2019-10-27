@@ -118,7 +118,7 @@
                       <form action="{{route('inventories.destroy', $item->id)}}" method="post" disable>
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger btn-xs">hapus</button>
+                        <button class="btn btn-danger btn-xs">Hapus</button>
                       </form>
                     @endif
                   </td>

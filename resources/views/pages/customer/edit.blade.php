@@ -14,7 +14,6 @@
     <div class="col-md-6 text-right">
       <h3>
         <a type="button" class="btn btn-info" href="{{route('customer')}}">
-
           Kembali
         </a>
       </h3>

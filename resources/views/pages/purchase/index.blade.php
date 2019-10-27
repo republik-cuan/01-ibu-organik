@@ -117,9 +117,9 @@
               const color = arguments[2].statusPembayaran === "terbayar" ? "btn-warning" : "btn-success";
               const label = arguments[2].statusPembayaran === "terbayar" ? "Batal" : "Verifikasi";
               let verified = '<form action="'+hh+'" style="margin: 0 3px; display: inline;" method="post">@csrf @method('put')<button class="btn '+color+' btn-xs">'+label+'</button></form>';
-              const detail = '<a class="btn btn-info btn-xs" style="margin: 0 3px;" href="'+link+'/add">detail</a>';
-              const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">edit</a>';
-              const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">delete</button></form>';
+              const detail = '<a class="btn btn-info btn-xs" style="margin: 0 3px;" href="'+link+'/add">Detail</a>';
+              const edit = '<a class="btn btn-primary btn-xs" style="margin: 0 3px" href="'+link+'">Edit</a>';
+              const hapus = '<form role="form" action="'+link+'" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete')}}<button class="btn btn-danger btn-xs">Delete</button></form>';
               const hasil = arguments[2].statusPembayaran === "terbayar" ? '<div class="text-center">'+verified+detail+'</div>' : '<div class="text-center">'+verified+detail+edit+hapus+'</div>';
               return hasil;
             }
