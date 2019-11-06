@@ -14,6 +14,17 @@
           <a class="btn btn-success" href="{{route('rekap.export-item')}}" style="margin-bottom: 10px;">Cetak</a>
         </div>
         <div class="col-md-12">
+          <form class="form-inline" action="" method="get">
+            <div class="form-group">
+              <label class="sr-only" for="start_date">Start Date</label>
+              <input id="start_date" class="form-control" type="date" name="start_date">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="end_date">End Date</label>
+              <input id="end_date" class="form-control" type="date" name="end_date">
+            </div>
+            <button type="submit" class="btn btn-info">Submit</button>
+          </form>
           <table id="table-item" class="data-table table table-bordered table-hover text-center">
             <thead>
               <tr>
