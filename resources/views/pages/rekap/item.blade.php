@@ -10,21 +10,39 @@
   <div class="box box-danger">
     <div class="box-body">
       <div class="row">
-        <div class="col-md-6 col-md-offset-6 text-right">
-          <a class="btn btn-success" href="{{route('rekap.export-item')}}" style="margin-bottom: 10px;">Cetak</a>
-        </div>
-        <div class="col-md-12">
+        <div class="col-6 col-md-6">
           <form class="form-inline" action="" method="get">
             <div class="form-group">
               <label class="sr-only" for="start_date">Start Date</label>
-              <input id="start_date" class="form-control" type="date" name="start_date">
+              <input id="start_date" class="form-control" type="date" name="start_date" value="{{ $start }}">
             </div>
             <div class="form-group">
               <label class="sr-only" for="end_date">End Date</label>
-              <input id="end_date" class="form-control" type="date" name="end_date">
+              <input id="end_date" class="form-control" type="date" name="end_date" value="{{ $end }}">
             </div>
-            <button type="submit" class="btn btn-info">Submit</button>
+            <div class="form-group">
+              <label class="sr-only" for="bank">Bank</label>
+              <select class="form-control" name="bank" id="bank">
+                <option value="none">--Pilh--</option>
+                @foreach ($banks as $bank)
+                  <option value="{{ $bank['id'] }}" {{ $bnk==$bank['id'] ? 'selected' : ''}}>
+                    {{ $bank['bank'] }}
+                  </option>
+                @endforeach
+              </select>
+            </div>
+            <button type="submit" class="btn btn-info">Filter</button>
           </form>
+        </div>
+        <div class="col-6 col-md-6 text-right">
+					<form action="" method="post">
+						@csrf
+						<button type="submit" class="btn btn-success" target="__blank">
+							Cetak
+						</button>
+					</form>
+        </div>
+        <div class="col-md-12">
           <table id="table-item" class="data-table table table-bordered table-hover text-center">
             <thead>
               <tr>
@@ -43,7 +61,6 @@
   </div>
 @stop
 
-
 @section('js')
 <script charset="utf-8">
   let subtotal = 0;
@@ -54,7 +71,6 @@
       columns: [{
           data: 'id',
           render: function(data) {
-            console.log(arguments);
             return arguments[3].row+=1;
           },
         },
@@ -75,10 +91,16 @@
           render: function(data) {
             let harga = 0;
             let hasil = 0;
+            let arr = [];
             subtotal = 0;
             margin = 0;
-            if (data.length > 0) {
-             data.map((datum) => {
+            if (typeof(data)=="object") {
+              arr = $.map(data, function(val, id) { return [val]; })
+            } else {
+              arr = data
+            }
+            if (arr.length > 0) {
+             arr.map((datum) => {
                 switch(datum.statusHarga) {
                   case 'reseller':
                     harga = arguments[2].reseller;
