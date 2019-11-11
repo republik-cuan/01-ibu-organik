@@ -7,6 +7,7 @@ use App\Item;
 use App\Bank;
 use App\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
@@ -21,6 +22,7 @@ class PurchaseController extends Controller
 
       return view('pages.purchase.index', [
         'purchases' => $purchases,
+        'auth' => Auth::user(),
       ]);
     }
 

@@ -98,55 +98,55 @@ class RekapController extends Controller
         $items = array_pad([], sizeof($temp), 0);
 
         if ($request->bank!=null) {
-					if ($request->bank=='none') {
-							for ($i = 0; $i < sizeof($items); $i++) {
-									$purchase = $temp[$i]->purchases->reject(function($purchase) {
-											$start = Date($_REQUEST['start_date']);
-											$end = Date($_REQUEST['end_date']);
-											return (
-													$purchase['created_at'] <= $start &&
-													$purchase['created_at'] >= $end
-											);
-									})->map(function($barang) {
-											return $barang;
-									});
+          if ($request->bank=='none') {
+            for ($i = 0; $i < sizeof($items); $i++) {
+              $purchase = $temp[$i]->purchases->reject(function($purchase) {
+                $start = Date($_REQUEST['start_date']);
+                $end = Date($_REQUEST['end_date']);
+                return (
+                  $purchase['created_at'] <= $start &&
+                  $purchase['created_at'] >= $end
+                );
+              })->map(function($barang) {
+                return $barang;
+              });
 
-									$items[$i] = [
-											'id' => $temp[$i]->id,
-											'name' => $temp[$i]->name,
-											'endUser' => $temp[$i]->endUser,
-											'modal' => $temp[$i]->modal,
-											'reseller' => $temp[$i]->reseller,
-											'sold' => $temp[$i]->sold,
-											'purchases' => $purchase,
-									];
-							}
-					} else {
-							for ($i = 0; $i < sizeof($items); $i++) {
-									$purchase = $temp[$i]->purchases->reject(function($purchase) {
-											$start = Date($_REQUEST['start_date']);
-											$end = Date($_REQUEST['end_date']);
-											$bank = intval($_REQUEST['bank']);
-											return (
-													$purchase['bank_id'] != $bank ||
-													$purchase['created_at'] <= $start &&
-													$purchase['created_at'] >= $end
-											);
-									})->map(function($barang) {
-											return $barang;
-									});
+              $items[$i] = [
+                'id' => $temp[$i]->id,
+                'name' => $temp[$i]->name,
+                'endUser' => $temp[$i]->endUser,
+                'modal' => $temp[$i]->modal,
+                'reseller' => $temp[$i]->reseller,
+                'sold' => $temp[$i]->sold,
+                'purchases' => $purchase,
+              ];
+            }
+          } else {
+            for ($i = 0; $i < sizeof($items); $i++) {
+              $purchase = $temp[$i]->purchases->reject(function($purchase) {
+                $start = Date($_REQUEST['start_date']);
+                $end = Date($_REQUEST['end_date']);
+                $bank = intval($_REQUEST['bank']);
+                return (
+                  $purchase['bank_id'] != $bank ||
+                  $purchase['created_at'] <= $start &&
+                  $purchase['created_at'] >= $end
+                );
+              })->map(function($barang) {
+                return $barang;
+              });
 
-									$items[$i] = [
-											'id' => $temp[$i]->id,
-											'name' => $temp[$i]->name,
-											'endUser' => $temp[$i]->endUser,
-											'modal' => $temp[$i]->modal,
-											'reseller' => $temp[$i]->reseller,
-											'sold' => $temp[$i]->sold,
-											'purchases' => $purchase,
-									];
-							}
-					}
+              $items[$i] = [
+                'id' => $temp[$i]->id,
+                'name' => $temp[$i]->name,
+                'endUser' => $temp[$i]->endUser,
+                'modal' => $temp[$i]->modal,
+                'reseller' => $temp[$i]->reseller,
+                'sold' => $temp[$i]->sold,
+                'purchases' => $purchase,
+              ];
+            }
+          }
         }
       } else {
         $items = Item::with('purchases')->get();
