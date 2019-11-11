@@ -34,21 +34,41 @@
             <div class="col-md-7">
               <p class="form-control-static">{{ucwords($customer->name)}}</p>
             </div>
-            <label class="col-md-5 control-label" style="text-align: left;">Alamat</label>
-            <div class="col-md-7">
-              <p class="form-control-static">{{$customer->address}}</p>
-            </div>
             <label class="col-md-5 control-label" style="text-align: left;">Telp</label>
             <div class="col-md-7">
               <p class="form-control-static">{{$customer->phone}}</p>
             </div>
-            <label class="col-md-5 control-label" style="text-align: left;">Delivery By</label>
+            <label class="col-md-5 control-label" style="text-align: left;">Rekening</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{strtoupper($purchase->deliveryOption)}}</p>
+              <p class="form-control-static">{{ $purchase->bank->bank." | ".$purchase->bank->rekening }}</p>
             </div>
-            <label class="col-md-5 control-label" style="text-align: left;">Date</label>
+            <label class="col-md-5 control-label" style="text-align: left;">Alamat</label>
             <div class="col-md-7">
-              <p class="form-control-static">{{date_format($purchase->created_at, "d M Y")}}</p>
+              <p class="form-control-static">{{ ucwords($customer->address) }}</p>
+            </div>
+            <label class="col-md-5 control-label" style="text-align: left;">Patokan</label>
+            <div class="col-md-7">
+              <p class="form-control-static">{{ ucwords($customer->patokan) }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-md-offset-4">
+          <div class="form-horizontal">
+            <div>
+              <label class="col-md-5 control-label">Tanggal</label>
+              <div class="col-md-7">
+                <p class="form-control-static">
+                  {{ date_format($purchase->created_at, 'l, d-m-Y') }}
+                </p>
+              </div>
+            </div>
+            <div>
+              <label class="col-md-5 control-label">Pengiriman</label>
+              <div class="col-md-7">
+                <p class="form-control-static">
+                  {{ ucwords($purchase->deliveryOption) }}
+                </p>
+              </div>
             </div>
           </div>
         </div>

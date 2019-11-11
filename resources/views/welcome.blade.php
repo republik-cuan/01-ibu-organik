@@ -110,7 +110,7 @@
           <h2>Galeri Produk</h2>
           <div class="row">
             @foreach ($items as $item)
-              <div class="col-md-3 py-3">
+              <div class="col-md-4 py-3">
                 <div class="card">
                   <img class="card-img-top" src="{{ asset('img/01.jpg') }}">
                 </div>

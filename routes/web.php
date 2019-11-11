@@ -37,7 +37,7 @@ Route::get('/', function () {
     ],
   ];
 
-  $items = range(1, 8);
+  $items = range(1, 9);
 
   return view('welcome', [
     'about' => $about,
