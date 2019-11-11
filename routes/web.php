@@ -194,14 +194,14 @@ Route::group([
     Route::delete('/{id}', 'BankController@destroy')->name('.destroy');
     Route::delete('/trash/{id}', 'BankController@destroypermanent')->name('.destroypermanent');
   });
-  
+
   Route::group([
     'as' => 'rekap',
     'prefix' => 'rekap',
     'middleware' => 'check-role',
   ], function() {
     Route::get('/item', 'RekapController@item')->name('.item');
-    Route::get('/item/export', 'RekapController@itemExport')->name('.export-item');
+    Route::post('/item', 'RekapController@itemExport')->name('.export-item');
     Route::get('/month', 'RekapController@month')->name('.monthly');
     Route::post('/month', 'RekapController@monthExport')->name('.export-month');
   });
