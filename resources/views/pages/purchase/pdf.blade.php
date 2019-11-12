@@ -63,6 +63,7 @@
         <td>
           @php
             $berat += $item->total;
+            $discount += $item->discount;
             echo $item->total." gram";
           @endphp
         </td>
@@ -92,6 +93,7 @@
         </td>
       </tr>
     @endforeach
+    @if ($discount > 0)
       <tr>
         <th colspan="5" class="text-left px-2">
           Diskon
@@ -107,6 +109,7 @@
           </tr>
         @endif
       @endforeach
+    @endif
       <tr>
         <td colspan="5">
           <span class="text-white">hello</span>
