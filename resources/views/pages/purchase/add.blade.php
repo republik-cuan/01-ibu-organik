@@ -78,7 +78,6 @@
               <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Discount</th>
                 <th>Jumlah</th>
                 <th>Harga</th>
                 <th>Sub Total</th>
@@ -97,12 +96,6 @@
                 <tr>
                   <td>{{$key+=1}}</td>
                   <td>{{$item->item->name}}</td>
-                  <td>
-                    @php
-                      $discount += $item->discount;
-                      echo "Rp. ".number_format($item->discount, 2);
-                    @endphp
-                  </td>
                   <td>
                     @php
                       $berat += $item->total;
@@ -144,11 +137,24 @@
                   </td>
                 </tr>
               @endforeach
+              <tr>
+                <th colspan="6" class="px-2" style="text-align: left">Diskon</th>
+              </tr>
+              @foreach ($inventories as $key => $item)
+                <tr>
+                  <td>{{ $key+=1 }}</td>
+                  <td>{{ ucwords($item->item->name) }}</td>
+                  <td>{{ $item->total." ".$item->item['statuan'] }}</td>
+                  <td colspan="2">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+                </tr>
+              @endforeach
               @if ($purchase['statusPembayaran']!="terbayar")
                 <form action="{{route('inventories.store')}}" method="post">
                   @csrf
                   <tr>
-                    <td><input type="number" name="purchase" id="purchase" value="{{$purchase->id}}" hidden></td>
+                    <td>
+                      <input type="number" name="purchase" id="purchase" value="{{$purchase->id}}" hidden>
+                    </td>
                     <td>
                       <select class="js-example-basic-single form-control" name="item" id="item" required>
                         <option>Pilih</option>
@@ -185,7 +191,7 @@
                         <option value="satuan">Satuan</option>
                       </select>
                     </td>
-                    <td colspan="2">
+                    <td>
                       <button class="btn btn-primary" type="submit">
                         Submit
                       </button>
@@ -194,21 +200,16 @@
                 </form>
               @endif
               <tr>
-                <th colspan="2" style="text-align: right;">Total</th>
-                <td></td>
-                <td>{{number_format($berat, 2)}}</td>
-                <td></td>
-                <td colspan="2">{{"Rp. ".number_format($subTotal,2)}}</td>
+                <th colspan="5" style="text-align: left;">Total</th>
+                <td colspan="1">{{"Rp. ".number_format($subTotal,2)}}</td>
               </tr>
               <tr>
-                <th colspan="2" style="text-align: right;">Delivery</th>
-                <td colspan="3"></td>
-                <td colspan="2">{{"Rp. ".number_format($purchase->deliveryPrice, 2)}}</td>
+                <th colspan="5" style="text-align: left;">Delivery</th>
+                <td>{{"Rp. ".number_format($purchase->deliveryPrice, 2)}}</td>
               </tr>
               <tr>
-                <th colspan="2" style="text-align: right;">Grand Total</th>
-                <td colspan="3"></td>
-                <td colspan="2">
+                <th colspan="5" style="text-align: left;">Grand Total</th>
+                <td>
                   @if ($purchase->deliveryOption=="free ongkir")
                     {{"Rp. ".number_format($purchase->deliveryPrice+$subTotal, 2)}}
                   @else
