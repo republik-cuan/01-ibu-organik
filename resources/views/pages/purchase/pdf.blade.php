@@ -98,12 +98,14 @@
         </th>
       </tr>
       @foreach ($inventories as $key => $item)
-        <tr>
-          <td>{{ $key+=1 }}</td>
-          <td>{{ ucwords($item->item->name) }}</td>
-          <td>{{ $item->total." gram" }}</td>
-          <td colspan="2" class="text-left px-4">{{ "Rp. ".number_format($item->discount, 2) }}</td>
-        </tr>
+        @if ($item->discount > 0)
+          <tr>
+            <td>{{ $key+=1 }}</td>
+            <td>{{ ucwords($item->item->name) }}</td>
+            <td>{{ $item->total." gram" }}</td>
+            <td colspan="2" class="text-left px-4">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+          </tr>
+        @endif
       @endforeach
       <tr>
         <td colspan="5">
