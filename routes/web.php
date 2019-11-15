@@ -37,12 +37,7 @@ Route::get('/', function () {
     ],
   ];
 
-  $items = range(1, 9);
-
-  return view('welcome', [
-    'about' => $about,
-    'items' => $items,
-  ]);
+  return view('welcome', [ 'about' => $about ]);
 });
 
 Auth::routes();
