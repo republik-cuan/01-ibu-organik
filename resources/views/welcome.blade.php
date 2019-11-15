@@ -112,7 +112,7 @@
             @foreach (range(1,24) as $item)
               <div class="col-md-4 py-3">
                 <div class="card">
-                  <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.png') }}">
+                  <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
                 </div>
               </div>
             @endforeach
