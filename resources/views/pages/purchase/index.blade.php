@@ -135,7 +135,7 @@
               }
               const role = "{{ $auth->role }}";
               const cls = (role === "super admin") ? "" : "hidden";
-              return `<p class="${cls}">Rp. ${new Intl.NumberFormat().format(hasil)}</p>`
+              return (role === "super admin") ? `<p>Rp. ${new Intl.NumberFormat().format(hasil)}</p>` : ''
             }
           },
           {
