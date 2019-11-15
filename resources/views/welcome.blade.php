@@ -81,14 +81,14 @@
         <h2>Kelebihan</h2>
       </div>
       <div class="row">
-        <div class="col-lg-4 my-auto">
+        <div class="col-lg-4 my-auto text-center">
           <img src="{{ asset('img/logo.png') }}" class="w-75" alt=""/>
         </div>
         <div class="col-lg-8 my-auto">
           <div class="container-fluid">
             <div class="row">
             	@foreach ($about as $item)
-								<div class="col-lg-6">
+								<div class="col-6">
 									<div class="feature-item">
 										<i class="{{ $item['icon'] }} fa-10x"></i>
 										<h3>{{ $item['label'] }}</h3>
@@ -103,43 +103,43 @@
     </div>
   </section>
 
-  <section class="cta p-5">
+  <section class="cta p-5" id="contact">
     <div class="cta-content">
       <div class="container">
         <center>
           <h2>Galeri Produk</h2>
-          <div class="row">
-            @foreach ($items as $item)
+          <div class="row align-items-center">
+            @foreach (range(1,24) as $item)
               <div class="col-md-4 py-3">
                 <div class="card">
-                  <img class="card-img-top" src="{{ asset('img/01.jpg') }}">
+                  <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
                 </div>
               </div>
             @endforeach
+          </div>
         </center>
-        </div>
       </div>
     </div>
     <div class="overlay"></div>
   </section>
 
-  <section class="contact bg-primary" id="contact">
+  <section class="contact bg-primary">
     <div class="container">
       <h2>Talk with us at</h2>
       <ul class="list-inline list-social">
-        <li class="list-inline-item social-twitter">
-          <a href="#">
-            <i class="fab fa-twitter"></i>
+        <li class="list-inline-item social-whatsapp">
+          <a href="https://wa.me/0812-588-1610" target="_blank">
+            <i class="fab fa-whatsapp"></i>
           </a>
         </li>
-        <li class="list-inline-item social-facebook">
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
+        <li class="list-inline-item social-twitter">
+          <a href="https://www.instagram.com/ibuorganik/" target="_blank">
+            <i class="fab fa-instagram"></i>
           </a>
         </li>
         <li class="list-inline-item social-google-plus">
-          <a href="#">
-            <i class="fab fa-google-plus-g"></i>
+          <a href="mailto:ibuorganik@gmail.com" target="_blank">
+            <i class="fas fa-envelope"></i>
           </a>
         </li>
       </ul>

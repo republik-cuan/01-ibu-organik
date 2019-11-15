@@ -10,31 +10,48 @@
 <body>
   <table class="w-100">
     <tr>
-      <th>No Invoice</th>
-      <td>{{$purchase->kode}}</td>
-      <td class="text-right">{{ date_format($purchase->created_at, "l, d-m-Y") }}</td>
+      <td colspan="3" rowspan="5">
+        <img src="{{ public_path('img/logo_cetak.png') }}" alt="" style="width: 100;"/>
+      </td>
     </tr>
     <tr>
-      <th>Nama</th>
+      <th class="text-right h2" colspan="3">INVOICE</th>
+    </tr>
+    <tr>
+      <th class="text-right" colspan="2">Date</th>
+      <td class="text-right">{{ date_format($purchase->created_at, 'm/d/Y') }}</td>
+    </tr>
+    <tr>
+      <th class="text-right" colspan="2">Invoice</th>
+      <td class="text-right">{{ $purchase->kode }}</td>
+    </tr>
+  </table>
+  <br></br>
+  <table class="w-100">
+    <tr>
+      <th class="bg-success" colspan="3">Bill To:</th>
+    </tr>
+    <tr>
+      <th class="px-3">Nama</th>
       <td>{{$customer->name}}</td>
       <td class="text-right">{{ ucwords($purchase->deliveryOption) }}</td>
     </tr>
     <tr>
-      <th>Telp</th>
+      <th class="px-3">Telp</th>
       <td>{{$customer->phone}}</td>
     </tr>
     <tr>
-      <th>Rekening</th>
+      <th class="px-3">Rekening</th>
       <td>
         {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
       </td>
     </tr>
     <tr>
-      <th>Alamat</th>
+      <th class="px-3">Alamat</th>
       <td>{{$customer->address}}</td>
     </tr>
     <tr>
-      <th>Patokan</th>
+      <th class="px-3">Patokan</th>
       <td>{{ucwords($customer->patokan)}}</td>
     </tr>
   </table>
@@ -63,6 +80,7 @@
         <td>
           @php
             $berat += $item->total;
+            $discount += $item->discount;
             echo $item->total." gram";
           @endphp
         </td>
@@ -92,6 +110,7 @@
         </td>
       </tr>
     @endforeach
+    @if ($discount > 0)
       <tr>
         <th colspan="5" class="text-left px-2">
           Diskon
@@ -107,6 +126,7 @@
           </tr>
         @endif
       @endforeach
+    @endif
       <tr>
         <td colspan="5">
           <span class="text-white">hello</span>
