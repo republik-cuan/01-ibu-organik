@@ -32,26 +32,26 @@
       <th class="bg-success" colspan="3">Bill To:</th>
     </tr>
     <tr>
-      <th class="px-3">Nama</th>
+      <th class="px-3 w-25">Nama</th>
       <td>{{$customer->name}}</td>
       <td class="text-right">{{ ucwords($purchase->deliveryOption) }}</td>
     </tr>
     <tr>
-      <th class="px-3">Telp</th>
+      <th class="px-3 w-25">Telp</th>
       <td>{{$customer->phone}}</td>
     </tr>
     <tr>
-      <th class="px-3">Rekening</th>
+      <th class="px-3 w-25">Rekening</th>
       <td>
         {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
       </td>
     </tr>
     <tr>
-      <th class="px-3">Alamat</th>
+      <th class="px-3 w-25">Alamat</th>
       <td>{{$customer->address}}</td>
     </tr>
     <tr>
-      <th class="px-3">Patokan</th>
+      <th class="px-3 w-25">Patokan</th>
       <td>{{ucwords($customer->patokan)}}</td>
     </tr>
   </table>
