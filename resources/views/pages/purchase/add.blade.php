@@ -12,7 +12,7 @@
         <a class="btn btn-info" href="{{route('purchase')}}">
           Kembali
         </a>
-        <a class="btn btn-success" href="{{route('inventories.print', $purchase->id)}}">
+        <a class="btn btn-success" href="{{route('inventories.print', $purchase->id)}}" target="_blank">
           Cetak
         </a>
       </h3>
@@ -99,6 +99,7 @@
                   <td>
                     @php
                       $berat += $item->total;
+                      $discount += $item->discount;
                       echo $item->total." ".$item->item['satuan'];
                     @endphp
                   </td>
@@ -137,17 +138,24 @@
                   </td>
                 </tr>
               @endforeach
-              <tr>
-                <th colspan="6" class="px-2" style="text-align: left">Diskon</th>
-              </tr>
-              @foreach ($inventories as $key => $item)
+              @if ($discount > 0)
                 <tr>
-                  <td>{{ $key+=1 }}</td>
-                  <td>{{ ucwords($item->item->name) }}</td>
-                  <td>{{ $item->total." ".$item->item['statuan'] }}</td>
-                  <td colspan="2">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+                  <th colspan="6" class="px-2" style="text-align: left">Diskon</th>
                 </tr>
-              @endforeach
+                @php
+                  $id = 0;
+                @endphp
+                @foreach ($inventories as $key => $item)
+                  @if ($item->discount > 0)
+                    <tr>
+                      <td>{{ $id+=1 }}</td>
+                      <td>{{ ucwords($item->item->name) }}</td>
+                      <td>{{ $item->total." ".$item->item['statuan'] }}</td>
+                      <td colspan="2">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+                    </tr>
+                  @endif
+                @endforeach
+              @endif
               @if ($purchase['statusPembayaran']!="terbayar")
                 <form action="{{route('inventories.store')}}" method="post">
                   @csrf

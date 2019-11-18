@@ -31,7 +31,6 @@
                 <th>Tanggal Transfer</th>
                 <th>Pengiriman</th>
                 <th>Total Bayar</th>
-                <th>Margin</th>
                 <th>Status Pembayaran</th>
                 <th>Action</th>
               </tr>
@@ -99,43 +98,6 @@
                 temp = hasil.reduce((acc, datum) => acc + datum);
               }
               return `${data} | Rp. ${new Intl.NumberFormat().format(temp)}`
-            }
-          },
-          {
-            data: 'inventories',
-            render: function(data) {
-              let temp = 0;
-              let hasil = 0;
-              if ( data.length > 0 ) {
-                switch (arguments[2].statusHarga) {
-                  case 'reseller':
-                    temp = datum.map(datum => {
-                      const foo = datum.item.reseller - datum.item.modal;
-                      return (datum.total * foo) - datum.discount;
-                    });
-                    break;
-                  case 'modal':
-                    temp = data.map(datum => {
-                      const foo = datum.item.modal - datum.item.modal;
-                      return (datum.total * foo) - datum.discount;
-                    });
-                    break;
-                  case 'end user':
-                    temp = data.map(datum => {
-                      const foo = datum.item.endUser - datum.item.modal;
-                      return (datum.total * foo) - datum.discount;
-                    });
-                    break;
-                  default:
-                    temp = 0;
-                    break;
-                }
-                hasil = temp.reduce((acc, datum) => acc + datum);
-                hasil -= arguments[2].deliveryPrice
-              }
-              const role = "{{ $auth->role }}";
-              const cls = (role === "super admin") ? "" : "hidden";
-              return (role === "super admin") ? `<p>Rp. ${new Intl.NumberFormat().format(hasil)}</p>` : ''
             }
           },
           {
