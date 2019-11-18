@@ -25,6 +25,12 @@
       <th class="text-right" colspan="2">Invoice</th>
       <td class="text-right">{{ $purchase->kode }}</td>
     </tr>
+    <tr>
+      <th class="text-right" colspan="2">Rekening</th>
+      <td class="text-right">
+        {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
+      </td>
+    </tr>
   </table>
   <br></br>
   <table class="w-100">
@@ -39,12 +45,6 @@
     <tr>
       <th class="px-3 w-25">Telp</th>
       <td>{{$customer->phone}}</td>
-    </tr>
-    <tr>
-      <th class="px-3 w-25">Rekening</th>
-      <td>
-        {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
-      </td>
     </tr>
     <tr>
       <th class="px-3 w-25">Alamat</th>
@@ -121,8 +121,8 @@
           <tr>
             <td>{{ $key+=1 }}</td>
             <td>{{ ucwords($item->item->name) }}</td>
-            <td>{{ $item->total." gram" }}</td>
-            <td colspan="2" class="text-left px-4">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+            <td colspan="2" class="text-right px-4">{{ "Rp. ".number_format($item->discount, 2) }}</td>
+            <td></td>
           </tr>
         @endif
       @endforeach
@@ -134,8 +134,7 @@
       </tr>
       <tr>
         <th colspan="2" class="text-left px-2">Total</th>
-        <td>{{number_format($berat, 2)}}</td>
-        <td>{{"Rp. ".number_format($harga,2)}}</td>
+        <td colspan="2" class="text-right px-4">{{"Rp. ".number_format($harga,2)}}</td>
         <td>{{"Rp. ".number_format($subTotal,2)}}</td>
       </tr>
       <tr>
