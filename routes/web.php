@@ -17,23 +17,23 @@ Route::get('/', function () {
   $about = [
     [
       'icon' => 'fas fa-apple-alt',
-      'label' => 'Alami',
-      'description' => 'Sayuran tumbuh diladang sendiri dan tanpa memakai bahan pengawet'
+      'label' => 'Organik Tersertifikasi',
+      'description' => 'Sayuran petani petani organik yang sudah mengikutin pembinaan pelatihan organik dan hasil panennya sudah di uji, lulus Quallity Control dan mengikuti sertifikasi organik'
     ],
     [
       'icon' => 'fas fa-wallet',
-      'label' => 'Terjangkau',
-      'description' => 'Harga dari produk kami tidak berdasarkan merk, namun kami menyesuaikan harga pasar'
+      'label' => 'Pelayanan Terbaik',
+      'description' => 'Untuk memberi pelayanan terbaik, @ibuorganik membangun team dari hulu ke hilir, dari mulai team tanam, panen, pasca panen, distribusi semua di bawah pengawasan @Ibuorganik untuk mejaga kwalitas, penjual dan para staf yang ramah akan siap melayani pesanan anda'
     ],
     [
       'icon' => 'fas fa-smile',
-      'label' => 'Ramah',
-      'description' => 'Penjual dan para staf yang ramah akan siap melayani pesanan anda'
+      'label' => 'Garansi Kepuasan',
+      'description' => 'Jika #SahabatIbuOrganik kurang puas terhadap produk kami, ada garansi uang kembali atau produk diganti dengan yang baru saat panen selanjutnya'
     ],
     [
       'icon' => 'fas fa-handshake',
-      'label' => 'Terpercaya',
-      'description' => 'Poin diatas merupakan bukti '
+      'label' => 'Diskusi #PerjalananHidupSehat',
+      'description' => '@Ibuorganik  berfokus dalam edukasi dan mengajak masyarakat untuk melakukan #PerjalananHidupSehat sehingga staff terbuka untuk diajak diskusi mengenai resep, cara pengolahan makanan, pola makan, dan lainnya yang berkaitan dengan #PerjalananHidupSehat'
     ],
   ];
 
