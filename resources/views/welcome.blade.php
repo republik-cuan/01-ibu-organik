@@ -54,9 +54,9 @@
       <div class="row h-100">
         <div class="col-lg-7 my-auto">
           <div class="header-content mx-auto">
-            <h1 class="mb-5">
-                Mengutamakan kualitas bukan kuantitas karna kepuasan pleanggan adalah yang utama
-            </h1>
+            <h2 class="mb-3">
+              Halo, <strong>@ibuorganik</strong> adalah supplier sayur organik, buah organik, beras organik tersertifikasi, dan Bahan Pangan Organik Pilihan yang mengutamakan kualitas, karena kepuasan, kenyamanan dan kepercayaan  pelanggan yang utama bagi kami
+            </h2>
             <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Tentang Kami</a>
           </div>
         </div>
@@ -67,9 +67,12 @@
   <section class="download bg-primary text-center" id="download">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-10 mx-auto">
           <h2 class="section-heading">Tentang Kami</h2>
-          <p>Kami merupakan retail sayuran organik asal semarang, kualitas merupakan hargadiri kami sebagai penjual.</p>
+          <p>
+            Berawal dari melakukan #PerjalnanHidupSehat @Ibuorganik memberikan solusi bagi masyarakat yang kesulitan
+            mendapatkan produk sayuran, buah, beras dan bahan organik yang terpercaya, tersertifikasi.  Semua produk dari kami terseleksi, kami membangun tim dari hulu ke hilir untuk menjaga kwalitas.  Ibuorganik fokus menyebarkan manfaat yaitu memberikan informasi tentang #PerjalananHidupSehat dan informasi tentang makanan sehat yang mudah di dapat kepada masyarakat dan mengajak petani menanam dengan ramah lingkungan sehingga tidak merusak ekosistem yang ada di lahan tersebut.
+          </p>
         </div>
       </div>
     </div>
@@ -111,7 +114,7 @@
           <div class="row align-items-center">
             @foreach (range(1,24) as $item)
               <div class="col-md-4 py-3">
-                <div class="card">
+                <div class="card w-75">
                   <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
                 </div>
               </div>
@@ -128,7 +131,7 @@
       <h2>Talk with us at</h2>
       <ul class="list-inline list-social">
         <li class="list-inline-item social-whatsapp">
-          <a href="https://wa.me/0812-588-1610" target="_blank">
+          <a href="https://api.whatsapp.com/send?phone=628125881610&text=Halo%20@ibuorganik%20saya%20mau%20order%20sayur%20organik" target="_blank">
             <i class="fab fa-whatsapp"></i>
           </a>
         </li>
