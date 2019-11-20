@@ -21,7 +21,7 @@ Route::get('/', function () {
       'description' => 'Sayuran petani petani organik yang sudah mengikutin pembinaan pelatihan organik dan hasil panennya sudah di uji, lulus Quallity Control dan mengikuti sertifikasi organik'
     ],
     [
-      'icon' => 'fas fa-wallet',
+      'icon' => 'fas fa-users',
       'label' => 'Pelayanan Terbaik',
       'description' => 'Untuk memberi pelayanan terbaik, @ibuorganik membangun team dari hulu ke hilir, dari mulai team tanam, panen, pasca panen, distribusi semua di bawah pengawasan @Ibuorganik untuk mejaga kwalitas, penjual dan para staf yang ramah akan siap melayani pesanan anda'
     ],
