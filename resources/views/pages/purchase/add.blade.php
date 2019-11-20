@@ -91,6 +91,7 @@
                 $berat = 0;
                 $discount = 0;
                 $total = 0;
+                $margin = 0;
               @endphp
               @foreach ($inventories as $key => $item)
                 <tr>
@@ -122,6 +123,7 @@
                   <td>
                     @php
                       $temp = $item->total * $harga;
+                      $margin += (($harga-$item->item->modal) * $item->total);
                       $temp -= $item->discount;
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
@@ -224,6 +226,10 @@
                     {{"Rp. ".number_format($subTotal, 2)}}
                   @endif
                 </td>
+              </tr>
+              <tr>
+                <th colspan="5" style="text-align: left">Margin</th>
+                <td>{{ "Rp. ".number_format($margin, 2) }}</td>
               </tr>
             </tbody>
           </table>
