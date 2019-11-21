@@ -87,13 +87,14 @@
             let arr = [];
             let hasil = 0;
             if (typeof(data)=="object") {
-              arr = $.map(data, function(val, id) { return val.pivot.total; })
+              arr = $.map(data, function(val, id) { return val.pivot.total * modal; })
             } else {
               arr = data
             }
             if (arr.length > 0 ) {
-              hasil = arr.reduce((acc, cur) => acc + (modal * cur));
+              hasil = arr.reduce((acc, cur) => acc + cur);
             }
+            console.log({hasil, arr, modal})
             return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
           }
         },
