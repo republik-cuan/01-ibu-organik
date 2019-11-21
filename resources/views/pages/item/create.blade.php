@@ -28,11 +28,11 @@
             <label for="name">Nama</label>
             <input type="text" class="form-control" name="name" placeholder="Nama Item" required>
             <label for="modal">Harga Modal</label>
-            <input type="number" class="form-control" name="modal" placeholder="Harga Item" required>
+            <input type="number" class="form-control" name="modal" step="any" placeholder="Harga Item" required>
             <label for="reseller">Harga Reseller</label>
-            <input type="number" class="form-control" name="reseller" placeholder="Harga Item" required>
+            <input type="number" class="form-control" name="reseller" step="any" placeholder="Harga Item" required>
             <label for="endUser">Harga Pelanggan</label>
-            <input type="number" class="form-control" name="endUser" placeholder="Harga Item" required>
+            <input type="number" class="form-control" name="endUser" step="any" placeholder="Harga Item" required>
             <label for="number">Stok</label>
             <input type="number" class="form-control" name="stock" placeholder="Stok Item" required>
             <label for="satuan">Satuan</label>

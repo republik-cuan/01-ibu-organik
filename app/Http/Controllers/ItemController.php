@@ -52,9 +52,9 @@ class ItemController extends Controller
       try {
         $validatedData = $request->validate([
           'name' => 'unique:items|required',
-          'modal' => 'required|integer',
-          'reseller' => 'required|integer',
-          'endUser' => 'required|integer',
+          'modal' => 'required',
+          'reseller' => 'required',
+          'endUser' => 'required',
           'stock' => 'required|integer',
           'satuan' => 'required',
           'category_id' => 'required|integer',
