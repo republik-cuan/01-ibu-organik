@@ -10,7 +10,6 @@
   <div class="col-md-6 text-right">
     <h3>
       <a type="button" class="btn btn-info" href="{{route('bank')}}">
-
         Kembali
       </a>
     </h3>

@@ -81,7 +81,7 @@ class BankController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'bank' => 'unique:banks|required',
+            'bank' => 'required',
             'rekening' => 'required',
         ]);
         $bank = Bank::find($id);
