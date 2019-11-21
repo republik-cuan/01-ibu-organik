@@ -94,7 +94,6 @@
             if (arr.length > 0 ) {
               hasil = arr.reduce((acc, cur) => acc + (modal * cur));
             }
-            console.log({hasil, arr, data})
             return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
           }
         },
