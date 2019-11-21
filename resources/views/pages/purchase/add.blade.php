@@ -152,7 +152,7 @@
                     <tr>
                       <td>{{ $id+=1 }}</td>
                       <td>{{ ucwords($item->item->name) }}</td>
-                      <td>{{ $item->total." ".$item->item['statuan'] }}</td>
+                      <td></td>
                       <td colspan="2">{{ "Rp. ".number_format($item->discount, 2) }}</td>
                     </tr>
                   @endif
