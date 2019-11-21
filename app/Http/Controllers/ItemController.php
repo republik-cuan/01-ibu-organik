@@ -60,13 +60,12 @@ class ItemController extends Controller
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
         ]);
+        Item::create($validatedData);
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        Item::create($validatedData);
+        return redirect()->route('item');
       }
-
-      return redirect()->route('item');
     }
 
     /**
