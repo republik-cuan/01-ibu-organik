@@ -113,6 +113,9 @@ class ItemController extends Controller
         $item = Item::find($id);
         $temp = ($request->stock - ($item->stock-$item->sold));
         $item->update([
+          'modal' => $request->modal,
+          'reseller' => $request->reseller,
+          'endUser' => $request->endUser,
           'name' => $request->name,
           'price' => $request->price,
           'stock' => $item->stock + $temp,
