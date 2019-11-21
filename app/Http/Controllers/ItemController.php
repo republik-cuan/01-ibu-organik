@@ -112,15 +112,15 @@ class ItemController extends Controller
       try {
         $item = Item::find($id);
         $temp = ($request->stock - ($item->stock-$item->sold));
-      } catch (Exception $e) {
-        return abort(404, $e);
-      } finally {
         $item->update([
           'name' => $request->name,
           'price' => $request->price,
           'stock' => $item->stock + $temp,
           'satuan' => $request->satuan,
         ]);
+      } catch (Exception $e) {
+        return abort(404, $e);
+      } finally {
         return redirect()->route('item')->with('message','Edit Item Berhasil');
       }
     }

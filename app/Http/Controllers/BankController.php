@@ -84,7 +84,7 @@ class BankController extends Controller
             'bank' => 'unique:banks|required',
             'rekening' => 'required',
         ]);
-        $bank = Bank::findOrfail($id);
+        $bank = Bank::find($id);
         $bank->update($validatedData);
         return redirect('bank')->with('message', 'Edit bank berhasil');
     }

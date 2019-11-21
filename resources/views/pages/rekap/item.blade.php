@@ -81,9 +81,20 @@
           data: 'sold',
         },
         {
-          data: 'modal',
+          data: 'purchases',
           render: function(data) {
-            return `Rp. ${new Intl.NumberFormat().format(data)}`;
+            const modal = arguments[2].modal;
+            let arr = [];
+            let hasil = 0;
+            if (typeof(data)=="object") {
+              arr = $.map(data, function(val, id) { return [val]; })
+            } else {
+              arr = data
+            }
+            if (arr.length > 0 ) {
+              hasil = arr.reduce((acc, cur) => acc + (modal * cur));
+            }
+            return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
           }
         },
         {
