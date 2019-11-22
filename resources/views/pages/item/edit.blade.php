@@ -30,13 +30,13 @@
             <input type="text" class="form-control" name="name" value="{{ $item->name }}" placeholder="Nama Item" autofocus>
             {!! $errors->first('name', '<p class="help-block text-danger">:message</p>')!!}
             <label for="modal">Modal</label>
-            <input type="number" class="form-control" name="modal" value="{{ $item->modal }}" placeholder="Modal" autofocus>
+            <input type="number" step="any" class="form-control" name="modal" value="{{ $item->modal }}" placeholder="Modal" autofocus>
             {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
             <label for="reseller">Reseller</label>
-            <input type="number" class="form-control" name="reseller" value="{{ $item->reseller }}" placeholder="Reseller" autofocus>
+            <input type="number" step="any" class="form-control" name="reseller" value="{{ $item->reseller }}" placeholder="Reseller" autofocus>
             {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
             <label for="endUser">End User</label>
-            <input type="number" class="form-control" name="endUser" value="{{ $item->endUser }}" placeholder="End User" autofocus>
+            <input type="number" step="any" class="form-control" name="endUser" value="{{ $item->endUser }}" placeholder="End User" autofocus>
             {!! $errors->first('price', '<p class="help-block text-danger">:message</p>')!!}
             <label for="stock">Stok</label>
             <input type="number" class="form-control" name="stock" value="{{ ($item->stock-$item->sold) }}" placeholder="Stok Item" autofocus>

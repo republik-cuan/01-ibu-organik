@@ -3,7 +3,16 @@
 @section('title', 'Item')
 
 @section('content_header')
-@if(session()->get('message'))
+@if (session()->get('error'))
+<div class="row">
+  <div class="col-md-6">
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      {{session()->get('message')}}
+    </div>
+  </div>
+</div>
+@elseif(session()->get('message'))
 <div class="row">
   <div class="col-md-6">
     <div class="alert alert-success">

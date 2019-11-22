@@ -60,13 +60,12 @@ class ItemController extends Controller
           'category_id' => 'required|integer',
           'supplier_id' => 'required|integer',
         ]);
+        Item::create($validatedData);
       } catch (Exception $e) {
         return abort(404, $e);
       } finally {
-        Item::create($validatedData);
+        return redirect()->route('item');
       }
-
-      return redirect()->route('item');
     }
 
     /**
@@ -136,13 +135,22 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-      try {
-        Item::where('id', $id)->delete();
-      } catch (Exception $e) {
-        return abort(404, $e);
-      }
+      $item = Item::with('purchases')->find($id);
 
-      return redirect()->route('item');
+      if (sizeof($item->purchases) > 0) {
+        return redirect()->route('item')->with([
+          'error' => true,
+          'message' => 'Some Purchase still have this value'
+        ]);
+      } else {
+        try {
+          Item::where('id', $id)->delete();
+        } catch (Exception $e) {
+          return abort(404, $e);
+        }
+
+        return redirect()->route('item');
+      }
     }
     public function trash()
     {
