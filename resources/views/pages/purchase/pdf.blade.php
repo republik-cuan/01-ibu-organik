@@ -28,7 +28,9 @@
     <tr>
       <th class="text-right" colspan="2">Rekening</th>
       <td class="text-right">
-        {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
+        {{ $purchase->bank->bank }}
+        <br>
+        {{ $purchase->bank->rekening }}
       </td>
     </tr>
   </table>
