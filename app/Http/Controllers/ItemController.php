@@ -144,12 +144,12 @@ class ItemController extends Controller
         ]);
       } else {
         try {
-          Item::where('id', $id)->delete();
+          $item->forceDelete();
         } catch (Exception $e) {
           return abort(404, $e);
+        } finally {
+          return redirect()->route('item');
         }
-
-        return redirect()->route('item');
       }
     }
     public function trash()
@@ -161,9 +161,13 @@ class ItemController extends Controller
     }
     public function destroypermanent($id)
     {
-      $item = Item::onlyTrashed()->findOrFail($id);
-      $item->forceDelete();
-      return redirect('item/trash');
+      $item = Item::with('purchases')->find($id);
+      if (sizeof($item->purchases) > 0) {
+        return redirect()->route('item')->with('message','Edit Item Berhasil');
+      } else {
+        $item->forceDelete();
+        return redirect('item/trash');
+      }
     }
     public function restore($id)
     {

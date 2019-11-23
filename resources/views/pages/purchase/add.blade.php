@@ -227,7 +227,7 @@
                   @endif
                 </td>
               </tr>
-              <tr>
+              <tr class="hidden" id="margin">
                 <th colspan="5" style="text-align: left">Margin</th>
                 <td>{{ "Rp. ".number_format($margin, 2) }}</td>
               </tr>
@@ -235,7 +235,7 @@
           </table>
         </div>
         <div class="col-md-12 text-right">
-          <a class="btn btn-warning btn" href="{{route('purchase')}}">Simpan</a>
+          <a class="btn btn-warning" id="simpan" href="#">Simpan</a>
         </div>
       </div>
     </div>
@@ -244,8 +244,24 @@
 
 @section('js')
   <script charset="utf-8">
+    const margin = $('#margin');
+    const btnSimpan = $('#simpan');
+
     $(document).ready(function() {
       $('.js-example-basic-single').select2();
+      btnSimpan.click(function() {
+        const attr = margin.attr('class');
+        console.log({ attr, hasil: attr==='hidden'})
+        if (attr === 'hidden') {
+          margin.attr({
+            'class': ''
+          })
+        } else {
+          margin.attr({
+            'class': 'hidden'
+          })
+        }
+      });
     });
   </script>
 @stop

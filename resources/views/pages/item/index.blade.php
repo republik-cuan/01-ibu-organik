@@ -31,6 +31,9 @@
       <a class="btn btn-info" href="{{route('item.create')}}">
         Tambah Item
       </a>
+      <a class="btn btn-warning" href="{{ route('item.trash') }}">
+        Item Terhapus
+      </a>
     </h3>
   </div>
 </div>

@@ -28,7 +28,9 @@
     <tr>
       <th class="text-right" colspan="2">Rekening</th>
       <td class="text-right">
-        {{ $purchase->bank->bank." | ".$purchase->bank->rekening }}
+        {{ $purchase->bank->bank }}
+        <br>
+        {{ $purchase->bank->rekening }}
       </td>
     </tr>
   </table>
@@ -133,18 +135,15 @@
         </td>
       </tr>
       <tr>
-        <th colspan="2" class="text-left px-2">Total</th>
-        <td colspan="2" class="text-right px-4">{{"Rp. ".number_format($harga,2)}}</td>
+        <th colspan="4" class="text-left px-2">Total</th>
         <td>{{"Rp. ".number_format($subTotal,2)}}</td>
       </tr>
       <tr>
-        <th colspan="2" class="text-left px-2">Delivery</th>
-        <td colspan="2"></td>
+        <th colspan="4" class="text-left px-2">Delivery</th>
         <td>{{"Rp. ".number_format($purchase->deliveryPrice,2)}}</td>
       </tr>
       <tr>
-        <th colspan="2" class="text-left px-2">Grand Total</th>
-        <td colspan="2"></td>
+        <th colspan="4" class="text-left px-2">Grand Total</th>
         <td>{{"Rp. ".number_format($purchase->deliveryPrice+$subTotal,2)}}</td>
       </tr>
     </tbody>
