@@ -78,7 +78,22 @@
           data: 'name'
         },
         {
-          data: 'sold',
+          data: 'purchases',
+          render: function(data) {
+            let arr = [];
+            let hasil = 0;
+            if (typeof(data)=="object") {
+              arr = $.map(data, (val, id) => val.pivot.total)
+            } else {
+              arr = data
+            }
+
+
+            hasil = arr.length > 0
+                      ?  arr.reduce((acc, cur) => acc + cur)
+                      : 0
+            return hasil
+          },
         },
         {
           data: 'purchases',
@@ -94,7 +109,6 @@
             if (arr.length > 0 ) {
               hasil = arr.reduce((acc, cur) => acc + cur);
             }
-            console.log({hasil, arr, modal})
             return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
           }
         },
