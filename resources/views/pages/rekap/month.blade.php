@@ -22,6 +22,7 @@
               <tr>
                 <th>No</th>
                 <th>Bulan</th>
+                <th>Free Ongkir</th>
                 <th>Total Harga</th>
                 <th>Ongkir</th>
                 <th>Margin</th>
@@ -118,6 +119,12 @@
           },
         },
         { data: 'label' },
+        {
+          data: 'ongkir',
+          render: function(data) {
+            return `Rp. ${new Intl.NumberFormat().format(data)}`
+          }
+        },
         {
           data: 'total_harga',
           render: function(data) {

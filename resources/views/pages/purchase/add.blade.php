@@ -228,7 +228,7 @@
                 </td>
               </tr>
               <tr class="hidden" id="margin">
-                <th colspan="5" style="text-align: left">Margin</th>
+                <th colspan="5" style="text-align: left">M</th>
                 <td>{{ "Rp. ".number_format($margin, 2) }}</td>
               </tr>
             </tbody>

@@ -42,7 +42,14 @@
             <a class="nav-link js-scroll-trigger" href="#features">Kelebihan</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Galeri Produk</a>
+            <a class="nav-link js-scroll-trigger" href="#galery">
+             Galeri Produk
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">
+              Kontak
+            </a>
           </li>
         </ul>
       </div>
@@ -106,7 +113,7 @@
     </div>
   </section>
 
-  <section class="cta p-5" id="contact">
+  <section class="cta p-5" id="galery">
     <div class="cta-content">
       <div class="container">
         <center>
@@ -126,7 +133,7 @@
     <div class="overlay"></div>
   </section>
 
-  <section class="contact bg-primary">
+  <section class="contact bg-primary" id="contact">
     <div class="container">
       <h2>Talk with us at</h2>
       <ul class="list-inline list-social">
