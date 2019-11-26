@@ -31,9 +31,6 @@
       <a class="btn btn-info" href="{{route('item.create')}}">
         Tambah Item
       </a>
-      <a class="btn btn-warning" href="{{ route('item.trash') }}">
-        Item Terhapus
-      </a>
     </h3>
   </div>
 </div>
@@ -127,8 +124,9 @@
           data: 'id',
           render: function(data) { 
             const link = "{{route('item')}}"+"/"+data;
+            const linkHapus = "{{route('item.trash')}}"+"/"+data;
             const detail = '<a class="btn btn-primary btn-xs" stlye="margin: 0 3px" href="' + link + ' ">Edit</a>';
-            const hapus = '<form role="form" action="' + link + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-danger btn-xs">Delete</button></form>';
+            const hapus = '<form role="form" action="' + linkHapus + '" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field() }}{{ method_field('delete ') }}<button class="btn btn-danger btn-xs">Delete</button></form>';
             return '<div class="text-center">' + detail + hapus + '</div>';
           }
         },
