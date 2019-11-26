@@ -37,12 +37,13 @@
   <br></br>
   <table class="w-100">
     <tr>
-      <th class="bg-success" colspan="3">Bill To:</th>
+      <th class="bg-success" colspan="5">Bill To:</th>
     </tr>
     <tr>
       <th class="px-3 w-25">Nama</th>
       <td>{{$customer->name}}</td>
-      <td class="text-right">{{ ucwords($purchase->deliveryOption) }}</td>
+      <th class="text-right">Pengiriman</th>
+      <td colspan="2" class="text-right">{{ ucwords($purchase->deliveryOption) }}</td>
     </tr>
     <tr>
       <th class="px-3 w-25">Telp</th>
