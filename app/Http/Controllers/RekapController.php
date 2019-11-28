@@ -116,65 +116,92 @@ class RekapController extends Controller
     }
 
     public function itemExport(Request $request) {
+
       if ($request->start_date!=null && $request->end_date!=null) {
-
         $temp = Item::with('purchases')->get();
-        $items = array_pad([], sizeof($temp), 0);
+        $foo = array_pad([], sizeof($temp), 0);
 
-        if ($request->bank!=null) {
-          if ($request->bank=='none') {
-            for ($i = 0; $i < sizeof($items); $i++) {
-              $purchase = $temp[$i]->purchases->reject(function($purchase) {
-                $start = Date($_REQUEST['start_date']);
-                $end = Date($_REQUEST['end_date']);
-                return (
-                  $purchase['created_at'] <= $start &&
-                  $purchase['created_at'] >= $end
-                );
-              })->map(function($barang) {
-                return $barang;
-              });
+        if ($request->bank!=null && $request->bank!='none') {
+          for ($i = 0; $i < sizeof($foo); $i++) {
+            $purchase = $temp[$i]->purchases->reject(function($purchase) {
+              $start = Date($_REQUEST['start_date']);
+              $end = Date($_REQUEST['end_date']);
+              $bank = intval($_REQUEST['bank']);
+              return (
+                $purchase['bank_id'] != $bank ||
+                $purchase['created_at'] <= $start &&
+                $purchase['created_at'] >= $end
+              );
+            })->map(function($barang) {
+              return $barang;
+            });
 
-              $items[$i] = [
-                'id' => $temp[$i]->id,
-                'name' => $temp[$i]->name,
-                'endUser' => $temp[$i]->endUser,
-                'modal' => $temp[$i]->modal,
-                'reseller' => $temp[$i]->reseller,
-                'sold' => $temp[$i]->sold,
-                'purchases' => $purchase,
-              ];
-            }
-          } else {
-            for ($i = 0; $i < sizeof($items); $i++) {
-              $purchase = $temp[$i]->purchases->reject(function($purchase) {
-                $start = Date($_REQUEST['start_date']);
-                $end = Date($_REQUEST['end_date']);
-                $bank = intval($_REQUEST['bank']);
-                return (
-                  $purchase['bank_id'] != $bank ||
-                  $purchase['created_at'] <= $start &&
-                  $purchase['created_at'] >= $end
-                );
-              })->map(function($barang) {
-                return $barang;
-              });
-
-              $items[$i] = [
-                'id' => $temp[$i]->id,
-                'name' => $temp[$i]->name,
-                'endUser' => $temp[$i]->endUser,
-                'modal' => $temp[$i]->modal,
-                'reseller' => $temp[$i]->reseller,
-                'sold' => $temp[$i]->sold,
-                'purchases' => $purchase,
-              ];
-            }
+            $foo[$i] = [
+              'id' => $temp[$i]->id,
+              'name' => $temp[$i]->name,
+              'endUser' => $temp[$i]->endUser,
+              'modal' => $temp[$i]->modal,
+              'reseller' => $temp[$i]->reseller,
+              'sold' => $temp[$i]->sold,
+              'purchases' => $purchase,
+            ];
           }
+        } else {
+						for ($i = 0; $i < sizeof($foo); $i++) {
+							$purchase = $temp[$i]->purchases->reject(function($purchase) {
+								$start = Date($_REQUEST['start_date']);
+								$end = Date($_REQUEST['end_date']);
+								return (
+									$purchase['created_at'] <= $start &&
+									$purchase['created_at'] >= $end
+								);
+							})->map(function($barang) {
+								return $barang;
+							});
+
+							$foo[$i] = [
+								'id' => $temp[$i]->id,
+								'name' => $temp[$i]->name,
+								'endUser' => $temp[$i]->endUser,
+								'modal' => $temp[$i]->modal,
+								'reseller' => $temp[$i]->reseller,
+								'sold' => $temp[$i]->sold,
+								'purchases' => $purchase,
+							];
+						}
         }
+
+        $items = json_encode($foo);
+
+      } else if ($request->bank != null && $request->bank != "none") {
+        $temp = Item::with('purchases')->get();
+        $foo = array_pad([], sizeof($temp), 0);
+
+        for ($i = 0; $i < sizeof($foo); $i++) {
+          $purchase = $temp[$i]->purchases->reject(function($purchase) {
+            $bank = intval($_REQUEST['bank']);
+            return $purchase['bank_id'] != $bank;
+          })->map(function($barang) {
+            return $barang;
+          });
+
+          $foo[$i] = [
+            'id' => $temp[$i]->id,
+            'name' => $temp[$i]->name,
+            'endUser' => $temp[$i]->endUser,
+            'modal' => $temp[$i]->modal,
+            'reseller' => $temp[$i]->reseller,
+            'sold' => $temp[$i]->sold,
+            'purchases' => $purchase,
+          ];
+
+          $items = json_encode($foo);
+        }
+        
       } else {
         $items = Item::with('purchases')->get();
       }
+
       $date = Date("d F Y");
       $pdf = PDF::loadView('pages.rekap.item-pdf', [
         'items' => $items,
