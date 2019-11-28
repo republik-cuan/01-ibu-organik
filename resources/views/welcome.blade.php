@@ -64,7 +64,7 @@
             <h2 class="mb-3">
               Halo, <strong>@ibuorganik</strong> adalah supplier sayur organik, buah organik, beras organik tersertifikasi, dan Bahan Pangan Organik Pilihan yang mengutamakan kualitas, karena kepuasan, kenyamanan dan kepercayaan  pelanggan yang utama bagi kami
             </h2>
-            <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Tentang Kami</a>
+            <a href="https://api.whatsapp.com/send?phone=628125881610&text=Halo%20@ibuorganik%20saya%20mau%20order%20sayur%20organik" class="btn btn-outline btn-xl js-scroll-trigger">Hubungi Kami</a>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
       <div class="row">
         <div class="col-md-10 mx-auto">
           <h2 class="section-heading">Tentang Kami</h2>
-          <p>
+          <p class="text-justify">
             Berawal dari melakukan #PerjalnanHidupSehat @Ibuorganik memberikan solusi bagi masyarakat yang kesulitan
             mendapatkan produk sayuran, buah, beras dan bahan organik yang terpercaya, tersertifikasi.  Semua produk dari kami terseleksi, kami membangun tim dari hulu ke hilir untuk menjaga kwalitas.  Ibuorganik fokus menyebarkan manfaat yaitu memberikan informasi tentang #PerjalananHidupSehat dan informasi tentang makanan sehat yang mudah di dapat kepada masyarakat dan mengajak petani menanam dengan ramah lingkungan sehingga tidak merusak ekosistem yang ada di lahan tersebut.
           </p>
