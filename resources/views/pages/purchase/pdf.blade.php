@@ -84,7 +84,7 @@
           @php
             $berat += $item->total;
             $discount += $item->discount;
-            echo $item->total." gram";
+            echo $item->total;
           @endphp
         </td>
         <td>
@@ -106,7 +106,6 @@
         <td>
           @php
             $temp = $item->total * $harga;
-            $temp -= $item->discount;
             $subTotal += $temp;
             echo "Rp. ".number_format($temp, 2);
           @endphp
@@ -132,12 +131,20 @@
     @endif
       <tr>
         <td colspan="5">
-          <span class="text-white">hello</span>
+          <span class="text-white">text-kosong</span>
         </td>
       </tr>
       <tr>
-        <th colspan="4" class="text-left px-2">Total</th>
+        <th colspan="4" class="text-left px-2">Total Harga</th>
         <td>{{"Rp. ".number_format($subTotal,2)}}</td>
+      </tr>
+      <tr>
+        <th colspan="4" class="text-left px-2">Total Diskon</th>
+        <td>{{"Rp. ".number_format($discount,2)}}</td>
+      </tr>
+      <tr>
+        <th colspan="4" class="text-left px-2">Total</th>
+        <td>{{"Rp. ".number_format($subTotal-$discount,2)}}</td>
       </tr>
       <tr>
         <th colspan="4" class="text-left px-2">Delivery</th>
