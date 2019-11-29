@@ -119,7 +119,7 @@
         <center>
           <h2>Galeri Produk</h2>
           <div class="row align-items-center">
-            @foreach (range(1,34) as $item)
+            @foreach (range(1,31) as $item)
               <div class="col-md-4 py-3">
                 <div class="card w-75">
                   <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
