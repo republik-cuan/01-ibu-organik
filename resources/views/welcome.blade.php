@@ -64,7 +64,7 @@
             <h2 class="mb-3">
               Halo, <strong>@ibuorganik</strong> adalah supplier sayur organik, buah organik, beras organik tersertifikasi, dan Bahan Pangan Organik Pilihan yang mengutamakan kualitas, karena kepuasan, kenyamanan dan kepercayaan  pelanggan yang utama bagi kami
             </h2>
-            <a href="https://api.whatsapp.com/send?phone=628125881610&text=Halo%20@ibuorganik%20saya%20mau%20order%20sayur%20organik" class="btn btn-outline btn-xl js-scroll-trigger">Hubungi Kami</a>
+            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Hubungi Kami</a>
           </div>
         </div>
       </div>
