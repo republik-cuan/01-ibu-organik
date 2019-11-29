@@ -48,7 +48,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">
-              Kontak
+              Hubungi Kami
             </a>
           </li>
         </ul>
@@ -77,8 +77,7 @@
         <div class="col-md-10 mx-auto">
           <h2 class="section-heading">Tentang Kami</h2>
           <p class="text-justify">
-            Berawal dari melakukan #PerjalnanHidupSehat @Ibuorganik memberikan solusi bagi masyarakat yang kesulitan
-            mendapatkan produk sayuran, buah, beras dan bahan organik yang terpercaya, tersertifikasi.  Semua produk dari kami terseleksi, kami membangun tim dari hulu ke hilir untuk menjaga kwalitas.  Ibuorganik fokus menyebarkan manfaat yaitu memberikan informasi tentang #PerjalananHidupSehat dan informasi tentang makanan sehat yang mudah di dapat kepada masyarakat dan mengajak petani menanam dengan ramah lingkungan sehingga tidak merusak ekosistem yang ada di lahan tersebut.
+            Berawal dari melakukan #PerjalnanHidupSehat @Ibuorganik memberikan solusi bagi masyarakat yang kesulitan mendapatkan produk sayuran, buah, beras dan bahan organik yang terpercaya, tersertifikasi.  Semua produk dari kami terseleksi, kami membangun tim dari hulu ke hilir untuk menjaga kualitas.  Ibuorganik fokus menyebarkan manfaat yaitu memberikan informasi tentang #PerjalananHidupSehat dan informasi tentang makanan sehat yang mudah di dapat kepada masyarakat dan mengajak petani menanam dengan ramah lingkungan sehingga tidak merusak ekosistem yang ada di lahan tersebut.
           </p>
         </div>
       </div>
@@ -102,7 +101,7 @@
 									<div class="feature-item">
 										<i class="{{ $item['icon'] }} fa-10x"></i>
 										<h3>{{ $item['label'] }}</h3>
-										<p class="text-muted">{{ $item['description'] }}</p>
+										<p class="text-muted align-justify">{{ $item['description'] }}</p>
 									</div>
 								</div>
 							@endforeach
