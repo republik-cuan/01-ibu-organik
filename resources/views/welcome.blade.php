@@ -101,7 +101,7 @@
 									<div class="feature-item">
 										<i class="{{ $item['icon'] }} fa-10x"></i>
 										<h3>{{ $item['label'] }}</h3>
-										<p class="text-muted text-justify">{{ $item['description'] }}</p>
+										<p class="text-muted text-center">{{ $item['description'] }}</p>
 									</div>
 								</div>
 							@endforeach
