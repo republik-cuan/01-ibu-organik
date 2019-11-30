@@ -101,7 +101,7 @@
 									<div class="feature-item">
 										<i class="{{ $item['icon'] }} fa-10x"></i>
 										<h3>{{ $item['label'] }}</h3>
-										<p class="text-muted align-justify">{{ $item['description'] }}</p>
+										<p class="text-muted text-justify">{{ $item['description'] }}</p>
 									</div>
 								</div>
 							@endforeach
@@ -119,11 +119,13 @@
           <h2>Galeri Produk</h2>
           <div class="row align-items-center">
             @foreach (range(1,31) as $item)
-              <div class="col-md-4 py-3">
-                <div class="card w-75">
-                  <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
+              @if ($item != 13)
+                <div class="col-md-4 py-3">
+                  <div class="card w-75">
+                    <img class="card-img-top" src="{{ asset('img/warna_'.sprintf("%02d", $item).'.jpg') }}">
+                  </div>
                 </div>
-              </div>
+              @endif
             @endforeach
           </div>
         </center>
