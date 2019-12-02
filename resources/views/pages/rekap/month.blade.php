@@ -65,8 +65,9 @@
                 harga = val.item.endUser;
                 break;
             }
+            const temp = ((harga-val.item.modal) * val.total);
             foo += (val.total*harga);
-            baz += (val.total*val.item.modal);
+            baz += (temp-val.discount)
           });
         }
         ongkir += datum.deliveryPrice;
@@ -76,7 +77,7 @@
         'label': dt.toLocaleDateString("id", {year: "numeric", month: "long"}),
         'total_harga': foo,
         'ongkir': ongkir,
-        'margin': (foo-baz),
+        'margin': baz,
       }];
     }
   } else {
