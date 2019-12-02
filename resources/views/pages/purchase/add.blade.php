@@ -107,7 +107,7 @@
                   <td>
                     @php
                       switch ($purchase['statusHarga']) {
-                        case 'reseller' : 
+                        case 'reseller' :
                           $harga = $item->item->reseller;
                           break;
                         case 'modal' :
@@ -123,8 +123,8 @@
                   <td>
                     @php
                       $temp = $item->total * $harga;
-                      $margin += (($harga-$item->item->modal) * $item->total);
                       $temp -= $item->discount;
+                      $margin += (($temp - $$item->item->modal) * $item->total);
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
                     @endphp
@@ -229,7 +229,7 @@
               </tr>
               <tr class="hidden" id="margin">
                 <th colspan="5" style="text-align: left">M</th>
-                <td>{{ "Rp. ".number_format($margin, 2) }}</td>
+                <td>{{ "Rp. ".number_format(($margin - $purchase->deliveryPrice), 2) }}</td>
               </tr>
             </tbody>
           </table>

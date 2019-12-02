@@ -143,7 +143,7 @@
         <td>{{"Rp. ".number_format($discount,2)}}</td>
       </tr>
       <tr>
-        <th colspan="4" class="text-left px-2">Total</th>
+        <th colspan="4" class="text-left px-2">Total Setelah Diskon</th>
         <td>{{"Rp. ".number_format($subTotal-$discount,2)}}</td>
       </tr>
       <tr>
@@ -152,7 +152,7 @@
       </tr>
       <tr>
         <th colspan="4" class="text-left px-2">Grand Total</th>
-        <td>{{"Rp. ".number_format($purchase->deliveryPrice+$subTotal,2)}}</td>
+        <td>{{"Rp. ".number_format($purchase->deliveryPrice+($subTotal-$discount),2)}}</td>
       </tr>
     </tbody>
   </table>
