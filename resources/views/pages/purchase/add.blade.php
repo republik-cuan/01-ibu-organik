@@ -229,7 +229,7 @@
               </tr>
               <tr class="hidden" id="margin">
                 <th colspan="5" style="text-align: left">M</th>
-                <td>{{ "Rp. ".number_format(($margin - $purchase->deliveryPrice), 2) }}</td>
+                <td>{{ "Rp. ".number_format(($margin + $purchase->deliveryPrice), 2) }}</td>
               </tr>
             </tbody>
           </table>
