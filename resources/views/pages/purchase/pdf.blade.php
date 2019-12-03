@@ -154,7 +154,7 @@
       </tr>
       <tr>
         <th colspan="4" class="text-left px-2">Grand Total</th>
-        <td>{{"Rp. ".number_format($purchase->deliveryPrice-($subTotal-$discount),2)}}</td>
+        <td>{{"Rp. ".number_format(($subTotal-$discount) - $purchase->deliveryPrice,2)}}</td>
       </tr>
     </tbody>
   </table>
