@@ -124,7 +124,7 @@
                     @php
                       $temp = $item->total * $harga;
                       $temp -= $item->discount;
-                      $margin += (($temp - $item->item->modal) * $item->total);
+                      $margin += ((($harga - $item->item->modal) * $item->total) - $item->discount);
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
                     @endphp
