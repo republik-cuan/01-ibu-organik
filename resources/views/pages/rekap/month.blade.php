@@ -70,6 +70,7 @@
             baz += (temp-val.discount)
           });
         }
+        baz -= datum.deliveryPrice
         ongkir += datum.deliveryPrice;
       });
       let dt = new Date(id);
