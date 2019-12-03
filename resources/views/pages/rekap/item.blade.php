@@ -96,20 +96,9 @@
           },
         },
         {
-          data: 'purchases',
+          data: 'modal',
           render: function(data) {
-            const modal = arguments[2].modal;
-            let arr = [];
-            let hasil = 0;
-            if (typeof(data)=="object") {
-              arr = $.map(data, function(val, id) { return val.pivot.total * modal; })
-            } else {
-              arr = data
-            }
-            if (arr.length > 0 ) {
-              hasil = arr.reduce((acc, cur) => acc + cur);
-            }
-            return `Rp. ${new Intl.NumberFormat().format(hasil)}`;
+            return `Rp. ${new Intl.NumberFormat().format(data)}`;
           }
         },
         {

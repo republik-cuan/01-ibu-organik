@@ -124,7 +124,7 @@
                     @php
                       $temp = $item->total * $harga;
                       $temp -= $item->discount;
-                      $margin += (($temp - $item->item->modal) * $item->total);
+                      $margin += ((($harga - $item->item->modal) * $item->total) + $item->discount);
                       $subTotal += $temp;
                       echo "Rp. ".number_format($temp, 2);
                     @endphp
@@ -221,7 +221,7 @@
                 <th colspan="5" style="text-align: left;">Grand Total</th>
                 <td>
                   @if ($purchase->deliveryOption=="free ongkir")
-                    {{"Rp. ".number_format($purchase->deliveryPrice+$subTotal, 2)}}
+                    {{"Rp. ".number_format($subTotal - $purchase->deliveryPrice, 2)}}
                   @else
                     {{"Rp. ".number_format($subTotal, 2)}}
                   @endif
