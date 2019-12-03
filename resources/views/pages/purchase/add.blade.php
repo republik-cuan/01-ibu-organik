@@ -221,7 +221,7 @@
                 <th colspan="5" style="text-align: left;">Grand Total</th>
                 <td>
                   @if ($purchase->deliveryOption=="free ongkir")
-                    {{"Rp. ".number_format($purchase->deliveryPrice+$subTotal, 2)}}
+                    {{"Rp. ".number_format($subTotal - $purchase->deliveryPrice, 2)}}
                   @else
                     {{"Rp. ".number_format($subTotal, 2)}}
                   @endif
