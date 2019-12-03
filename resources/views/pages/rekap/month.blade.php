@@ -67,11 +67,12 @@
             }
             const temp = ((harga-val.item.modal) * val.total);
             foo += (val.total*harga);
-            baz += (temp+val.discount)
+            baz += (temp-val.discount)
+            console.log({ datum, baz })
           });
         }
         baz -= datum.deliveryPrice
-        ongkir += datum.deliveryPrice;
+        ongkir -= datum.deliveryPrice;
       });
       let dt = new Date(id);
       purchases = [...purchases, {
