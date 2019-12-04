@@ -150,11 +150,24 @@
       @endif
       <tr>
         <th colspan="4" class="text-left px-2">Delivery</th>
-        <td>{{"Rp. ".number_format($purchase->deliveryPrice,2)}}</td>
+        <td>
+          @if ($purchase['deliveryOption']=='free ongkir')
+            {{"Rp. ".number_format($purchase->deliveryPrice,2)}}
+          @else
+            -
+          @endif
+        </td>
       </tr>
       <tr>
         <th colspan="4" class="text-left px-2">Grand Total</th>
-        <td>{{"Rp. ".number_format(($subTotal-$discount) - $purchase->deliveryPrice,2)}}</td>
+        <td>
+          @php
+            if ($purchase['deliveryOption']=='free ongkir')
+              echo "Rp. ".number_format(($subTotal-$discount) - $purchase->deliveryPrice,2);
+            else
+              echo "Rp. ".number_format($subTotal-$discount,2);
+          @endphp
+        </td>
       </tr>
     </tbody>
   </table>
