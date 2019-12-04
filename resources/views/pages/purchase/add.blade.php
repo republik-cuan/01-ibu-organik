@@ -215,7 +215,14 @@
               </tr>
               <tr>
                 <th colspan="5" style="text-align: left;">Delivery</th>
-                <td>{{"Rp. ".number_format($purchase->deliveryPrice, 2)}}</td>
+                <td>
+                  @php
+                    if ($purchase['deliveryOption']=='free ongkir')
+                      echo "Rp. ".number_format($purchase->deliveryPrice, 2);
+                    else
+                      echo "-";
+                  @endphp
+                </td>
               </tr>
               <tr>
                 <th colspan="5" style="text-align: left;">Grand Total</th>
@@ -229,7 +236,14 @@
               </tr>
               <tr class="hidden" id="margin">
                 <th colspan="5" style="text-align: left">M</th>
-                <td>{{ "Rp. ".number_format(($margin - $purchase->deliveryPrice), 2) }}</td>
+                <td>
+                  @php
+                    if ($purchase['deliveryOption']=='free ongkir')
+                      echo "Rp. ".number_format(($margin - $purchase->deliveryPrice), 2);
+                    else
+                      echo "Rp. ".number_format($margin, 2);
+                  @endphp
+                </td>
               </tr>
             </tbody>
           </table>
